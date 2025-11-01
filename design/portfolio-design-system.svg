@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920" height="2400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- Color Palette -->
+    <linearGradient id="cyanMagentaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff00ff;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff0080;stop-opacity:1" />
+      <stop offset="16%" style="stop-color:#ff8c00;stop-opacity:1" />
+      <stop offset="33%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00ff00;stop-opacity:1" />
+      <stop offset="66%" style="stop-color:#00bfff;stop-opacity:1" />
+      <stop offset="83%" style="stop-color:#8b00ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff0080;stop-opacity:1" />
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="2400" fill="#0a0a0f"/>
+  
+  <!-- Grid Pattern -->
+  <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#00ffff" stroke-width="0.5" opacity="0.1"/>
+  </pattern>
+  <rect width="1920" height="2400" fill="url(#grid)"/>
+
+  <!-- Title Section -->
+  <text x="60" y="80" font-family="Arial Black, sans-serif" font-size="48" fill="#00ffff" font-weight="900">
+    BENJAMIN FILLER PORTFOLIO
+  </text>
+  <text x="60" y="120" font-family="Arial, sans-serif" font-size="20" fill="#6b7280">
+    Design System &amp; Visual Reference
+  </text>
+
+  <!-- Color Palette Section -->
+  <text x="60" y="200" font-family="Arial Black, sans-serif" font-size="32" fill="#f8f9fa" font-weight="900">
+    COLOR PALETTE
+  </text>
+
+  <!-- Primary Colors -->
+  <g id="color-cyan">
+    <rect x="60" y="230" width="180" height="180" fill="#00ffff" rx="0"/>
+    <text x="150" y="310" font-family="Arial, sans-serif" font-size="28" fill="#0a0a0f" text-anchor="middle" font-weight="700">
+      CYAN
+    </text>
+    <text x="150" y="340" font-family="Arial, sans-serif" font-size="16" fill="#0a0a0f" text-anchor="middle">
+      #00FFFF
+    </text>
+    <text x="150" y="360" font-family="Arial, sans-serif" font-size="14" fill="#0a0a0f" text-anchor="middle">
+      Primary
+    </text>
+  </g>
+
+  <g id="color-magenta">
+    <rect x="260" y="230" width="180" height="180" fill="#ff00ff" rx="0"/>
+    <text x="350" y="310" font-family="Arial, sans-serif" font-size="28" fill="#f8f9fa" text-anchor="middle" font-weight="700">
+      MAGENTA
+    </text>
+    <text x="350" y="340" font-family="Arial, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle">
+      #FF00FF
+    </text>
+    <text x="350" y="360" font-family="Arial, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle">
+      Accent
+    </text>
+  </g>
+
+  <g id="color-purple">
+    <rect x="460" y="230" width="180" height="180" fill="#8b5cf6" rx="0"/>
+    <text x="550" y="310" font-family="Arial, sans-serif" font-size="28" fill="#f8f9fa" text-anchor="middle" font-weight="700">
+      PURPLE
+    </text>
+    <text x="550" y="340" font-family="Arial, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle">
+      #8B5CF6
+    </text>
+    <text x="550" y="360" font-family="Arial, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle">
+      Secondary
+    </text>
+  </g>
+
+  <!-- Background Colors -->
+  <g id="color-dark">
+    <rect x="660" y="230" width="180" height="180" fill="#0a0a0f" stroke="#00ffff" stroke-width="2" rx="0"/>
+    <text x="750" y="310" font-family="Arial, sans-serif" font-size="28" fill="#f8f9fa" text-anchor="middle" font-weight="700">
+      DARK
+    </text>
+    <text x="750" y="340" font-family="Arial, sans-serif" font-size="16" fill="#00ffff" text-anchor="middle">
+      #0A0A0F
+    </text>
+    <text x="750" y="360" font-family="Arial, sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">
+      Background
+    </text>
+  </g>
+
+  <g id="color-light">
+    <rect x="860" y="230" width="180" height="180" fill="#f8f9fa" rx="0"/>
+    <text x="950" y="310" font-family="Arial, sans-serif" font-size="28" fill="#0a0a0f" text-anchor="middle" font-weight="700">
+      LIGHT
+    </text>
+    <text x="950" y="340" font-family="Arial, sans-serif" font-size="16" fill="#0a0a0f" text-anchor="middle">
+      #F8F9FA
+    </text>
+    <text x="950" y="360" font-family="Arial, sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">
+      Text
+    </text>
+  </g>
+
+  <g id="color-gray">
+    <rect x="1060" y="230" width="180" height="180" fill="#6b7280" rx="0"/>
+    <text x="1150" y="310" font-family="Arial, sans-serif" font-size="28" fill="#f8f9fa" text-anchor="middle" font-weight="700">
+      GRAY
+    </text>
+    <text x="1150" y="340" font-family="Arial, sans-serif" font-size="16" fill="#f8f9fa" text-anchor="middle">
+      #6B7280
+    </text>
+    <text x="1150" y="360" font-family="Arial, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle">
+      Muted Text
+    </text>
+  </g>
+
+  <!-- Gradient Examples -->
+  <rect x="1260" y="230" width="280" height="180" fill="url(#cyanMagentaGradient)" rx="0"/>
+  <text x="1400" y="310" font-family="Arial, sans-serif" font-size="24" fill="#f8f9fa" text-anchor="middle" font-weight="700">
+    GRADIENT
+  </text>
+  <text x="1400" y="340" font-family="Arial, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle">
+    Cyan → Magenta
+  </text>
+
+  <rect x="1560" y="230" width="280" height="180" fill="url(#rainbowGradient)" rx="0"/>
+  <text x="1700" y="310" font-family="Arial, sans-serif" font-size="24" fill="#f8f9fa" text-anchor="middle" font-weight="700">
+    RAINBOW
+  </text>
+  <text x="1700" y="340" font-family="Arial, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle">
+    Animated Background
+  </text>
+
+  <!-- Typography Section -->
+  <text x="60" y="500" font-family="Arial Black, sans-serif" font-size="32" fill="#f8f9fa" font-weight="900">
+    TYPOGRAPHY
+  </text>
+
+  <!-- Display Font -->
+  <rect x="60" y="530" width="850" height="180" fill="rgba(255,255,255,0.03)" stroke="rgba(0,255,255,0.2)" stroke-width="1"/>
+  <text x="80" y="570" font-family="Arial, sans-serif" font-size="16" fill="#6b7280">
+    Display Font (Archivo Black)
+  </text>
+  <text x="80" y="620" font-family="Arial Black, sans-serif" font-size="72" fill="url(#cyanMagentaGradient)" font-weight="900" letter-spacing="-2">
+    BENJAMIN FILLER
+  </text>
+  <text x="80" y="660" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">
+    Used for: Hero titles, section headers • Weight: 900 • Letter-spacing: -2px
+  </text>
+
+  <!-- Body Font -->
+  <rect x="940" y="530" width="920" height="180" fill="rgba(255,255,255,0.03)" stroke="rgba(255,0,255,0.2)" stroke-width="1"/>
+  <text x="960" y="570" font-family="Arial, sans-serif" font-size="16" fill="#6b7280">
+    Body Font (Space Grotesk)
+  </text>
+  <text x="960" y="610" font-family="Arial, sans-serif" font-size="48" fill="#f8f9fa" font-weight="400">
+    Space Grotesk Regular
+  </text>
+  <text x="960" y="650" font-family="Arial, sans-serif" font-size="48" fill="#f8f9fa" font-weight="700">
+    Space Grotesk Bold
+  </text>
+  <text x="960" y="680" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">
+    Used for: Body text, navigation, buttons • Weights: 400-700
+  </text>
+
+  <!-- UI Components Section -->
+  <text x="60" y="800" font-family="Arial Black, sans-serif" font-size="32" fill="#f8f9fa" font-weight="900">
+    UI COMPONENTS
+  </text>
+
+  <!-- Buttons -->
+  <g id="button-primary">
+    <rect x="60" y="840" width="240" height="70" fill="#00ffff" rx="0"/>
+    <text x="180" y="885" font-family="Arial, sans-serif" font-size="18" fill="#0a0a0f" text-anchor="middle" font-weight="700" letter-spacing="1">
+      PRIMARY BUTTON
+    </text>
+  </g>
+
+  <g id="button-secondary">
+    <rect x="330" y="840" width="240" height="70" fill="transparent" stroke="#ff00ff" stroke-width="2" rx="0"/>
+    <text x="450" y="885" font-family="Arial, sans-serif" font-size="18" fill="#ff00ff" text-anchor="middle" font-weight="700" letter-spacing="1">
+      SECONDARY
+    </text>
+  </g>
+
+  <g id="button-hover">
+    <rect x="600" y="840" width="240" height="70" fill="transparent" stroke="#00ffff" stroke-width="2" rx="0" filter="url(#glow)"/>
+    <text x="720" y="885" font-family="Arial, sans-serif" font-size="18" fill="#00ffff" text-anchor="middle" font-weight="700" letter-spacing="1">
+      HOVER STATE
+    </text>
+  </g>
+
+  <!-- Cards -->
+  <text x="60" y="980" font-family="Arial, sans-serif" font-size="20" fill="#6b7280">
+    Glass-morphism Cards
+  </text>
+
+  <g id="skill-card">
+    <rect x="60" y="1000" width="380" height="280" fill="rgba(255,255,255,0.03)" stroke="rgba(0,255,255,0.2)" stroke-width="1" rx="0"/>
+    <rect x="60" y="1000" width="380" height="3" fill="url(#cyanMagentaGradient)"/>
+    <text x="80" y="1050" font-size="48" fill="#00ffff">💻</text>
+    <text x="80" y="1120" font-family="Arial, sans-serif" font-size="24" fill="#f8f9fa" font-weight="700" letter-spacing="1">
+      SKILL CARD
+    </text>
+    <text x="80" y="1150" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">
+      Glass effect with gradient top border
+    </text>
+    <rect x="80" y="1170" width="80" height="28" fill="rgba(0,255,255,0.1)" stroke="rgba(0,255,255,0.3)" stroke-width="1"/>
+    <text x="120" y="1190" font-family="Arial, sans-serif" font-size="12" fill="#00ffff" text-anchor="middle" font-weight="500" letter-spacing="0.5">
+      TAG
+    </text>
+  </g>
+
+  <g id="project-card">
+    <rect x="470" y="1000" width="380" height="280" fill="rgba(255,255,255,0.03)" stroke="rgba(255,0,255,0.2)" stroke-width="1" rx="0"/>
+    <rect x="470" y="1000" width="380" height="160" fill="#1a1a2e"/>
+    <text x="660" y="1090" font-family="Arial, sans-serif" font-size="16" fill="#6b7280" text-anchor="middle">
+      PROJECT IMAGE
+    </text>
+    <text x="490" y="1200" font-family="Arial, sans-serif" font-size="20" fill="#f8f9fa" font-weight="700" letter-spacing="1">
+      PROJECT TITLE
+    </text>
+    <text x="490" y="1230" font-family="Arial, sans-serif" font-size="13" fill="#6b7280">
+      Brief description text
+    </text>
+    <rect x="490" y="1245" width="70" height="24" fill="rgba(255,0,255,0.1)" stroke="rgba(255,0,255,0.3)" stroke-width="1"/>
+    <text x="525" y="1262" font-family="Arial, sans-serif" font-size="11" fill="#ff00ff" text-anchor="middle" font-weight="500">
+      TAG
+    </text>
+  </g>
+
+  <!-- Layout Grid Section -->
+  <text x="60" y="1370" font-family="Arial Black, sans-serif" font-size="32" fill="#f8f9fa" font-weight="900">
+    LAYOUT SYSTEM
+  </text>
+
+  <text x="60" y="1410" font-family="Arial, sans-serif" font-size="16" fill="#6b7280">
+    Max Width: 1400px • Padding: 2rem • Gap: 2-6rem
+  </text>
+
+  <!-- Grid Example -->
+  <rect x="60" y="1440" width="1800" height="400" fill="rgba(255,255,255,0.02)" stroke="rgba(0,255,255,0.1)" stroke-width="1" rx="0"/>
+  
+  <!-- 3 Column Grid -->
+  <rect x="80" y="1460" width="580" height="160" fill="rgba(0,255,255,0.05)" stroke="rgba(0,255,255,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="370" y="1550" font-family="Arial, sans-serif" font-size="18" fill="#6b7280" text-anchor="middle">
+    COLUMN 1
+  </text>
+  
+  <rect x="680" y="1460" width="580" height="160" fill="rgba(255,0,255,0.05)" stroke="rgba(255,0,255,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="970" y="1550" font-family="Arial, sans-serif" font-size="18" fill="#6b7280" text-anchor="middle">
+    COLUMN 2
+  </text>
+  
+  <rect x="1280" y="1460" width="560" height="160" fill="rgba(139,92,246,0.05)" stroke="rgba(139,92,246,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="1560" y="1550" font-family="Arial, sans-serif" font-size="18" fill="#6b7280" text-anchor="middle">
+    COLUMN 3
+  </text>
+
+  <!-- 2 Column Grid -->
+  <rect x="80" y="1640" width="880" height="180" fill="rgba(0,255,255,0.05)" stroke="rgba(0,255,255,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="520" y="1740" font-family="Arial, sans-serif" font-size="18" fill="#6b7280" text-anchor="middle">
+    2 COLUMN LAYOUT (About Section)
+  </text>
+  
+  <rect x="980" y="1640" width="860" height="180" fill="rgba(255,0,255,0.05)" stroke="rgba(255,0,255,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="1410" y="1740" font-family="Arial, sans-serif" font-size="18" fill="#6b7280" text-anchor="middle">
+    IMAGE / CONTENT
+  </text>
+
+  <!-- Animation Examples -->
+  <text x="60" y="1950" font-family="Arial Black, sans-serif" font-size="32" fill="#f8f9fa" font-weight="900">
+    ANIMATIONS
+  </text>
+
+  <!-- Glow Effect -->
+  <text x="60" y="2000" font-family="Arial Black, sans-serif" font-size="64" fill="url(#cyanMagentaGradient)" font-weight="900" filter="url(#glow)">
+    GLOW EFFECT
+  </text>
+
+  <!-- Rainbow Background -->
+  <rect x="60" y="2080" width="400" height="200" fill="url(#rainbowGradient)" filter="url(#blur)" opacity="0.6" rx="4"/>
+  <rect x="80" y="2100" width="360" height="160" fill="none" stroke="#00ffff" stroke-width="3"/>
+  <text x="260" y="2190" font-family="Arial, sans-serif" font-size="20" fill="#f8f9fa" text-anchor="middle" font-weight="700">
+    ANIMATED RAINBOW
+  </text>
+  <text x="260" y="2220" font-family="Arial, sans-serif" font-size="14" fill="#f8f9fa" text-anchor="middle">
+    Profile Image Background
+  </text>
+
+  <!-- Gradient Shift -->
+  <rect x="500" y="2080" width="400" height="200" fill="#0a0a0f"/>
+  <circle cx="600" cy="2140" r="60" fill="#00ffff" opacity="0.15" filter="url(#blur)"/>
+  <circle cx="750" cy="2200" r="60" fill="#ff00ff" opacity="0.15" filter="url(#blur)"/>
+  <text x="700" y="2190" font-family="Arial, sans-serif" font-size="20" fill="#f8f9fa" text-anchor="middle" font-weight="700">
+    GRADIENT SHIFT
+  </text>
+  <text x="700" y="2220" font-family="Arial, sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">
+    Background Animation
+  </text>
+
+  <!-- Hover Transform -->
+  <g transform="translate(0, -10)">
+    <rect x="940" y="2080" width="400" height="200" fill="rgba(255,255,255,0.03)" stroke="rgba(139,92,246,0.5)" stroke-width="2" filter="url(#glow)"/>
+    <text x="1140" y="2190" font-family="Arial, sans-serif" font-size="20" fill="#8b5cf6" text-anchor="middle" font-weight="700">
+      HOVER LIFT
+    </text>
+    <text x="1140" y="2220" font-family="Arial, sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">
+      translateY(-10px) + glow
+    </text>
+  </g>
+
+  <!-- Specs -->
+  <text x="60" y="2350" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">
+    © 2025 Benjamin Filler Portfolio • Design System v1.0 • Cyberpunk/Vaporwave Aesthetic
+  </text>
+</svg>

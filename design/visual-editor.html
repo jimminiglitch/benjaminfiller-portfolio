@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benjamin Filler Portfolio - Visual Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --cyan: #00ffff;
+      --magenta: #ff00ff;
+      --purple: #8b5cf6;
+      --dark: #0a0a0f;
+      --darker: #050508;
+      --light: #f8f9fa;
+      --gray: #6b7280;
+      
+      --font-main: 'Space Grotesk', -apple-system, system-ui, sans-serif;
+      --font-display: 'Archivo Black', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+      animation: gradientShift 20s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+      50% { opacity: 0.8; transform: scale(1.1) rotate(2deg); }
+    }
+
+    /* Grid Overlay */
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--cyan);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      color: var(--magenta);
+      text-shadow: 0 0 20px var(--magenta);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--cyan);
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 10vw, 8rem);
+      line-height: 0.9;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); }
+      50% { filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.5)); }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      color: var(--gray);
+      margin-bottom: 3rem;
+      max-width: 800px;
+      font-weight: 500;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 0;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      font-family: var(--font-main);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: var(--cyan);
+      color: var(--dark);
+      border-color: var(--cyan);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--cyan);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--magenta);
+      border-color: var(--magenta);
+    }
+
+    .btn-secondary:hover {
+      background: var(--magenta);
+      color: var(--dark);
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+    }
+
+    /* Section Base */
+    .section {
+      padding: 8rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* About Section Specific */
+    #about {
+      padding: 1rem 2rem;
+    }
+
+    #about .section-title {
+      font-size: 40px;
+      margin: 0 0 10px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      margin-bottom: 4rem;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--light) 0%, var(--gray) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-text {
+      font-size: 1.125rem;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .about-text p {
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p strong {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .about-image-wrapper {
+      position: relative;
+    }
+
+    .about-image {
+      width: 65%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 3px solid var(--cyan);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-image-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: -20px;
+      bottom: -20px;
+      border: 2px solid var(--magenta);
+      z-index: 0;
+    }
+
+    /* Animated rainbow background for profile image */
+    .about-image-wrapper::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(
+        45deg,
+        #ff0080,
+        #ff8c00,
+        #ffd700,
+        #00ff00,
+        #00bfff,
+        #8b00ff,
+        #ff0080
+      );
+      background-size: 400% 400%;
+      animation: rainbowRotate 8s ease infinite;
+      z-index: -1;
+      border-radius: 4px;
+      opacity: 0.6;
+      filter: blur(20px);
+    }
+
+    @keyframes rainbowRotate {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .skill-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .skill-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .skill-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .skill-description {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .skill-tag {
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    /* Editor Panel */
+    .editor-panel {
+      position: fixed;
+      right: 0;
+      top: 80px;
+      width: 400px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      padding: 1.5rem;
+      z-index: 999;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .editor-panel.open {
+      transform: translateX(0);
+    }
+
+    /* Element Inspector Mode */
+    body.inspect-mode * {
+      cursor: crosshair !important;
+    }
+
+    body.inspect-mode *:hover {
+      outline: 2px solid var(--cyan) !important;
+      outline-offset: 2px;
+    }
+
+    .selected-element {
+      outline: 3px solid var(--magenta) !important;
+      outline-offset: 2px;
+    }
+
+    .editor-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .editor-tab {
+      background: none;
+      border: none;
+      color: var(--gray);
+      padding: 0.75rem 1rem;
+      font-family: var(--font-main);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      cursor: pointer;
+      letter-spacing: 1px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .editor-tab.active {
+      color: var(--cyan);
+      border-bottom-color: var(--cyan);
+    }
+
+    .editor-tab:hover {
+      color: var(--light);
+    }
+
+    .editor-content {
+      display: none;
+    }
+
+    .editor-content.active {
+      display: block;
+    }
+
+    .element-path {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background: rgba(0, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      font-family: monospace;
+      word-break: break-all;
+    }
+
+    .editor-toggle {
+      position: fixed;
+      right: 20px;
+      top: 100px;
+      z-index: 1000;
+      background: var(--cyan);
+      color: var(--dark);
+      border: none;
+      padding: 1rem;
+      font-family: var(--font-main);
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .editor-toggle:hover {
+      background: var(--magenta);
+      box-shadow: 0 0 20px var(--magenta);
+    }
+
+    .editor-group {
+      margin-bottom: 2rem;
+    }
+
+    .editor-label {
+      display: block;
+      color: var(--cyan);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .editor-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      color: var(--light);
+      padding: 0.75rem;
+      font-family: var(--font-main);
+      font-size: 0.875rem;
+    }
+
+    .editor-input:focus {
+      outline: none;
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .export-btn {
+      width: 100%;
+      background: var(--magenta);
+      color: var(--light);
+      border: none;
+      padding: 1rem;
+      font-family: var(--font-main);
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 1px;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .export-btn:hover {
+      box-shadow: 0 0 20px var(--magenta);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .editor-panel {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- Editor Toggle -->
+  <button class="editor-toggle" onclick="toggleEditor()">⚙️ Edit</button>
+
+  <!-- Editor Panel -->
+  <div class="editor-panel" id="editorPanel">
+    <h2 style="color: var(--cyan); font-family: var(--font-display); margin-bottom: 1rem; text-transform: uppercase; font-size: 1.25rem;">Visual Editor</h2>
+    
+    <!-- Tabs -->
+    <div class="editor-tabs">
+      <button class="editor-tab active" onclick="switchTab('global')">Global</button>
+      <button class="editor-tab" onclick="switchTab('inspector')">Inspector</button>
+      <button class="editor-tab" onclick="switchTab('export')">Export</button>
+    </div>
+
+    <!-- Global Tab -->
+    <div class="editor-content active" id="global-content">
+      <div class="editor-group">
+        <label class="editor-label">Primary Color (Cyan)</label>
+        <input type="color" value="#00ffff" class="editor-input" onchange="updateColor('--cyan', this.value)">
+      </div>
+
+      <div class="editor-group">
+        <label class="editor-label">Accent Color (Magenta)</label>
+        <input type="color" value="#ff00ff" class="editor-input" onchange="updateColor('--magenta', this.value)">
+      </div>
+
+      <div class="editor-group">
+        <label class="editor-label">Secondary (Purple)</label>
+        <input type="color" value="#8b5cf6" class="editor-input" onchange="updateColor('--purple', this.value)">
+      </div>
+
+      <div class="editor-group">
+        <label class="editor-label">Background (Dark)</label>
+        <input type="color" value="#0a0a0f" class="editor-input" onchange="updateColor('--dark', this.value)">
+      </div>
+
+      <div class="editor-group">
+        <label class="editor-label">Text Color (Light)</label>
+        <input type="color" value="#f8f9fa" class="editor-input" onchange="updateColor('--light', this.value)">
+      </div>
+
+      <div class="editor-group">
+        <label class="editor-label">Muted Text (Gray)</label>
+        <input type="color" value="#6b7280" class="editor-input" onchange="updateColor('--gray', this.value)">
+      </div>
+    </div>
+
+    <!-- Inspector Tab -->
+    <div class="editor-content" id="inspector-content">
+      <button class="export-btn" onclick="toggleInspectMode()" id="inspectBtn">
+        🎯 Click to Inspect Elements
+      </button>
+      
+      <div id="inspector-controls" style="display: none;">
+        <div class="element-path" id="elementPath">No element selected</div>
+        
+        <div class="editor-group">
+          <label class="editor-label">Text Content</label>
+          <textarea class="editor-input" rows="3" id="elementText" oninput="updateElementText()"></textarea>
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Font Size</label>
+          <input type="text" class="editor-input" id="elementFontSize" oninput="updateElementStyle('fontSize', this.value)" placeholder="e.g. 2rem, 24px">
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Color</label>
+          <input type="color" class="editor-input" id="elementColor" onchange="updateElementStyle('color', this.value)">
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Background Color</label>
+          <input type="color" class="editor-input" id="elementBg" onchange="updateElementStyle('backgroundColor', this.value)">
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Padding</label>
+          <input type="text" class="editor-input" id="elementPadding" oninput="updateElementStyle('padding', this.value)" placeholder="e.g. 2rem, 20px 40px">
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Margin</label>
+          <input type="text" class="editor-input" id="elementMargin" oninput="updateElementStyle('margin', this.value)" placeholder="e.g. 2rem, 20px auto">
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Width</label>
+          <input type="text" class="editor-input" id="elementWidth" oninput="updateElementStyle('width', this.value)" placeholder="e.g. 100%, 500px, auto">
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Height</label>
+          <input type="text" class="editor-input" id="elementHeight" oninput="updateElementStyle('height', this.value)" placeholder="e.g. 100vh, 300px, auto">
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Display</label>
+          <select class="editor-input" id="elementDisplay" onchange="updateElementStyle('display', this.value)">
+            <option value="">Default</option>
+            <option value="block">Block</option>
+            <option value="inline">Inline</option>
+            <option value="inline-block">Inline-Block</option>
+            <option value="flex">Flex</option>
+            <option value="grid">Grid</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Text Align</label>
+          <select class="editor-input" id="elementTextAlign" onchange="updateElementStyle('textAlign', this.value)">
+            <option value="">Default</option>
+            <option value="left">Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+            <option value="justify">Justify</option>
+          </select>
+        </div>
+
+        <div class="editor-group">
+          <label class="editor-label">Font Weight</label>
+          <select class="editor-input" id="elementFontWeight" onchange="updateElementStyle('fontWeight', this.value)">
+            <option value="">Default</option>
+            <option value="400">Regular (400)</option>
+            <option value="500">Medium (500)</option>
+            <option value="600">Semi-Bold (600)</option>
+            <option value="700">Bold (700)</option>
+            <option value="900">Black (900)</option>
+          </select>
+        </div>
+
+        <button class="export-btn" onclick="clearSelection()" style="background: var(--purple);">
+          Clear Selection
+        </button>
+      </div>
+    </div>
+
+    <!-- Export Tab -->
+    <div class="editor-content" id="export-content">
+      <button class="export-btn" onclick="exportCSS()">📋 Copy CSS Variables</button>
+      <button class="export-btn" onclick="exportAll()">💾 Export All Changes</button>
+      
+      <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0, 255, 255, 0.2);">
+        <p style="color: var(--gray); font-size: 0.875rem; margin-bottom: 1rem;">
+          Click "Export All Changes" and paste the JSON output back to me. I'll update your actual site!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">BF</a>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">BENJAMIN<br>FILLER</h1>
+      <p class="hero-subtitle">
+        Multidisciplinary Creative / Artist / Developer<br>
+        -------------------------------------------------------<br>
+        <em>Art & Design / Video Production / Music / Code / Narrative Systems / Instructional Design</em>
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-secondary">Let's Collaborate</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <h2 class="section-title">ABOUT</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>multidisciplinary creative</strong> working across web development, 
+          documentary film, digital art, and interactive design. Based in Detroit, I create 
+          experiences that push boundaries and challenge conventions.
+        </p>
+        <p>
+          From building <strong>browser-based operating systems</strong> to directing 
+          <strong>experimental documentaries</strong>, my work explores where technology, 
+          visual storytelling, and art collide.
+        </p>
+        <p>
+          Whether it's crafting immersive web experiences, composing surreal digital art, 
+          or capturing intimate human stories on film—I approach every project with 
+          <strong>creative vision and technical precision</strong>.
+        </p>
+      </div>
+      <div class="about-image-wrapper">
+        <img src="../public/images/BenjaminFiller3.png" alt="Benjamin Filler" class="about-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section" id="skills">
+    <h2 class="section-title" style="font-size: 60px;">Projects</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="skill-icon">💻</span>
+        <h3 class="skill-title">Web Development</h3>
+        <p class="skill-description">
+          Building performant, interactive web experiences with modern frameworks 
+          and creative UI/UX design.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Astro</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Node.js</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-icon">🎬</span>
+        <h3 class="skill-title">Film & Video</h3>
+        <p class="skill-description">
+          Directing, producing, and editing documentary, narrative, and experimental 
+          moving pictures.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Direction</span>
+          <span class="skill-tag">Cinematography</span>
+          <span class="skill-tag">Editing</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-icon">🖼️</span>
+        <h3 class="skill-title">Digital Art</h3>
+        <p class="skill-description">
+          Creating composite photo art and digital illustrations that blend 
+          photography with surreal aesthetics.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Composites</span>
+          <span class="skill-tag">Illustration</span>
+          <span class="skill-tag">Design</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-icon">⚙️</span>
+        <h3 class="skill-title">Interactive Design</h3>
+        <p class="skill-description">
+          Building immersive digital experiences that blend art, technology, 
+          and user interaction.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">UI/UX</span>
+          <span class="skill-tag">p5.js</span>
+          <span class="skill-tag">Animation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    let selectedElement = null;
+    let inspectMode = false;
+    const elementChanges = new Map();
+
+    function toggleEditor() {
+      document.getElementById('editorPanel').classList.toggle('open');
+    }
+
+    function switchTab(tabName) {
+      // Update tab buttons
+      document.querySelectorAll('.editor-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // Update content
+      document.querySelectorAll('.editor-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.getElementById(tabName + '-content').classList.add('active');
+    }
+
+    function updateColor(variable, value) {
+      document.documentElement.style.setProperty(variable, value);
+    }
+
+    function updateText(selector, value) {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.innerHTML = value.replace(/\n/g, '<br>');
+      }
+    }
+
+    function toggleInspectMode() {
+      inspectMode = !inspectMode;
+      const btn = document.getElementById('inspectBtn');
+      
+      if (inspectMode) {
+        document.body.classList.add('inspect-mode');
+        btn.textContent = '❌ Cancel Inspect Mode';
+        btn.style.background = 'var(--magenta)';
+        addInspectListeners();
+      } else {
+        document.body.classList.remove('inspect-mode');
+        btn.textContent = '🎯 Click to Inspect Elements';
+        btn.style.background = 'var(--cyan)';
+        removeInspectListeners();
+      }
+    }
+
+    function addInspectListeners() {
+      document.addEventListener('click', handleElementClick, true);
+    }
+
+    function removeInspectListeners() {
+      document.removeEventListener('click', handleElementClick, true);
+    }
+
+    function handleElementClick(e) {
+      if (!inspectMode) return;
+      
+      // Ignore clicks on editor panel
+      if (e.target.closest('.editor-panel') || e.target.closest('.editor-toggle')) {
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      selectElement(e.target);
+    }
+
+    function selectElement(element) {
+      // Clear previous selection
+      if (selectedElement) {
+        selectedElement.classList.remove('selected-element');
+      }
+
+      selectedElement = element;
+      selectedElement.classList.add('selected-element');
+
+      // Show inspector controls
+      document.getElementById('inspector-controls').style.display = 'block';
+
+      // Get element path
+      const path = getElementPath(element);
+      document.getElementById('elementPath').textContent = path;
+
+      // Populate controls
+      const styles = window.getComputedStyle(element);
+      
+      document.getElementById('elementText').value = element.textContent || '';
+      document.getElementById('elementFontSize').value = styles.fontSize || '';
+      document.getElementById('elementColor').value = rgbToHex(styles.color) || '#ffffff';
+      document.getElementById('elementBg').value = rgbToHex(styles.backgroundColor) || '#000000';
+      document.getElementById('elementPadding').value = styles.padding || '';
+      document.getElementById('elementMargin').value = styles.margin || '';
+      document.getElementById('elementWidth').value = element.style.width || '';
+      document.getElementById('elementHeight').value = element.style.height || '';
+      document.getElementById('elementDisplay').value = element.style.display || '';
+      document.getElementById('elementTextAlign').value = element.style.textAlign || '';
+      document.getElementById('elementFontWeight').value = element.style.fontWeight || '';
+
+      // Turn off inspect mode after selection
+      toggleInspectMode();
+    }
+
+    function getElementPath(element) {
+      const path = [];
+      let current = element;
+      
+      while (current && current !== document.body) {
+        let selector = current.tagName.toLowerCase();
+        if (current.id) {
+          selector += '#' + current.id;
+        } else if (current.className) {
+          const classes = current.className.toString().split(' ').filter(c => c && c !== 'selected-element');
+          if (classes.length) {
+            selector += '.' + classes.join('.');
+          }
+        }
+        path.unshift(selector);
+        current = current.parentElement;
+      }
+      
+      return path.join(' > ');
+    }
+
+    function rgbToHex(rgb) {
+      if (!rgb || rgb === 'rgba(0, 0, 0, 0)') return null;
+      
+      const result = rgb.match(/\d+/g);
+      if (!result) return null;
+      
+      const r = parseInt(result[0]);
+      const g = parseInt(result[1]);
+      const b = parseInt(result[2]);
+      
+      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
+    function updateElementText() {
+      if (!selectedElement) return;
+      const value = document.getElementById('elementText').value;
+      selectedElement.textContent = value;
+      
+      recordChange(selectedElement, 'textContent', value);
+    }
+
+    function updateElementStyle(property, value) {
+      if (!selectedElement) return;
+      selectedElement.style[property] = value;
+      
+      recordChange(selectedElement, property, value);
+    }
+
+    function recordChange(element, property, value) {
+      const path = getElementPath(element);
+      
+      if (!elementChanges.has(path)) {
+        elementChanges.set(path, {});
+      }
+      
+      elementChanges.get(path)[property] = value;
+    }
+
+    function clearSelection() {
+      if (selectedElement) {
+        selectedElement.classList.remove('selected-element');
+        selectedElement = null;
+      }
+      document.getElementById('inspector-controls').style.display = 'none';
+      document.getElementById('elementPath').textContent = 'No element selected';
+    }
+
+    function exportCSS() {
+      const root = document.documentElement;
+      const styles = getComputedStyle(root);
+      
+      const cssVars = `
+:root {
+  --cyan: ${styles.getPropertyValue('--cyan')};
+  --magenta: ${styles.getPropertyValue('--magenta')};
+  --purple: ${styles.getPropertyValue('--purple')};
+  --dark: ${styles.getPropertyValue('--dark')};
+  --light: ${styles.getPropertyValue('--light')};
+  --gray: ${styles.getPropertyValue('--gray')};
+}`;
+      
+      navigator.clipboard.writeText(cssVars);
+      alert('✅ CSS Variables copied to clipboard!');
+    }
+
+    function exportAll() {
+      const root = document.documentElement;
+      const styles = getComputedStyle(root);
+      
+      const changes = {
+        colors: {
+          cyan: styles.getPropertyValue('--cyan').trim(),
+          magenta: styles.getPropertyValue('--magenta').trim(),
+          purple: styles.getPropertyValue('--purple').trim(),
+          dark: styles.getPropertyValue('--dark').trim(),
+          light: styles.getPropertyValue('--light').trim(),
+          gray: styles.getPropertyValue('--gray').trim()
+        },
+        text: {
+          heroTitle: document.querySelector('.hero-title').innerText,
+          heroSubtitle: document.querySelector('.hero-subtitle').innerText
+        },
+        elementChanges: Object.fromEntries(elementChanges)
+      };
+      
+      const output = JSON.stringify(changes, null, 2);
+      navigator.clipboard.writeText(output);
+      alert('✅ All changes exported to clipboard as JSON!\n\nPaste this back to me and I\'ll update your site.');
+    }
+  </script>
+</body>
+</html>

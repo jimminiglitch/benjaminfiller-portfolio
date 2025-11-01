@@ -267,6 +267,16 @@ const description =
         position: relative;
       }
 
+      /* About Section Specific */
+      #about {
+        padding: 1rem 2rem;
+      }
+
+      #about .section-title {
+        font-size: 40px;
+        margin: 0 0 10px;
+      }
+
       .section-title {
         font-family: var(--font-display);
         font-size: clamp(2.5rem, 6vw, 5rem);
@@ -307,7 +317,7 @@ const description =
       }
 
       .about-image {
-        width: 100%;
+        width: 65%;
         aspect-ratio: 1;
         object-fit: cover;
         border: 3px solid var(--cyan);
@@ -324,6 +334,41 @@ const description =
         bottom: -20px;
         border: 2px solid var(--magenta);
         z-index: 0;
+      }
+
+      /* Animated rainbow background for profile image */
+      .about-image-wrapper::after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: linear-gradient(
+          45deg,
+          #ff0080,
+          #ff8c00,
+          #ffd700,
+          #00ff00,
+          #00bfff,
+          #8b00ff,
+          #ff0080
+        );
+        background-size: 400% 400%;
+        animation: rainbowRotate 8s ease infinite;
+        z-index: -1;
+        border-radius: 4px;
+        opacity: 0.6;
+        filter: blur(20px);
+      }
+
+      @keyframes rainbowRotate {
+        0%, 100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
       }
 
       /* Skills Section */
@@ -706,8 +751,9 @@ const description =
           BENJAMIN<br />FILLER
         </h1>
         <p class="hero-subtitle fade-in fade-in-delay-1">
-          Creative Developer / Filmmaker / Digital Artist<br />
-          Building immersive experiences at the intersection of code, film & art
+          Multidisciplinary Creative / Artist / Developer<br />
+          -------------------------------------------------------<br />
+          <em>Art & Design / Video Production / Music / Code / Narrative Systems / Instructional Design</em>
         </p>
         <div class="hero-cta fade-in fade-in-delay-2">
           <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -740,7 +786,7 @@ const description =
         </div>
         <div class="about-image-wrapper reveal">
           <img
-            src="/images/BenjaminFiller.png"
+            src="/images/BenjaminFiller3.png"
             alt="Benjamin Filler"
             class="about-image"
             loading="lazy"
@@ -751,7 +797,7 @@ const description =
 
     <!-- Skills -->
     <section class="section" id="skills">
-      <h2 class="section-title reveal">SKILLS</h2>
+      <h2 class="section-title reveal" style="font-size: 60px;">Projects</h2>
       <div class="skills-grid">
         <div class="skill-card reveal">
           <span class="skill-icon">💻</span>
@@ -773,8 +819,8 @@ const description =
           <span class="skill-icon">🎬</span>
           <h3 class="skill-title">Film & Video</h3>
           <p class="skill-description">
-            Directing, producing, and editing documentary films with experimental 
-            storytelling techniques.
+            Directing, producing, and editing documentary, narrative, and experimental 
+            moving pictures.
           </p>
           <div class="skill-tags">
             <span class="skill-tag">Direction</span>
@@ -843,7 +889,7 @@ const description =
 
         <!-- The Weight of Care -->
         <div class="project-card reveal">
-          <img src="/images/desktop/VaporTV.png" alt="The Weight of Care" class="project-image" loading="lazy" />
+          <img src="/images/desktop/octavia.png" alt="The Weight of Care" class="project-image" loading="lazy" />
           <div class="project-content">
             <h3 class="project-title">The Weight of Care</h3>
             <p class="project-description">
@@ -863,7 +909,7 @@ const description =
 
         <!-- Birding with Brian -->
         <div class="project-card reveal">
-          <img src="/images/desktop/VaporTV.png" alt="Birding with Brian" class="project-image" loading="lazy" />
+          <img src="/images/desktop/vaportree.png" alt="Birding with Brian" class="project-image" loading="lazy" />
           <div class="project-content">
             <h3 class="project-title">Birding with Brian</h3>
             <p class="project-description">
