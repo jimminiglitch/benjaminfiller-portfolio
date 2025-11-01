@@ -53,6 +53,7 @@ benjaminfiller-portfolio/
 ### Update Content
 
 Edit `src/pages/index.astro` to customize:
+
 - Hero section (title, subtitle)
 - About section (bio text)
 - Skills cards
@@ -62,6 +63,7 @@ Edit `src/pages/index.astro` to customize:
 ### Update Images
 
 Replace images in `public/images/`:
+
 - `BenjaminFiller.png` - Your profile photo
 - `DOGOFWAR.png` - Project images
 - `desktop/*.png` - Additional project images
@@ -69,6 +71,7 @@ Replace images in `public/images/`:
 ### Update Colors
 
 Modify CSS variables in `index.astro`:
+
 ```css
 :root {
   --cyan: #00ffff;

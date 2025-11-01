@@ -52,6 +52,30 @@ const description =
         color: var(--light);
         line-height: 1.6;
         overflow-x: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9999;
+        animation: grain 0.5s steps(10) infinite;
+      }
+
+      @keyframes grain {
+        0%, 100% { transform: translate(0, 0); }
+        10% { transform: translate(-2%, -2%); }
+        20% { transform: translate(2%, 2%); }
+        30% { transform: translate(-3%, 3%); }
+        40% { transform: translate(3%, -3%); }
+        50% { transform: translate(-2%, 2%); }
+        60% { transform: translate(2%, -2%); }
+        70% { transform: translate(-3%, -3%); }
+        80% { transform: translate(3%, 3%); }
+        90% { transform: translate(-2%, -2%); }
       }
 
       /* Animated Background */
@@ -60,15 +84,77 @@ const description =
         inset: 0;
         z-index: -1;
         background: 
-          radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
-          radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
-        animation: gradientShift 20s ease infinite;
+          radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+        animation: gradientShift 15s ease infinite;
       }
 
       @keyframes gradientShift {
-        0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
-        50% { opacity: 0.8; transform: scale(1.1) rotate(2deg); }
+        0%, 100% { 
+          opacity: 1; 
+          transform: scale(1) rotate(0deg);
+          filter: hue-rotate(0deg);
+        }
+        33% { 
+          opacity: 0.9; 
+          transform: scale(1.15) rotate(3deg);
+          filter: hue-rotate(30deg);
+        }
+        66% { 
+          opacity: 0.85; 
+          transform: scale(1.1) rotate(-2deg);
+          filter: hue-rotate(-20deg);
+        }
+      }
+
+      /* Particles Canvas */
+      #particles {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Custom Cursor */
+      body {
+        cursor: none;
+      }
+
+      .custom-cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--cyan);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        mix-blend-mode: difference;
+        will-change: transform;
+      }
+
+      .custom-cursor::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 4px;
+        height: 4px;
+        background: var(--cyan);
+        border-radius: 50%;
+      }
+
+      .custom-cursor.hover {
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 255, 255, 0.1);
+        border-color: var(--magenta);
+      }
+
+      a, button {
+        cursor: none;
       }
 
       /* Grid Overlay */
@@ -81,6 +167,25 @@ const description =
           linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
         background-size: 50px 50px;
         pointer-events: none;
+      }
+
+      .grid-overlay::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          transparent 0%,
+          rgba(0, 255, 255, 0.02) 50%,
+          transparent 100%
+        );
+        background-size: 100% 4px;
+        animation: scanline 8s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100vh); }
       }
 
       /* Navigation */
@@ -178,16 +283,64 @@ const description =
         margin-bottom: 2rem;
         text-transform: uppercase;
         letter-spacing: -2px;
-        background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 100%);
+        background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 50%, var(--purple) 100%);
+        background-size: 200% 200%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        animation: titleGlow 3s ease-in-out infinite;
+        animation: titleGlow 3s ease-in-out infinite, gradientMove 8s ease infinite;
+        position: relative;
+      }
+
+      .hero-title::before {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 50%, var(--purple) 100%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: glitch 5s infinite;
+        opacity: 0.8;
+        z-index: -1;
       }
 
       @keyframes titleGlow {
-        0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); }
-        50% { filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.5)); }
+        0%, 100% { 
+          filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)) 
+                  drop-shadow(0 0 60px rgba(255, 0, 255, 0.4)); 
+        }
+        50% { 
+          filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.6))
+                  drop-shadow(0 0 80px rgba(0, 255, 255, 0.3)); 
+        }
+      }
+
+      @keyframes gradientMove {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      @keyframes glitch {
+        0%, 90%, 100% { 
+          transform: translate(0, 0); 
+          clip-path: none;
+        }
+        92% { 
+          transform: translate(-2px, 2px); 
+          clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+        }
+        94% { 
+          transform: translate(2px, -2px); 
+          clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+        }
+        96% { 
+          transform: translate(-2px, 1px); 
+        }
       }
 
       .hero-subtitle {
@@ -210,7 +363,7 @@ const description =
         font-weight: 600;
         text-decoration: none;
         border-radius: 0;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         cursor: pointer;
         border: 2px solid;
         text-transform: uppercase;
@@ -218,6 +371,7 @@ const description =
         position: relative;
         overflow: hidden;
         font-family: var(--font-main);
+        transform-style: preserve-3d;
       }
 
       .btn::before {
@@ -227,12 +381,27 @@ const description =
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s ease;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s ease;
+      }
+
+      .btn::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: inherit;
+        filter: blur(20px);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: -1;
       }
 
       .btn:hover::before {
         left: 100%;
+      }
+
+      .btn:hover::after {
+        opacity: 0.8;
       }
 
       .btn-primary {
@@ -244,7 +413,11 @@ const description =
       .btn-primary:hover {
         background: transparent;
         color: var(--cyan);
-        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        box-shadow: 
+          0 0 40px rgba(0, 255, 255, 0.6),
+          0 10px 30px rgba(0, 255, 255, 0.3),
+          inset 0 0 20px rgba(0, 255, 255, 0.2);
+        transform: translateY(-3px) scale(1.05);
       }
 
       .btn-secondary {
@@ -283,10 +456,30 @@ const description =
         margin-bottom: 4rem;
         text-transform: uppercase;
         letter-spacing: -1px;
-        background: linear-gradient(135deg, var(--light) 0%, var(--gray) 100%);
+        background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 50%, var(--purple) 100%);
+        background-size: 200% 200%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        animation: gradientMove 8s ease infinite;
+        text-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--cyan), var(--magenta));
+        animation: lineExpand 3s ease infinite;
+      }
+
+      @keyframes lineExpand {
+        0%, 100% { width: 100px; opacity: 1; }
+        50% { width: 200px; opacity: 0.6; }
       }
 
       /* About Section */
@@ -395,9 +588,11 @@ const description =
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 255, 255, 0.2);
         padding: 2.5rem;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
+        transform-style: preserve-3d;
+        perspective: 1000px;
       }
 
       .skill-card::before {
@@ -413,14 +608,36 @@ const description =
         transition: transform 0.3s ease;
       }
 
+      .skill-card::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(0, 255, 255, 0.2), transparent);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
       .skill-card:hover {
         border-color: var(--cyan);
-        box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
-        transform: translateY(-5px);
+        box-shadow: 
+          0 20px 60px rgba(0, 255, 255, 0.3),
+          0 0 40px rgba(255, 0, 255, 0.2),
+          inset 0 0 20px rgba(0, 255, 255, 0.1);
+        transform: translateY(-10px) rotateX(2deg);
       }
 
       .skill-card:hover::before {
         transform: scaleX(1);
+      }
+
+      .skill-card:hover::after {
+        width: 300px;
+        height: 300px;
       }
 
       .skill-icon {
@@ -473,8 +690,10 @@ const description =
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 0, 255, 0.2);
         overflow: hidden;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
+        transform-style: preserve-3d;
+        perspective: 1000px;
       }
 
       .project-card::before {
@@ -484,19 +703,47 @@ const description =
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15));
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.4s ease;
         pointer-events: none;
+      }
+
+      .project-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%
+        );
+        background-size: 200% 200%;
+        animation: shimmer 3s infinite;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: -100% 0; }
+        100% { background-position: 200% 0; }
       }
 
       .project-card:hover {
         border-color: var(--magenta);
-        box-shadow: 0 20px 60px rgba(255, 0, 255, 0.3);
-        transform: translateY(-10px);
+        box-shadow: 
+          0 30px 80px rgba(255, 0, 255, 0.4),
+          0 0 60px rgba(0, 255, 255, 0.2),
+          inset 0 0 30px rgba(255, 0, 255, 0.1);
+        transform: translateY(-15px) rotateX(3deg) scale(1.02);
       }
 
       .project-card:hover::before {
+        opacity: 1;
+      }
+
+      .project-card:hover::after {
         opacity: 1;
       }
 
@@ -505,11 +752,13 @@ const description =
         aspect-ratio: 16 / 10;
         object-fit: cover;
         display: block;
-        transition: transform 0.3s ease;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        filter: brightness(0.8) saturate(1.2);
       }
 
       .project-card:hover .project-image {
-        transform: scale(1.05);
+        transform: scale(1.1) rotate(1deg);
+        filter: brightness(1.1) saturate(1.4) contrast(1.1);
       }
 
       .project-content {
@@ -680,14 +929,24 @@ const description =
 
       .reveal {
         opacity: 0;
-        transform: translateY(50px);
-        transition: all 0.6s ease;
+        transform: translateY(50px) scale(0.95);
+        filter: blur(10px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .reveal.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
+        filter: blur(0);
       }
+
+      /* Stagger reveal animations */
+      .reveal:nth-child(1) { transition-delay: 0.1s; }
+      .reveal:nth-child(2) { transition-delay: 0.2s; }
+      .reveal:nth-child(3) { transition-delay: 0.3s; }
+      .reveal:nth-child(4) { transition-delay: 0.4s; }
+      .reveal:nth-child(5) { transition-delay: 0.5s; }
+      .reveal:nth-child(6) { transition-delay: 0.6s; }
 
       /* Responsive */
       @media (max-width: 768px) {
@@ -739,6 +998,8 @@ const description =
   <body>
     <div class="bg-gradient"></div>
     <div class="grid-overlay"></div>
+    <canvas id="particles"></canvas>
+    <div class="custom-cursor"></div>
 
     <!-- Navigation -->
     <nav class="nav" id="nav">
@@ -759,7 +1020,7 @@ const description =
     <!-- Hero -->
     <section class="hero" id="hero">
       <div class="hero-content">
-        <h1 class="hero-title fade-in">
+        <h1 class="hero-title fade-in" data-text="BENJAMIN FILLER">
           BENJAMIN<br />FILLER
         </h1>
         <p class="hero-subtitle fade-in fade-in-delay-1">
@@ -1069,6 +1330,170 @@ const description =
     </footer>
 
     <script>
+      // ==================== ADVANCED PORTFOLIO EFFECTS ====================
+      // ✨ Custom cursor with smooth following
+      // 🎨 Particle system with connecting lines
+      // 🎯 3D card tilt effects on hover
+      // 🧲 Magnetic hover on nav logo
+      // 💫 Animated skill icons
+      // 🌈 Multiple gradient animations
+      // ⚡ Glitch effects on title
+      // 🎭 Shimmer effects on project cards
+      // 📺 Scanline CRT effect
+      // 🎬 Film grain texture overlay
+      // 🔮 Enhanced glow and neon effects
+      // ==================== PARTICLES SYSTEM ====================
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const particleCount = 100;
+      const connectionDistance = 150;
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = (Math.random() - 0.5) * 0.5;
+          this.radius = Math.random() * 2 + 1;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(0, 255, 255, 0.5)';
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      function connectParticles() {
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < connectionDistance) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(0, 255, 255, ${1 - distance / connectionDistance})`;
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(particle => {
+          particle.update();
+          particle.draw();
+        });
+
+        connectParticles();
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      // ==================== CUSTOM CURSOR (OPTIMIZED) ====================
+      const cursor = document.querySelector('.custom-cursor');
+      let mouseX = 0, mouseY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Direct update for instant response
+        if (cursor) {
+          cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        }
+      }, { passive: true });
+
+      // Hover effects for cursor
+      document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+
+      // ==================== 3D TILT EFFECT ====================
+      document.querySelectorAll('.skill-card, .project-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = (y - centerY) / 10;
+          const rotateY = (centerX - x) / 10;
+          
+          card.style.transform = `
+            translateY(-15px) 
+            rotateX(${rotateX}deg) 
+            rotateY(${rotateY}deg)
+            scale(1.02)
+          `;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+
+      // ==================== MAGNETIC EFFECT ON NAV LOGO ====================
+      const navLogo = document.querySelector('.nav-logo');
+      if (navLogo) {
+        navLogo.addEventListener('mousemove', (e) => {
+          const rect = navLogo.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          navLogo.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.1)`;
+        });
+
+        navLogo.addEventListener('mouseleave', () => {
+          navLogo.style.transform = '';
+        });
+      }
+
+      // ==================== ANIMATED SKILL ICONS ====================
+      document.querySelectorAll('.skill-icon').forEach(icon => {
+        icon.addEventListener('mouseenter', () => {
+          icon.style.transform = 'scale(1.3) rotate(10deg)';
+          icon.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        });
+        
+        icon.addEventListener('mouseleave', () => {
+          icon.style.transform = '';
+        });
+      });
+
       // Mobile Menu
       const menuToggle = document.getElementById('menuToggle');
       const navLinks = document.getElementById('navLinks');
