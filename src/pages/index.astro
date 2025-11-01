@@ -374,8 +374,20 @@ const description =
       /* Skills Section */
       .skills-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.5rem;
+      }
+      
+      @media (max-width: 1400px) {
+        .skills-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       .skill-card {
@@ -418,9 +430,9 @@ const description =
       }
 
       .skill-title {
-        font-size: 1.5rem;
+        font-size: 18px;
         font-weight: 700;
-        margin-bottom: 1rem;
+        margin: 0 0 6px;
         color: var(--light);
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -797,21 +809,20 @@ const description =
 
     <!-- Skills -->
     <section class="section" id="skills">
-      <h2 class="section-title reveal" style="font-size: 60px;">Projects</h2>
+      <h2 class="section-title reveal" style="font-size: 60px;">skills</h2>
       <div class="skills-grid">
         <div class="skill-card reveal">
-          <span class="skill-icon">💻</span>
-          <h3 class="skill-title">Web Development</h3>
+          <span class="skill-icon">🎨</span>
+          <h3 class="skill-title">Visual Art & Design</h3>
           <p class="skill-description">
-            Building performant, interactive web experiences with modern frameworks 
-            and creative UI/UX design.
+            Creating composite photo art, digital illustrations, and visual designs 
+            that blend photography with surreal aesthetics.
           </p>
           <div class="skill-tags">
-            <span class="skill-tag">Astro</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Composites</span>
+            <span class="skill-tag">Illustration</span>
+            <span class="skill-tag">Graphic Design</span>
+            <span class="skill-tag">UI/UX</span>
           </div>
         </div>
 
@@ -831,32 +842,62 @@ const description =
         </div>
 
         <div class="skill-card reveal">
-          <span class="skill-icon">🖼️</span>
-          <h3 class="skill-title">Digital Art</h3>
+          <span class="skill-icon">🎵</span>
+          <h3 class="skill-title">Sound & Music</h3>
           <p class="skill-description">
-            Creating composite photo art and digital illustrations that blend 
-            photography with surreal aesthetics.
+            Composing, producing, and sound designing for multimedia projects, 
+            with emphasis on experimental and ambient soundscapes.
           </p>
           <div class="skill-tags">
-            <span class="skill-tag">Composites</span>
-            <span class="skill-tag">Illustration</span>
-            <span class="skill-tag">Design</span>
-            <span class="skill-tag">Surrealism</span>
+            <span class="skill-tag">Composition</span>
+            <span class="skill-tag">Production</span>
+            <span class="skill-tag">Sound Design</span>
+            <span class="skill-tag">Mixing</span>
           </div>
         </div>
 
         <div class="skill-card reveal">
-          <span class="skill-icon">⚙️</span>
-          <h3 class="skill-title">Interactive Design</h3>
+          <span class="skill-icon">💻</span>
+          <h3 class="skill-title">Tech</h3>
           <p class="skill-description">
-            Building immersive digital experiences that blend art, technology, 
-            and user interaction.
+            Building performant web applications, interactive experiences, and 
+            creative coding projects with modern frameworks.
           </p>
           <div class="skill-tags">
-            <span class="skill-tag">UI/UX</span>
-            <span class="skill-tag">p5.js</span>
-            <span class="skill-tag">Animation</span>
-            <span class="skill-tag">Creative Code</span>
+            <span class="skill-tag">Astro</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Python</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon">📖</span>
+          <h3 class="skill-title">Narrative Systems</h3>
+          <p class="skill-description">
+            Designing interactive storytelling systems, branching narratives, 
+            and world-building frameworks for games and experiences.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Storytelling</span>
+            <span class="skill-tag">Game Design</span>
+            <span class="skill-tag">World-Building</span>
+            <span class="skill-tag">Writing</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon">🎓</span>
+          <h3 class="skill-title">Learning Technologies</h3>
+          <p class="skill-description">
+            Creating engaging educational experiences and learning systems that 
+            blend pedagogy with interactive technology.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Curriculum Design</span>
+            <span class="skill-tag">E-Learning</span>
+            <span class="skill-tag">Assessment</span>
+            <span class="skill-tag">Learning Tech</span>
           </div>
         </div>
       </div>
