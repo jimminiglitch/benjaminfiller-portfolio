@@ -1,0 +1,1041 @@
+---
+// Professional Profile Page - Bold Creative Redesign
+const title = 'Benjamin Filler - Creative Developer & Digital Artist'
+const description =
+  'Detroit-based creative developer, filmmaker, and artist. Building immersive web experiences, directing films, and creating interactive multimedia projects.'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Preload Critical Assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --cyan: #00ffff;
+        --magenta: #ff00ff;
+        --purple: #8b5cf6;
+        --dark: #0a0a0f;
+        --darker: #050508;
+        --light: #f8f9fa;
+        --gray: #6b7280;
+        
+        --font-main: 'Space Grotesk', -apple-system, system-ui, sans-serif;
+        --font-display: 'Archivo Black', sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+      }
+
+      body {
+        font-family: var(--font-main);
+        background: var(--dark);
+        color: var(--light);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Animated Background */
+      .bg-gradient {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: 
+          radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+        animation: gradientShift 20s ease infinite;
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        50% { opacity: 0.8; transform: scale(1.1) rotate(2deg); }
+      }
+
+      /* Grid Overlay */
+      .grid-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image: 
+          linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        color: var(--cyan);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-logo:hover {
+        color: var(--magenta);
+        text-shadow: 0 0 20px var(--magenta);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 3rem;
+        list-style: none;
+      }
+
+      .nav-link {
+        color: var(--light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--cyan), var(--magenta));
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--cyan);
+      }
+
+      .nav-link:hover::before {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8rem 2rem 4rem;
+        position: relative;
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        width: 100%;
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 10vw, 8rem);
+        line-height: 0.9;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+        background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: titleGlow 3s ease-in-out infinite;
+      }
+
+      @keyframes titleGlow {
+        0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); }
+        50% { filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.5)); }
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.25rem, 3vw, 2rem);
+        color: var(--gray);
+        margin-bottom: 3rem;
+        max-width: 800px;
+        font-weight: 500;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+        font-family: var(--font-main);
+      }
+
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn-primary {
+        background: var(--cyan);
+        color: var(--dark);
+        border-color: var(--cyan);
+      }
+
+      .btn-primary:hover {
+        background: transparent;
+        color: var(--cyan);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--magenta);
+        border-color: var(--magenta);
+      }
+
+      .btn-secondary:hover {
+        background: var(--magenta);
+        color: var(--dark);
+        box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+      }
+
+      /* Section Base */
+      .section {
+        padding: 8rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        margin-bottom: 4rem;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        background: linear-gradient(135deg, var(--light) 0%, var(--gray) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* About Section */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6rem;
+        align-items: center;
+      }
+
+      .about-text {
+        font-size: 1.125rem;
+        color: var(--gray);
+        line-height: 1.8;
+      }
+
+      .about-text p {
+        margin-bottom: 1.5rem;
+      }
+
+      .about-text p strong {
+        color: var(--cyan);
+        font-weight: 600;
+      }
+
+      .about-image-wrapper {
+        position: relative;
+      }
+
+      .about-image {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border: 3px solid var(--cyan);
+        position: relative;
+        z-index: 1;
+      }
+
+      .about-image-wrapper::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: -20px;
+        bottom: -20px;
+        border: 2px solid var(--magenta);
+        z-index: 0;
+      }
+
+      /* Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .skill-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        padding: 2.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--cyan), var(--magenta));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+
+      .skill-card:hover {
+        border-color: var(--cyan);
+        box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
+        transform: translateY(-5px);
+      }
+
+      .skill-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .skill-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+
+      .skill-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--light);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .skill-description {
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .skill-tag {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        background: rgba(0, 255, 255, 0.1);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        color: var(--cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+      }
+
+      /* Projects Section */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 3rem;
+      }
+
+      .project-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 0, 255, 0.2);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+
+      .project-card:hover {
+        border-color: var(--magenta);
+        box-shadow: 0 20px 60px rgba(255, 0, 255, 0.3);
+        transform: translateY(-10px);
+      }
+
+      .project-card:hover::before {
+        opacity: 1;
+      }
+
+      .project-image {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+
+      .project-card:hover .project-image {
+        transform: scale(1.05);
+      }
+
+      .project-content {
+        padding: 2rem;
+      }
+
+      .project-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--light);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .project-description {
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .project-tag {
+        font-size: 0.875rem;
+        padding: 0.4rem 1rem;
+        background: rgba(255, 0, 255, 0.1);
+        border: 1px solid rgba(255, 0, 255, 0.3);
+        color: var(--magenta);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .project-link {
+        color: var(--cyan);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+      }
+
+      .project-link:hover {
+        color: var(--magenta);
+        text-shadow: 0 0 10px var(--magenta);
+      }
+
+      /* Contact Section */
+      .contact-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .contact-text {
+        font-size: 1.5rem;
+        color: var(--gray);
+        margin-bottom: 3rem;
+        line-height: 1.6;
+      }
+
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .contact-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(139, 92, 246, 0.3);
+        min-width: 180px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .contact-link:hover {
+        border-color: var(--purple);
+        box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+        transform: translateY(-5px);
+      }
+
+      .contact-icon {
+        font-size: 3rem;
+      }
+
+      .contact-label {
+        color: var(--light);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Footer */
+      .footer {
+        background: rgba(0, 0, 0, 0.5);
+        border-top: 1px solid rgba(0, 255, 255, 0.1);
+        padding: 3rem 2rem;
+        text-align: center;
+        color: var(--gray);
+      }
+
+      .footer-link {
+        color: var(--cyan);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-link:hover {
+        color: var(--magenta);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-toggle {
+        display: none;
+        background: none;
+        border: 2px solid var(--cyan);
+        color: var(--cyan);
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu-toggle:hover {
+        border-color: var(--magenta);
+        color: var(--magenta);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .fade-in-delay-1 { animation-delay: 0.1s; }
+      .fade-in-delay-2 { animation-delay: 0.2s; }
+      .fade-in-delay-3 { animation-delay: 0.3s; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.6s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(10, 10, 15, 0.95);
+          backdrop-filter: blur(20px);
+          flex-direction: column;
+          padding: 2rem;
+          gap: 1.5rem;
+          border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .mobile-menu-toggle {
+          display: block;
+        }
+
+        .hero-title {
+          font-size: clamp(2rem, 12vw, 4rem);
+        }
+
+        .about-grid,
+        .projects-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .about-image-wrapper::before {
+          top: 10px;
+          left: 10px;
+          right: -10px;
+          bottom: -10px;
+        }
+
+        .section {
+          padding: 5rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+      <div class="nav-container">
+        <a href="#hero" class="nav-logo">BF</a>
+        <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          ☰
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <h1 class="hero-title fade-in">
+          BENJAMIN<br />FILLER
+        </h1>
+        <p class="hero-subtitle fade-in fade-in-delay-1">
+          Creative Developer / Filmmaker / Digital Artist<br />
+          Building immersive experiences at the intersection of code, film & art
+        </p>
+        <div class="hero-cta fade-in fade-in-delay-2">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Let's Collaborate</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <h2 class="section-title reveal">ABOUT</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm a <strong>multidisciplinary creative</strong> working across web development, 
+            documentary film, digital art, and interactive design. Based in Detroit, I create 
+            experiences that push boundaries and challenge conventions.
+          </p>
+          <p>
+            From building <strong>browser-based operating systems</strong> to directing 
+            <strong>experimental documentaries</strong>, my work explores where technology, 
+            visual storytelling, and art collide. I believe in making things that are both 
+            technically innovative and emotionally resonant.
+          </p>
+          <p>
+            Whether it's crafting immersive web experiences, composing surreal digital art, 
+            or capturing intimate human stories on film—I approach every project with 
+            <strong>creative vision and technical precision</strong>.
+          </p>
+        </div>
+        <div class="about-image-wrapper reveal">
+          <img
+            src="/images/BenjaminFiller.png"
+            alt="Benjamin Filler"
+            class="about-image"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills">
+      <h2 class="section-title reveal">SKILLS</h2>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <span class="skill-icon">💻</span>
+          <h3 class="skill-title">Web Development</h3>
+          <p class="skill-description">
+            Building performant, interactive web experiences with modern frameworks 
+            and creative UI/UX design.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Astro</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Python</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon">🎬</span>
+          <h3 class="skill-title">Film & Video</h3>
+          <p class="skill-description">
+            Directing, producing, and editing documentary films with experimental 
+            storytelling techniques.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Direction</span>
+            <span class="skill-tag">Cinematography</span>
+            <span class="skill-tag">Editing</span>
+            <span class="skill-tag">Production</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon">🖼️</span>
+          <h3 class="skill-title">Digital Art</h3>
+          <p class="skill-description">
+            Creating composite photo art and digital illustrations that blend 
+            photography with surreal aesthetics.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Composites</span>
+            <span class="skill-tag">Illustration</span>
+            <span class="skill-tag">Design</span>
+            <span class="skill-tag">Surrealism</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon">⚙️</span>
+          <h3 class="skill-title">Interactive Design</h3>
+          <p class="skill-description">
+            Building immersive digital experiences that blend art, technology, 
+            and user interaction.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">UI/UX</span>
+            <span class="skill-tag">p5.js</span>
+            <span class="skill-tag">Animation</span>
+            <span class="skill-tag">Creative Code</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <h2 class="section-title reveal">PROJECTS</h2>
+      <div class="projects-grid">
+        <!-- Desktop OS -->
+        <div class="project-card reveal">
+          <img src="/images/desktop/psychtoadglow.gif" alt="BBFiller Desktop OS" class="project-image" loading="lazy" />
+          <div class="project-content">
+            <h3 class="project-title">Desktop OS</h3>
+            <p class="project-description">
+              Browser-based operating system with draggable windows, games, and apps. 
+              Loads in under 500ms with cyberpunk aesthetic.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Astro</span>
+              <span class="project-tag">React</span>
+              <span class="project-tag">TypeScript</span>
+            </div>
+            <div class="project-links">
+              <a href="/desktop" class="project-link">View Demo →</a>
+              <a href="https://github.com/jimminiglitch/bbfillerdesktop" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Weight of Care -->
+        <div class="project-card reveal">
+          <img src="/images/desktop/VaporTV.png" alt="The Weight of Care" class="project-image" loading="lazy" />
+          <div class="project-content">
+            <h3 class="project-title">The Weight of Care</h3>
+            <p class="project-description">
+              Experimental documentary exploring the emotional weight of private care 
+              medicine in the USA through intimate storytelling.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Documentary</span>
+              <span class="project-tag">Direction</span>
+              <span class="project-tag">Editing</span>
+            </div>
+            <div class="project-links">
+              <a href="/desktop" class="project-link">Watch Film →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Birding with Brian -->
+        <div class="project-card reveal">
+          <img src="/images/desktop/VaporTV.png" alt="Birding with Brian" class="project-image" loading="lazy" />
+          <div class="project-content">
+            <h3 class="project-title">Birding with Brian</h3>
+            <p class="project-description">
+              Documentary short capturing the contemplative beauty of birdwatching 
+              and nature observation.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Documentary</span>
+              <span class="project-tag">Cinematography</span>
+              <span class="project-tag">Nature</span>
+            </div>
+            <div class="project-links">
+              <a href="/desktop" class="project-link">Watch Film →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Composite Art -->
+        <div class="project-card reveal">
+          <img src="/images/DOGOFWAR.png" alt="Composite Photo Art" class="project-image" loading="lazy" />
+          <div class="project-content">
+            <h3 class="project-title">Composite Art</h3>
+            <p class="project-description">
+              Digital composite artworks blending photography with surreal imagery. 
+              Featured: "Dog of War" and "La Vie un Chien".
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Digital Art</span>
+              <span class="project-tag">Composites</span>
+              <span class="project-tag">Surrealism</span>
+            </div>
+            <div class="project-links">
+              <a href="/desktop" class="project-link">View Gallery →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Games -->
+        <div class="project-card reveal">
+          <img src="/images/desktop/spacesnake.png" alt="Interactive Games" class="project-image" loading="lazy" />
+          <div class="project-content">
+            <h3 class="project-title">Interactive Games</h3>
+            <p class="project-description">
+              Browser-based games including Space Snake and Cyberpunk Minesweeper 
+              with custom graphics and neon aesthetics.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">Game Design</span>
+              <span class="project-tag">p5.js</span>
+            </div>
+            <div class="project-links">
+              <a href="/desktop" class="project-link">Play Games →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- r3d3ch0 -->
+        <div class="project-card reveal">
+          <img src="/images/desktop/r3d3ch0-logo.png" alt="r3d3ch0 Interactive Story" class="project-image" loading="lazy" />
+          <div class="project-content">
+            <h3 class="project-title">r3d3ch0 Story</h3>
+            <p class="project-description">
+              Interactive narrative experience combining web development with 
+              storytelling. Immersive story map blending digital art and design.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Interactive</span>
+              <span class="project-tag">Web Dev</span>
+              <span class="project-tag">Storytelling</span>
+            </div>
+            <div class="project-links">
+              <a href="/desktop" class="project-link">Experience →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <h2 class="section-title reveal">CONTACT</h2>
+      <div class="contact-content reveal">
+        <p class="contact-text">
+          Available for film projects, web development, and multimedia collaborations. 
+          Let's create something unique together.
+        </p>
+        <div class="contact-links">
+          <a href="/contact" class="contact-link">
+            <span class="contact-icon">📧</span>
+            <span class="contact-label">Email</span>
+          </a>
+          <a href="https://github.com/jimminiglitch" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="contact-icon">💻</span>
+            <span class="contact-label">GitHub</span>
+          </a>
+          <a href="/desktop" class="contact-link">
+            <span class="contact-icon">🖥️</span>
+            <span class="contact-label">Desktop</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        © 2025 BENJAMIN FILLER — Built with 
+        <a href="https://astro.build" class="footer-link" target="_blank" rel="noopener noreferrer">Astro</a> 
+        & creative vision
+      </p>
+      <p style="margin-top: 1rem;">
+        <a href="/desktop" class="footer-link">Desktop OS</a> • 
+        <a href="https://github.com/jimminiglitch/bbfillerdesktop" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
+    </footer>
+
+    <script>
+      // Mobile Menu
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      menuToggle?.addEventListener('click', () => {
+        navLinks?.classList.toggle('active');
+      });
+
+      navLinks?.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+        });
+      });
+
+      // Scroll Reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      // Nav Hide/Show on Scroll
+      let lastScroll = 0;
+      const nav = document.getElementById('nav');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+          nav.style.transform = 'translateY(0)';
+          return;
+        }
+        
+        if (currentScroll > lastScroll && currentScroll > 100) {
+          nav.style.transform = 'translateY(-100%)';
+        } else {
+          nav.style.transform = 'translateY(0)';
+        }
+        
+        lastScroll = currentScroll;
+      });
+
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(anchor.getAttribute('href'));
+          target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    </script>
+  </body>
+</html>

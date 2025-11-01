@@ -1,0 +1,18 @@
+{
+  "name": "benjaminfiller-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio for Benjamin Filler - Creative Developer & Digital Artist",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.14.6",
+    "@astrojs/vercel": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0"
+  }
+}
