@@ -1,10 +1,39 @@
 ---
 // Professional Profile Page - Bold Creative Redesign
-const title = 'Benjamin Filler - Creative Developer & Digital Artist'
-const description =
-  'Detroit-based creative developer, filmmaker, and artist. Building immersive web experiences, directing films, and creating interactive multimedia projects.'
-const siteUrl = 'https://benjaminfiller.com'
-const imageUrl = `${siteUrl}/images/og-image.jpg`
+import { profile, sameAs, resolvedSiteUrl, getAbsoluteOgImage } from '../data/profile'
+
+const title = profile.title
+const description = profile.description
+// Prefer environment-defined site URL for correct canonical/OG
+// Set PUBLIC_SITE_URL in your environment (e.g., https://your-domain.com)
+const publicSiteUrl = resolvedSiteUrl
+const defaultOgPath = profile.ogImagePath
+// Build JSON-LD with env-driven URLs when available
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Benjamin Filler',
+  url: publicSiteUrl || undefined,
+  image: getAbsoluteOgImage(),
+  sameAs,
+  jobTitle: 'Creative Developer & Digital Artist',
+  description:
+    'Detroit-based creative developer, filmmaker, and artist specializing in immersive web experiences, film production, and interactive multimedia projects',
+  knowsAbout: [
+    'Web Development',
+    'Filmmaking',
+    'Digital Art',
+    'Interactive Media',
+    'Sound Design',
+    'Instructional Design',
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Detroit',
+    addressRegion: 'MI',
+    addressCountry: 'US',
+  },
+}
 ---
 
 <!doctype html>
@@ -15,25 +44,25 @@ const imageUrl = `${siteUrl}/images/og-image.jpg`
     <title>{title}</title>
     <meta name="description" content={description} />
     
-    <!-- Canonical URL -->
-    <link rel="canonical" href={siteUrl} />
+  <!-- Canonical URL -->
+  {publicSiteUrl && <link rel="canonical" href={publicSiteUrl} />}
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteUrl} />
+  <meta property="og:type" content="website" />
+  {publicSiteUrl && <meta property="og:url" content={publicSiteUrl} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={imageUrl} />
+  <meta property="og:image" content={(publicSiteUrl ? publicSiteUrl.replace(/\/$/, '') + defaultOgPath : defaultOgPath)} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Benjamin Filler Portfolio" />
     
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={siteUrl} />
+  <meta name="twitter:card" content="summary_large_image" />
+  {publicSiteUrl && <meta name="twitter:url" content={publicSiteUrl} />}
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={imageUrl} />
+  <meta name="twitter:image" content={(publicSiteUrl ? publicSiteUrl.replace(/\/$/, '') + defaultOgPath : defaultOgPath)} />
     <meta name="twitter:creator" content="@jimminiglitch" />
     
     <!-- Additional SEO -->
@@ -51,27 +80,7 @@ const imageUrl = `${siteUrl}/images/og-image.jpg`
     />
     
     <!-- Structured Data / JSON-LD -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Benjamin Filler",
-        "url": "https://benjaminfiller.com",
-        "image": "https://benjaminfiller.com/images/og-image.jpg",
-        "sameAs": [
-          "https://github.com/jimminiglitch"
-        ],
-        "jobTitle": "Creative Developer & Digital Artist",
-        "description": "Detroit-based creative developer, filmmaker, and artist specializing in immersive web experiences, film production, and interactive multimedia projects",
-        "knowsAbout": ["Web Development", "Filmmaking", "Digital Art", "Interactive Media", "Sound Design", "Instructional Design"],
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Detroit",
-          "addressRegion": "MI",
-          "addressCountry": "US"
-        }
-      }
-    </script>
+    <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
 
     <style>
       :root {
