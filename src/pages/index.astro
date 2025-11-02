@@ -1,6 +1,7 @@
 ---
 // Professional Profile Page - Bold Creative Redesign
 import { profile, sameAs, resolvedSiteUrl, getAbsoluteOgImage } from '../data/profile'
+import { projects, getFeaturedProjects } from '../data/projects'
 
 const title = profile.title
 const description = profile.description
@@ -811,10 +812,71 @@ const jsonLd = {
       }
 
       /* Projects Section */
+      .project-filters {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 0.75rem 2rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 2px solid rgba(0, 255, 255, 0.3);
+        color: var(--cyan);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        font-family: var(--font-main);
+      }
+
+      .filter-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .filter-btn:hover {
+        border-color: var(--cyan);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        transform: translateY(-2px);
+      }
+
+      .filter-btn:hover::before {
+        left: 100%;
+      }
+
+      .filter-btn.active {
+        background: var(--cyan);
+        color: var(--dark);
+        border-color: var(--cyan);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+      }
+
+      .filter-btn:focus-visible {
+        outline: 3px solid var(--cyan);
+        outline-offset: 4px;
+      }
+
       .projects-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         gap: 3rem;
+      }
+
+      .project-card.hidden {
+        display: none;
       }
 
       .project-card {
@@ -1307,127 +1369,55 @@ const jsonLd = {
     <!-- Projects -->
     <section class="section" id="projects">
       <h2 class="section-title reveal">PROJECTS</h2>
+      
+      <!-- Filter Buttons -->
+      <div class="project-filters reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="code">Code</button>
+        <button class="filter-btn" data-filter="film">Film</button>
+        <button class="filter-btn" data-filter="art">Art</button>
+        <button class="filter-btn" data-filter="music">Music</button>
+        <button class="filter-btn" data-filter="interactive">Interactive</button>
+      </div>
+
       <div class="projects-grid">
-        <!-- Desktop OS -->
-        <div class="project-card reveal">
-          <img src="/images/desktop/psychtoadglow.gif" alt="BBFiller Desktop OS" class="project-image" loading="lazy" />
-          <div class="project-content">
-            <h3 class="project-title">Desktop OS</h3>
-            <p class="project-description">
-              Browser-based operating system with draggable windows, games, and apps. 
-              Loads in under 500ms with cyberpunk aesthetic.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Astro</span>
-              <span class="project-tag">React</span>
-              <span class="project-tag">TypeScript</span>
-            </div>
-            <div class="project-links">
-              <a href="/desktop" class="project-link">View Demo →</a>
-              <a href="https://github.com/jimminiglitch/bbfillerdesktop" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- The Weight of Care -->
-        <div class="project-card reveal">
-          <img src="/images/desktop/octavia.png" alt="The Weight of Care" class="project-image" loading="lazy" />
-          <div class="project-content">
-            <h3 class="project-title">The Weight of Care</h3>
-            <p class="project-description">
-              Experimental documentary exploring the emotional weight of private care 
-              medicine in the USA through intimate storytelling.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Documentary</span>
-              <span class="project-tag">Direction</span>
-              <span class="project-tag">Editing</span>
-            </div>
-            <div class="project-links">
-              <a href="/desktop" class="project-link">Watch Film →</a>
+        {projects.filter(p => p.featured).map((project) => (
+          <div class="project-card reveal" data-category={project.category}>
+            {project.thumbnail && (
+              <img 
+                src={project.thumbnail} 
+                alt={project.title} 
+                class="project-image" 
+                loading="lazy" 
+              />
+            )}
+            <div class="project-content">
+              <h3 class="project-title">{project.title}</h3>
+              <p class="project-description">{project.description}</p>
+              <div class="project-tags">
+                {project.tags.map((tag) => (
+                  <span class="project-tag">{tag}</span>
+                ))}
+              </div>
+              <div class="project-links">
+                {project.links.demo && (
+                  <a href={project.links.demo} class="project-link">View Demo →</a>
+                )}
+                {project.links.live && !project.links.demo && (
+                  <a href={project.links.live} class="project-link" target="_blank" rel="noopener noreferrer">
+                    {project.category === 'film' ? 'Watch →' : 'View Live →'}
+                  </a>
+                )}
+                {project.links.youtube && (
+                  <a href={project.links.youtube} class="project-link" target="_blank" rel="noopener noreferrer">YouTube →</a>
+                )}
+                {project.links.github && (
+                  <a href={project.links.github} class="project-link" target="_blank" rel="noopener noreferrer">GitHub →</a>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Birding with Brian -->
-        <div class="project-card reveal">
-          <img src="/images/desktop/vaportree.png" alt="Birding with Brian" class="project-image" loading="lazy" />
-          <div class="project-content">
-            <h3 class="project-title">Birding with Brian</h3>
-            <p class="project-description">
-              Documentary short capturing the contemplative beauty of birdwatching 
-              and nature observation.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Documentary</span>
-              <span class="project-tag">Cinematography</span>
-              <span class="project-tag">Nature</span>
-            </div>
-            <div class="project-links">
-              <a href="/desktop" class="project-link">Watch Film →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Composite Art -->
-        <div class="project-card reveal">
-          <img src="/images/DOGOFWAR.png" alt="Composite Photo Art" class="project-image" loading="lazy" />
-          <div class="project-content">
-            <h3 class="project-title">Composite Art</h3>
-            <p class="project-description">
-              Digital composite artworks blending photography with surreal imagery. 
-              Featured: "Dog of War" and "La Vie un Chien".
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Digital Art</span>
-              <span class="project-tag">Composites</span>
-              <span class="project-tag">Surrealism</span>
-            </div>
-            <div class="project-links">
-              <a href="/desktop" class="project-link">View Gallery →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Interactive Games -->
-        <div class="project-card reveal">
-          <img src="/images/desktop/spacesnake.png" alt="Interactive Games" class="project-image" loading="lazy" />
-          <div class="project-content">
-            <h3 class="project-title">Interactive Games</h3>
-            <p class="project-description">
-              Browser-based games including Space Snake and Cyberpunk Minesweeper 
-              with custom graphics and neon aesthetics.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">JavaScript</span>
-              <span class="project-tag">Game Design</span>
-              <span class="project-tag">p5.js</span>
-            </div>
-            <div class="project-links">
-              <a href="/desktop" class="project-link">Play Games →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- r3d3ch0 -->
-        <div class="project-card reveal">
-          <img src="/images/desktop/r3d3ch0-logo.png" alt="r3d3ch0 Interactive Story" class="project-image" loading="lazy" />
-          <div class="project-content">
-            <h3 class="project-title">r3d3ch0 Story</h3>
-            <p class="project-description">
-              Interactive narrative experience combining web development with 
-              storytelling. Immersive story map blending digital art and design.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Interactive</span>
-              <span class="project-tag">Web Dev</span>
-              <span class="project-tag">Storytelling</span>
-            </div>
-            <div class="project-links">
-              <a href="/desktop" class="project-link">Experience →</a>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
 
@@ -1767,6 +1757,53 @@ const jsonLd = {
           }
         });
       });
+
+      // ==================== PROJECT FILTERING ====================
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const filter = button.getAttribute('data-filter');
+          
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          // Filter projects with animation
+          projectCards.forEach((card, index) => {
+            const htmlCard = card as HTMLElement;
+            const category = htmlCard.getAttribute('data-category');
+            
+            if (filter === 'all' || category === filter) {
+              // Show card
+              setTimeout(() => {
+                htmlCard.classList.remove('hidden');
+                htmlCard.style.animation = 'fadeInUp 0.6s ease forwards';
+              }, index * 50); // Stagger animation
+            } else {
+              // Hide card
+              htmlCard.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // Add fadeInUp animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `;
+      document.head.appendChild(style);
     </script>
   </body>
 </html>
