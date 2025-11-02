@@ -3,6 +3,8 @@
 const title = 'Benjamin Filler - Creative Developer & Digital Artist'
 const description =
   'Detroit-based creative developer, filmmaker, and artist. Building immersive web experiences, directing films, and creating interactive multimedia projects.'
+const siteUrl = 'https://benjaminfiller.com'
+const imageUrl = `${siteUrl}/images/og-image.jpg`
 ---
 
 <!doctype html>
@@ -12,6 +14,33 @@ const description =
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={siteUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Benjamin Filler Portfolio" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={siteUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:creator" content="@jimminiglitch" />
+    
+    <!-- Additional SEO -->
+    <meta name="author" content="Benjamin Filler" />
+    <meta name="keywords" content="creative developer, digital artist, filmmaker, web developer, interactive media, Detroit artist, multimedia designer" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0a0a0f" />
 
     <!-- Preload Critical Assets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,6 +49,29 @@ const description =
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap"
       rel="stylesheet"
     />
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Benjamin Filler",
+        "url": "https://benjaminfiller.com",
+        "image": "https://benjaminfiller.com/images/og-image.jpg",
+        "sameAs": [
+          "https://github.com/jimminiglitch"
+        ],
+        "jobTitle": "Creative Developer & Digital Artist",
+        "description": "Detroit-based creative developer, filmmaker, and artist specializing in immersive web experiences, film production, and interactive multimedia projects",
+        "knowsAbout": ["Web Development", "Filmmaking", "Digital Art", "Interactive Media", "Sound Design", "Instructional Design"],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Detroit",
+          "addressRegion": "MI",
+          "addressCountry": "US"
+        }
+      }
+    </script>
 
     <style>
       :root {
@@ -53,6 +105,15 @@ const description =
         line-height: 1.6;
         overflow-x: hidden;
         position: relative;
+        cursor: none;
+      }
+
+      body.custom-cursor-disabled {
+        cursor: auto;
+      }
+
+      body.custom-cursor-disabled .custom-cursor {
+        display: none !important;
       }
 
       body::before {
@@ -153,8 +214,55 @@ const description =
         border-color: var(--magenta);
       }
 
-      a, button {
-        cursor: none;
+
+      body.custom-cursor-disabled a,
+      body.custom-cursor-disabled button,
+      body.custom-cursor-disabled .nav-link,
+      body.custom-cursor-disabled .btn,
+      body.custom-cursor-disabled .contact-link,
+      body.custom-cursor-disabled .project-link,
+      body.custom-cursor-disabled .mobile-menu-toggle {
+        cursor: pointer;
+      }
+
+      /* Respect user's motion preferences */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        
+        .custom-cursor {
+          display: none !important;
+        }
+        
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+      }
+
+      /* Skip to main content link for accessibility */
+      .skip-to-main {
+        position: absolute;
+        left: -9999px;
+        z-index: 999;
+        padding: 1rem 2rem;
+        background: var(--cyan);
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 0 0 4px 0;
+      }
+
+      .skip-to-main:focus {
+        left: 0;
+        top: 0;
       }
 
       /* Grid Overlay */
@@ -196,6 +304,7 @@ const description =
         right: 0;
         z-index: 1000;
         background: rgba(10, 10, 15, 0.8);
+        -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         transition: transform 0.3s ease;
@@ -364,7 +473,6 @@ const description =
         text-decoration: none;
         border-radius: 0;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        cursor: pointer;
         border: 2px solid;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -430,6 +538,20 @@ const description =
         background: var(--magenta);
         color: var(--dark);
         box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+      }
+
+      /* Focus styles for keyboard navigation */
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid var(--cyan);
+        outline-offset: 4px;
+        border-radius: 2px;
+      }
+
+      .nav-link:focus-visible {
+        background: rgba(0, 255, 255, 0.1);
       }
 
       /* Section Base */
@@ -585,6 +707,7 @@ const description =
 
       .skill-card {
         background: rgba(255, 255, 255, 0.03);
+        -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 255, 255, 0.2);
         padding: 2.5rem;
@@ -687,6 +810,7 @@ const description =
 
       .project-card {
         background: rgba(255, 255, 255, 0.03);
+        -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 0, 255, 0.2);
         overflow: hidden;
@@ -846,6 +970,7 @@ const description =
         gap: 1rem;
         padding: 2rem;
         background: rgba(255, 255, 255, 0.03);
+        -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         border: 2px solid rgba(139, 92, 246, 0.3);
         min-width: 180px;
@@ -897,7 +1022,6 @@ const description =
         color: var(--cyan);
         font-size: 1.5rem;
         padding: 0.5rem 1rem;
-        cursor: pointer;
         transition: all 0.3s ease;
       }
 
@@ -957,6 +1081,7 @@ const description =
           left: 0;
           right: 0;
           background: rgba(10, 10, 15, 0.95);
+          -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
           flex-direction: column;
           padding: 2rem;
@@ -996,23 +1121,29 @@ const description =
     </style>
   </head>
   <body>
+    <!-- Skip to main content for screen readers -->
+    <a href="#hero" class="skip-to-main">Skip to main content</a>
+    
     <div class="bg-gradient"></div>
     <div class="grid-overlay"></div>
-    <canvas id="particles"></canvas>
-    <div class="custom-cursor"></div>
+    <canvas id="particles" aria-hidden="true">
+      <!-- Fallback for browsers without canvas support -->
+      <p style="display: none;">Your browser does not support the HTML5 canvas element.</p>
+    </canvas>
+    <div class="custom-cursor" aria-hidden="true"></div>
 
     <!-- Navigation -->
-    <nav class="nav" id="nav">
+    <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
       <div class="nav-container">
-        <a href="#hero" class="nav-logo">BF</a>
-        <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <a href="#hero" class="nav-logo" aria-label="Benjamin Filler - Home">BF</a>
+        <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
           ☰
         </button>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+        <ul class="nav-links" id="navLinks" role="menubar">
+          <li role="none"><a href="#about" class="nav-link" role="menuitem">About</a></li>
+          <li role="none"><a href="#skills" class="nav-link" role="menuitem">Skills</a></li>
+          <li role="none"><a href="#projects" class="nav-link" role="menuitem">Projects</a></li>
+          <li role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
         </ul>
       </div>
     </nav>
@@ -1342,19 +1473,47 @@ const description =
       // 📺 Scanline CRT effect
       // 🎬 Film grain texture overlay
       // 🔮 Enhanced glow and neon effects
-      // ==================== PARTICLES SYSTEM ====================
-      const canvas = document.getElementById('particles');
-      const ctx = canvas.getContext('2d');
       
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // ==================== CONFIGURATION CONSTANTS ====================
+      const CONFIG = {
+        PARTICLE_COUNT: window.innerWidth < 768 ? 40 : 100,
+        CONNECTION_DISTANCE: 150,
+        MAGNETIC_MULTIPLIER: 0.3,
+        TILT_DIVISOR: 10
+      };
+      
+      // ==================== PARTICLES SYSTEM ====================
+      const canvas = document.getElementById('particles') as HTMLCanvasElement;
+      const ctx = canvas?.getContext('2d');
+      
+      if (canvas && ctx) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
 
-      const particles = [];
-      const particleCount = 100;
-      const connectionDistance = 150;
+      interface ParticleType {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        radius: number;
+        update: () => void;
+        draw: () => void;
+      }
 
-      class Particle {
+      const particles: ParticleType[] = [];
+      const particleCount = CONFIG.PARTICLE_COUNT;
+      const connectionDistance = CONFIG.CONNECTION_DISTANCE;
+
+      class Particle implements ParticleType {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        radius: number;
+
         constructor() {
+          if (!canvas) return;
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
           this.vx = (Math.random() - 0.5) * 0.5;
@@ -1363,6 +1522,7 @@ const description =
         }
 
         update() {
+          if (!canvas) return;
           this.x += this.vx;
           this.y += this.vy;
 
@@ -1371,6 +1531,7 @@ const description =
         }
 
         draw() {
+          if (!ctx) return;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
           ctx.fillStyle = 'rgba(0, 255, 255, 0.5)';
@@ -1378,11 +1539,14 @@ const description =
         }
       }
 
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
+      if (canvas && ctx) {
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new Particle());
+        }
       }
 
       function connectParticles() {
+        if (!ctx) return;
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
@@ -1402,6 +1566,7 @@ const description =
       }
 
       function animate() {
+        if (!ctx || !canvas) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         particles.forEach(particle => {
@@ -1413,68 +1578,105 @@ const description =
         requestAnimationFrame(animate);
       }
 
-      animate();
+      if (canvas && ctx) {
+        animate();
+      }
 
+      // Debounced resize handler
+      let resizeTimeout: number;
       window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(() => {
+          if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+          }
+        }, 250);
       });
 
       // ==================== CUSTOM CURSOR (OPTIMIZED) ====================
-      const cursor = document.querySelector('.custom-cursor');
+      const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+      const supportsHover = window.matchMedia('(hover: hover)').matches;
+      const fallbackNonTouch = !('ontouchstart' in window) && navigator.maxTouchPoints === 0;
+      const enableDesktopInteractions = (hasFinePointer && supportsHover) || fallbackNonTouch;
+      const cursor = document.querySelector('.custom-cursor') as HTMLElement | null;
+      const body = document.body;
       let mouseX = 0, mouseY = 0;
 
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        // Direct update for instant response
-        if (cursor) {
-          cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-        }
-      }, { passive: true });
+      if (enableDesktopInteractions && cursor) {
+        body.classList.remove('custom-cursor-disabled');
+        cursor.style.display = '';
 
-      // Hover effects for cursor
-      document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-      });
+        window.addEventListener('pointermove', (e: PointerEvent) => {
+          if (e.pointerType !== 'mouse') return;
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        }, { passive: true });
+
+        const renderCursor = () => {
+          cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+          requestAnimationFrame(renderCursor);
+        };
+
+        requestAnimationFrame(renderCursor);
+
+        const interactiveSelectors = 'a, button, .skill-card, .project-card';
+        document.querySelectorAll(interactiveSelectors).forEach(el => {
+          el.addEventListener('pointerenter', (event: Event) => {
+            const pointerEvent = event as PointerEvent;
+            if (pointerEvent.pointerType !== 'mouse') return;
+            cursor.classList.add('hover');
+          });
+          el.addEventListener('pointerleave', () => cursor.classList.remove('hover'));
+        });
+      } else {
+        if (cursor) {
+          cursor.style.display = 'none';
+        }
+        body.classList.add('custom-cursor-disabled');
+      }
 
       // ==================== 3D TILT EFFECT ====================
-      document.querySelectorAll('.skill-card, .project-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
+      if (enableDesktopInteractions) {
+        document.querySelectorAll('.skill-card, .project-card').forEach(card => {
+          const htmlCard = card as HTMLElement;
           
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = (y - centerY) / 10;
-          const rotateY = (centerX - x) / 10;
-          
-          card.style.transform = `
-            translateY(-15px) 
-            rotateX(${rotateX}deg) 
-            rotateY(${rotateY}deg)
-            scale(1.02)
-          `;
-        });
+          card.addEventListener('mousemove', (e: Event) => {
+            const mouseEvent = e as MouseEvent;
+            const rect = htmlCard.getBoundingClientRect();
+            const x = mouseEvent.clientX - rect.left;
+            const y = mouseEvent.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / CONFIG.TILT_DIVISOR;
+            const rotateY = (centerX - x) / CONFIG.TILT_DIVISOR;
+            
+            htmlCard.style.transform = `
+              translateY(-15px) 
+              rotateX(${rotateX}deg) 
+              rotateY(${rotateY}deg)
+              scale(1.02)
+            `;
+          });
 
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = '';
+          card.addEventListener('mouseleave', () => {
+            htmlCard.style.transform = '';
+          });
         });
-      });
+      }
 
       // ==================== MAGNETIC EFFECT ON NAV LOGO ====================
-      const navLogo = document.querySelector('.nav-logo');
-      if (navLogo) {
-        navLogo.addEventListener('mousemove', (e) => {
+      const navLogo = document.querySelector('.nav-logo') as HTMLElement | null;
+  if (navLogo && enableDesktopInteractions) {
+        navLogo.addEventListener('mousemove', (e: Event) => {
+          const mouseEvent = e as MouseEvent;
           const rect = navLogo.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
+          const x = mouseEvent.clientX - rect.left - rect.width / 2;
+          const y = mouseEvent.clientY - rect.top - rect.height / 2;
           
-          navLogo.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.1)`;
+          navLogo.style.transform = `translate(${x * CONFIG.MAGNETIC_MULTIPLIER}px, ${y * CONFIG.MAGNETIC_MULTIPLIER}px) scale(1.1)`;
         });
 
         navLogo.addEventListener('mouseleave', () => {
@@ -1484,27 +1686,31 @@ const description =
 
       // ==================== ANIMATED SKILL ICONS ====================
       document.querySelectorAll('.skill-icon').forEach(icon => {
+        const htmlIcon = icon as HTMLElement;
+        
         icon.addEventListener('mouseenter', () => {
-          icon.style.transform = 'scale(1.3) rotate(10deg)';
-          icon.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+          htmlIcon.style.transform = 'scale(1.3) rotate(10deg)';
+          htmlIcon.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
         });
         
         icon.addEventListener('mouseleave', () => {
-          icon.style.transform = '';
+          htmlIcon.style.transform = '';
         });
       });
 
       // Mobile Menu
-      const menuToggle = document.getElementById('menuToggle');
-      const navLinks = document.getElementById('navLinks');
+      const menuToggle = document.getElementById('menuToggle') as HTMLButtonElement | null;
+      const navLinks = document.getElementById('navLinks') as HTMLElement | null;
 
       menuToggle?.addEventListener('click', () => {
-        navLinks?.classList.toggle('active');
+        const isOpen = navLinks?.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
       });
 
       navLinks?.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
           navLinks.classList.remove('active');
+          menuToggle?.setAttribute('aria-expanded', 'false');
         });
       });
 
@@ -1521,9 +1727,10 @@ const description =
 
       // Nav Hide/Show on Scroll
       let lastScroll = 0;
-      const nav = document.getElementById('nav');
+      const nav = document.getElementById('nav') as HTMLElement | null;
 
       window.addEventListener('scroll', () => {
+        if (!nav) return;
         const currentScroll = window.pageYOffset;
         
         if (currentScroll <= 0) {
@@ -1538,14 +1745,17 @@ const description =
         }
         
         lastScroll = currentScroll;
-      });
+      }, { passive: true });
 
       // Smooth Scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
+        anchor.addEventListener('click', (e: Event) => {
           e.preventDefault();
-          const target = document.querySelector(anchor.getAttribute('href'));
-          target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const href = anchor.getAttribute('href');
+          if (href) {
+            const target = document.querySelector(href) as HTMLElement | null;
+            target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         });
       });
     </script>

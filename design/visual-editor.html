@@ -601,6 +601,42 @@
       box-shadow: 0 0 20px var(--magenta);
     }
 
+    .export-btn.clear-btn {
+      background: var(--purple);
+    }
+
+    .editor-title {
+      color: var(--cyan);
+      font-family: var(--font-display);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      font-size: 1.25rem;
+    }
+
+    .inspector-controls-hidden {
+      display: none;
+    }
+
+    .export-divider {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .export-info {
+      color: var(--gray);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .skills-title-large {
+      font-size: 60px;
+    }
+
+    .footer-spacing {
+      margin-top: 1rem;
+    }
+
     @media (max-width: 768px) {
       .about-grid {
         grid-template-columns: 1fr;
@@ -620,7 +656,7 @@
 
   <!-- Editor Panel -->
   <div class="editor-panel" id="editorPanel">
-    <h2 style="color: var(--cyan); font-family: var(--font-display); margin-bottom: 1rem; text-transform: uppercase; font-size: 1.25rem;">Visual Editor</h2>
+    <h2 class="editor-title">Visual Editor</h2>
     
     <!-- Tabs -->
     <div class="editor-tabs">
@@ -632,33 +668,33 @@
     <!-- Global Tab -->
     <div class="editor-content active" id="global-content">
       <div class="editor-group">
-        <label class="editor-label">Primary Color (Cyan)</label>
-        <input type="color" value="#00ffff" class="editor-input" onchange="updateColor('--cyan', this.value)">
+        <label class="editor-label" for="color-cyan">Primary Color (Cyan)</label>
+        <input type="color" id="color-cyan" value="#00ffff" class="editor-input" onchange="updateColor('--cyan', this.value)" title="Primary Color (Cyan)">
       </div>
 
       <div class="editor-group">
-        <label class="editor-label">Accent Color (Magenta)</label>
-        <input type="color" value="#ff00ff" class="editor-input" onchange="updateColor('--magenta', this.value)">
+        <label class="editor-label" for="color-magenta">Accent Color (Magenta)</label>
+        <input type="color" id="color-magenta" value="#ff00ff" class="editor-input" onchange="updateColor('--magenta', this.value)" title="Accent Color (Magenta)">
       </div>
 
       <div class="editor-group">
-        <label class="editor-label">Secondary (Purple)</label>
-        <input type="color" value="#8b5cf6" class="editor-input" onchange="updateColor('--purple', this.value)">
+        <label class="editor-label" for="color-purple">Secondary (Purple)</label>
+        <input type="color" id="color-purple" value="#8b5cf6" class="editor-input" onchange="updateColor('--purple', this.value)" title="Secondary (Purple)">
       </div>
 
       <div class="editor-group">
-        <label class="editor-label">Background (Dark)</label>
-        <input type="color" value="#0a0a0f" class="editor-input" onchange="updateColor('--dark', this.value)">
+        <label class="editor-label" for="color-dark">Background (Dark)</label>
+        <input type="color" id="color-dark" value="#0a0a0f" class="editor-input" onchange="updateColor('--dark', this.value)" title="Background (Dark)">
       </div>
 
       <div class="editor-group">
-        <label class="editor-label">Text Color (Light)</label>
-        <input type="color" value="#f8f9fa" class="editor-input" onchange="updateColor('--light', this.value)">
+        <label class="editor-label" for="color-light">Text Color (Light)</label>
+        <input type="color" id="color-light" value="#f8f9fa" class="editor-input" onchange="updateColor('--light', this.value)" title="Text Color (Light)">
       </div>
 
       <div class="editor-group">
-        <label class="editor-label">Muted Text (Gray)</label>
-        <input type="color" value="#6b7280" class="editor-input" onchange="updateColor('--gray', this.value)">
+        <label class="editor-label" for="color-gray">Muted Text (Gray)</label>
+        <input type="color" id="color-gray" value="#6b7280" class="editor-input" onchange="updateColor('--gray', this.value)" title="Muted Text (Gray)">
       </div>
     </div>
 
@@ -668,7 +704,7 @@
         🎯 Click to Inspect Elements
       </button>
       
-      <div id="inspector-controls" style="display: none;">
+      <div id="inspector-controls" class="inspector-controls-hidden">
         <div class="element-path" id="elementPath">No element selected</div>
         
         <div class="editor-group">
@@ -747,7 +783,7 @@
           </select>
         </div>
 
-        <button class="export-btn" onclick="clearSelection()" style="background: var(--purple);">
+        <button class="export-btn clear-btn" onclick="clearSelection()">
           Clear Selection
         </button>
       </div>
@@ -758,8 +794,8 @@
       <button class="export-btn" onclick="exportCSS()">📋 Copy CSS Variables</button>
       <button class="export-btn" onclick="exportAll()">💾 Export All Changes</button>
       
-      <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0, 255, 255, 0.2);">
-        <p style="color: var(--gray); font-size: 0.875rem; margin-bottom: 1rem;">
+      <div class="export-divider">
+        <p class="export-info">
           Click "Export All Changes" and paste the JSON output back to me. I'll update your actual site!
         </p>
       </div>
@@ -824,7 +860,7 @@
 
   <!-- Skills -->
   <section class="section" id="skills">
-    <h2 class="section-title" style="font-size: 60px;">skills</h2>
+    <h2 class="section-title skills-title-large">skills</h2>
     <div class="skills-grid">
       <div class="skill-card">
         <span class="skill-icon">🎨</span>
@@ -1077,7 +1113,7 @@
       <a href="https://astro.build" class="footer-link" target="_blank" rel="noopener noreferrer">Astro</a> 
       & creative vision
     </p>
-    <p style="margin-top: 1rem;">
+    <p class="footer-spacing">
       <a href="/desktop" class="footer-link">Desktop OS</a> • 
       <a href="https://github.com/jimminiglitch/bbfillerdesktop" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
     </p>
