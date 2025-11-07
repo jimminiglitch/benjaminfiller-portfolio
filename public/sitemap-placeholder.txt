@@ -1,0 +1,3 @@
+# Sitemap will be auto-generated at build time
+# This file is a placeholder for the sitemap configuration
+# Once you add @astrojs/sitemap to your project, it will generate sitemap-index.xml automatically
