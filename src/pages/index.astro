@@ -744,29 +744,45 @@ const jsonLd = {
 
       .about-image-wrapper {
         position: relative;
+        width: 500px;
+        height: 300px;
+        border: 3px solid var(--cyan);
+        box-shadow: 
+          0 0 30px rgba(0, 255, 255, 0.5),
+          0 0 60px rgba(255, 0, 255, 0.3),
+          inset 0 0 20px rgba(0, 255, 255, 0.2);
+        animation: boxGlow 3s ease-in-out infinite;
+        overflow: hidden;
       }
 
       .about-image {
-        width: 65%;
-        aspect-ratio: 1;
+        width: 200px;
+        height: 200px;
         object-fit: cover;
-        border: 3px solid var(--cyan);
-        position: relative;
+        border: 2px solid var(--magenta);
+        box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+        position: absolute;
         z-index: 1;
       }
 
-      .about-image-wrapper::before {
-        content: '';
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        right: -20px;
-        bottom: -20px;
-        border: 2px solid var(--magenta);
-        z-index: 0;
+      @keyframes boxGlow {
+        0%, 100% {
+          box-shadow: 
+            0 0 30px rgba(0, 255, 255, 0.5),
+            0 0 60px rgba(255, 0, 255, 0.3),
+            inset 0 0 20px rgba(0, 255, 255, 0.2);
+          border-color: var(--cyan);
+        }
+        50% {
+          box-shadow: 
+            0 0 40px rgba(255, 0, 255, 0.6),
+            0 0 80px rgba(0, 255, 255, 0.4),
+            inset 0 0 30px rgba(255, 0, 255, 0.2);
+          border-color: var(--magenta);
+        }
       }
 
-      /* Animated rainbow background for profile image */
+      /* Animated rainbow background glow for profile image */
       .about-image-wrapper::after {
         content: '';
         position: absolute;
@@ -787,7 +803,6 @@ const jsonLd = {
         background-size: 400% 400%;
         animation: rainbowRotate 8s ease infinite;
         z-index: -1;
-        border-radius: 4px;
         opacity: 0.6;
         filter: blur(20px);
       }
@@ -1515,10 +1530,7 @@ const jsonLd = {
                 ))}
               </div>
               <div class="project-links">
-                {project.links.demo && (
-                  <a href={project.links.demo} class="project-link">View Demo →</a>
-                )}
-                {project.links.live && !project.links.demo && (
+                {project.links.live && (
                   <a href={project.links.live} class="project-link" target="_blank" rel="noopener noreferrer">
                     {project.category === 'film' ? 'Watch →' : 'View Live →'}
                   </a>
@@ -2010,6 +2022,199 @@ const jsonLd = {
           }
         });
       });
+
+      // DVD Screensaver Physics for About Image
+      const aboutImage = document.querySelector('.about-image');
+      const aboutWrapper = document.querySelector('.about-image-wrapper');
+
+      if (aboutImage && aboutWrapper) {
+        let x = 0;
+        let y = 0;
+        let dx = 1.5; // horizontal velocity
+        let dy = 1.2; // vertical velocity
+        
+        const imageWidth = 200;
+        const imageHeight = 200;
+        const containerWidth = 500;
+        const containerHeight = 300;
+
+        let isDragging = false;
+        let lastX = 0;
+        let lastY = 0;
+        let lastTime = 0;
+        let velocityX = 0;
+        let velocityY = 0;
+
+        // Mouse/Touch down - start dragging
+        aboutImage.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          const rect = aboutWrapper.getBoundingClientRect();
+          lastX = e.clientX;
+          lastY = e.clientY;
+          lastTime = Date.now();
+          velocityX = 0;
+          velocityY = 0;
+          aboutImage.style.cursor = 'grabbing';
+          e.preventDefault();
+        });
+
+        aboutImage.addEventListener('touchstart', (e) => {
+          isDragging = true;
+          lastX = e.touches[0].clientX;
+          lastY = e.touches[0].clientY;
+          lastTime = Date.now();
+          velocityX = 0;
+          velocityY = 0;
+          e.preventDefault();
+        });
+
+        // Mouse/Touch move - drag the image
+        document.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          
+          const currentTime = Date.now();
+          const deltaTime = currentTime - lastTime;
+          
+          const rect = aboutWrapper.getBoundingClientRect();
+          const newX = e.clientX - rect.left - imageWidth / 2;
+          const newY = e.clientY - rect.top - imageHeight / 2;
+          
+          x = Math.max(0, Math.min(newX, containerWidth - imageWidth));
+          y = Math.max(0, Math.min(newY, containerHeight - imageHeight));
+          
+          // Track velocity during drag
+          if (deltaTime > 0) {
+            velocityX = (e.clientX - lastX) / deltaTime;
+            velocityY = (e.clientY - lastY) / deltaTime;
+          }
+          
+          lastX = e.clientX;
+          lastY = e.clientY;
+          lastTime = currentTime;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          
+          const currentTime = Date.now();
+          const deltaTime = currentTime - lastTime;
+          
+          const rect = aboutWrapper.getBoundingClientRect();
+          const newX = e.touches[0].clientX - rect.left - imageWidth / 2;
+          const newY = e.touches[0].clientY - rect.top - imageHeight / 2;
+          
+          x = Math.max(0, Math.min(newX, containerWidth - imageWidth));
+          y = Math.max(0, Math.min(newY, containerHeight - imageHeight));
+          
+          // Track velocity during drag
+          if (deltaTime > 0) {
+            velocityX = (e.touches[0].clientX - lastX) / deltaTime;
+            velocityY = (e.touches[0].clientY - lastY) / deltaTime;
+          }
+          
+          lastX = e.touches[0].clientX;
+          lastY = e.touches[0].clientY;
+          lastTime = currentTime;
+        });
+
+        // Mouse/Touch up - throw the image
+        document.addEventListener('mouseup', (e) => {
+          if (!isDragging) return;
+          
+          // Apply the tracked velocity with strong multiplier
+          dx = velocityX * 30; // Strong throw power
+          dy = velocityY * 30;
+          
+          // Cap max velocity
+          const maxSpeed = 20;
+          dx = Math.max(-maxSpeed, Math.min(dx, maxSpeed));
+          dy = Math.max(-maxSpeed, Math.min(dy, maxSpeed));
+          
+          // If barely moving, set default speed
+          if (Math.abs(dx) < 0.5) dx = 1.5;
+          if (Math.abs(dy) < 0.5) dy = 1.2;
+          
+          isDragging = false;
+          aboutImage.style.cursor = 'grab';
+        });
+
+        document.addEventListener('touchend', (e) => {
+          if (!isDragging) return;
+          
+          // Apply the tracked velocity with strong multiplier
+          dx = velocityX * 30;
+          dy = velocityY * 30;
+          
+          // Cap max velocity
+          const maxSpeed = 20;
+          dx = Math.max(-maxSpeed, Math.min(dx, maxSpeed));
+          dy = Math.max(-maxSpeed, Math.min(dy, maxSpeed));
+          
+          // If barely moving, set default speed
+          if (Math.abs(dx) < 0.5) dx = 1.5;
+          if (Math.abs(dy) < 0.5) dy = 1.2;
+          
+          isDragging = false;
+        });
+
+        // Set cursor style
+        aboutImage.style.cursor = 'grab';
+
+        function animateDVD() {
+          if (!isDragging) {
+            // Apply friction/decay to gradually slow down to normal speed
+            const friction = 0.98;
+            const minSpeed = 1.5;
+            
+            if (Math.abs(dx) > minSpeed) {
+              dx *= friction;
+            } else {
+              dx = dx > 0 ? minSpeed : -minSpeed;
+            }
+            
+            if (Math.abs(dy) > minSpeed) {
+              dy *= friction;
+            } else {
+              dy = dy > 0 ? 1.2 : -1.2;
+            }
+
+            // Update position
+            x += dx;
+            y += dy;
+
+            // Bounce off edges
+            if (x <= 0 || x + imageWidth >= containerWidth) {
+              dx = -dx;
+              x = Math.max(0, Math.min(x, containerWidth - imageWidth));
+            }
+            if (y <= 0 || y + imageHeight >= containerHeight) {
+              dy = -dy;
+              y = Math.max(0, Math.min(y, containerHeight - imageHeight));
+            }
+          }
+
+          // Apply position
+          aboutImage.style.left = `${x}px`;
+          aboutImage.style.top = `${y}px`;
+
+          // Dynamic glow speed based on velocity
+          const speed = Math.sqrt(dx * dx + dy * dy);
+          const normalSpeed = Math.sqrt(1.5 * 1.5 + 1.2 * 1.2); // ~1.9
+          const speedRatio = speed / normalSpeed;
+          
+          // Faster glow when moving fast
+          const glowDuration = Math.max(0.5, 3 / speedRatio);
+          aboutWrapper.style.animationDuration = `${glowDuration}s`;
+          
+          // Also pulse the image glow faster
+          const imageGlowIntensity = Math.min(40, 20 * speedRatio);
+          aboutImage.style.boxShadow = `0 0 ${imageGlowIntensity}px rgba(255, 0, 255, 0.6)`;
+
+          requestAnimationFrame(animateDVD);
+        }
+
+        animateDVD();
+      }
     </script>
   </body>
 </html>
