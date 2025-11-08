@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Benjamin Filler Portfolio - Visual Editor</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benjamin Filler - Creative Developer & Digital Artist</title>
+  <meta name="description" content="Detroit-based creative developer, filmmaker, and artist. Building immersive web experiences, directing films, and creating interactive multimedia projects." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://benjaminfiller.com" />
+  <meta property="og:type" content="website" />
   <style>
     :root {
       --cyan: #00ffff;
@@ -17,7 +20,6 @@
       --darker: #050508;
       --light: #f8f9fa;
       --gray: #6b7280;
-      
       --font-main: 'Space Grotesk', -apple-system, system-ui, sans-serif;
       --font-display: 'Archivo Black', sans-serif;
     }
@@ -29,7 +31,8 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: auto;
+      scroll-padding-top: 80px;
     }
 
     body {
@@ -38,141 +41,49 @@
       color: var(--light);
       line-height: 1.6;
       overflow-x: hidden;
-    }
-
-    /* Animated Background */
-    .bg-gradient {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
-      animation: gradientShift 20s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
-      50% { opacity: 0.8; transform: scale(1.1) rotate(2deg); }
-    }
-
-    /* Grid Overlay */
-    .grid-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background-image: 
-        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-    }
-
-    /* Navigation */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(10, 10, 15, 0.8);
-      -webkit-backdrop-filter: blur(20px);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-    }
-
-    .nav-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--cyan);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-logo:hover {
-      color: var(--magenta);
-      text-shadow: 0 0 20px var(--magenta);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 3rem;
-      list-style: none;
-    }
-
-    .nav-link {
-      color: var(--light);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
       position: relative;
-      transition: color 0.3s ease;
+      cursor: none;
     }
 
-    .nav-link::before {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--magenta));
-      transition: width 0.3s ease;
+    body.loading {
+      overflow: hidden;
     }
 
-    .nav-link:hover {
-      color: var(--cyan);
+    body.custom-cursor-disabled {
+      cursor: auto;
     }
 
-    .nav-link:hover::before {
-      width: 100%;
+    body.custom-cursor-disabled .custom-cursor {
+      display: none !important;
     }
 
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8rem 2rem 4rem;
-    }
+    .custom-cursor {
+        display: none !important;
+      }
 
-    .hero-content {
-      max-width: 1200px;
-      width: 100%;
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 10vw, 8rem);
-      line-height: 0.9;
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: -2px;
-      background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 100%);
+      .reveal {
+        opacity: 1 !important;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: titleGlow 3s ease-in-out infinite;
+      animation: titleGlow 3s ease-in-out infinite, gradientMove 8s ease infinite;
+      position: relative;
     }
 
     @keyframes titleGlow {
-      0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); }
-      50% { filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.5)); }
+      0%, 100% {
+        filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.6))
+                drop-shadow(0 0 60px rgba(255, 0, 255, 0.4));
+      }
+      50% {
+        filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.6))
+                drop-shadow(0 0 80px rgba(0, 255, 255, 0.3));
+      }
+    }
+
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .hero-subtitle {
@@ -195,14 +106,14 @@
       font-weight: 600;
       text-decoration: none;
       border-radius: 0;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       border: 2px solid;
       text-transform: uppercase;
       letter-spacing: 1px;
       position: relative;
       overflow: hidden;
       font-family: var(--font-main);
+      transform-style: preserve-3d;
     }
 
     .btn::before {
@@ -212,12 +123,27 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s ease;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      filter: blur(20px);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
     }
 
     .btn:hover::before {
       left: 100%;
+    }
+
+    .btn:hover::after {
+      opacity: 0.8;
     }
 
     .btn-primary {
@@ -229,7 +155,11 @@
     .btn-primary:hover {
       background: transparent;
       color: var(--cyan);
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.6),
+        0 10px 30px rgba(0, 255, 255, 0.3),
+        inset 0 0 20px rgba(0, 255, 255, 0.2);
+      transform: translateY(-3px) scale(1.05);
     }
 
     .btn-secondary {
@@ -244,14 +174,26 @@
       box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
     }
 
-    /* Section Base */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid var(--cyan);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    .nav-link:focus-visible {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
     .section {
       padding: 8rem 2rem;
       max-width: 1400px;
       margin: 0 auto;
+      position: relative;
     }
 
-    /* About Section Specific */
     #about {
       padding: 1rem 2rem;
     }
@@ -265,15 +207,46 @@
       font-family: var(--font-display);
       font-size: clamp(2.5rem, 6vw, 5rem);
       margin-bottom: 4rem;
+
+    .canvas-fallback-message {
+      display: none;
+    }
+
+    .skills-title-large {
+      font-size: 60px;
+    }
+
+    .contact-note {
+      margin-top: 1rem;
+    }
       text-transform: uppercase;
       letter-spacing: -1px;
-      background: linear-gradient(135deg, var(--light) 0%, var(--gray) 100%);
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 50%, var(--purple) 100%);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: gradientMove 8s ease infinite;
+      text-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+      position: relative;
     }
 
-    /* About Section */
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      animation: lineExpand 3s ease infinite;
+    }
+
+    @keyframes lineExpand {
+      0%, 100% { width: 100px; opacity: 1; }
+      50% { width: 200px; opacity: 0.6; }
+    }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -298,29 +271,45 @@
 
     .about-image-wrapper {
       position: relative;
+      width: 500px;
+      height: 300px;
+      border: 3px solid var(--cyan);
+      box-shadow:
+        0 0 30px rgba(0, 255, 255, 0.5),
+        0 0 60px rgba(255, 0, 255, 0.3),
+        inset 0 0 20px rgba(0, 255, 255, 0.2);
+      animation: boxGlow 3s ease-in-out infinite;
+      overflow: hidden;
+      --rainbow-duration: 8s;
     }
 
     .about-image {
-      width: 65%;
-      aspect-ratio: 1;
+      width: 200px;
+      height: 200px;
       object-fit: cover;
-      border: 3px solid var(--cyan);
-      position: relative;
+      border: 2px solid var(--magenta);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+      position: absolute;
       z-index: 1;
     }
 
-    .about-image-wrapper::before {
-      content: '';
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      right: -20px;
-      bottom: -20px;
-      border: 2px solid var(--magenta);
-      z-index: 0;
+    @keyframes boxGlow {
+      0%, 100% {
+        box-shadow:
+          0 0 30px rgba(0, 255, 255, 0.5),
+          0 0 60px rgba(255, 0, 255, 0.3),
+          inset 0 0 20px rgba(0, 255, 255, 0.2);
+        border-color: var(--cyan);
+      }
+      50% {
+        box-shadow:
+          0 0 40px rgba(255, 0, 255, 0.6),
+          0 0 80px rgba(0, 255, 255, 0.4),
+          inset 0 0 30px rgba(255, 0, 255, 0.2);
+        border-color: var(--magenta);
+      }
     }
 
-    /* Animated rainbow background for profile image */
     .about-image-wrapper::after {
       content: '';
       position: absolute;
@@ -339,9 +328,8 @@
         #ff0080
       );
       background-size: 400% 400%;
-      animation: rainbowRotate 8s ease infinite;
+      animation: rainbowRotate var(--rainbow-duration) ease infinite;
       z-index: -1;
-      border-radius: 4px;
       opacity: 0.6;
       filter: blur(20px);
     }
@@ -355,19 +343,18 @@
       }
     }
 
-    /* Skills Section */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 1.5rem;
     }
-    
+
     @media (max-width: 1400px) {
       .skills-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
-    
+
     @media (max-width: 768px) {
       .skills-grid {
         grid-template-columns: 1fr;
@@ -380,9 +367,11 @@
       backdrop-filter: blur(10px);
       border: 1px solid rgba(0, 255, 255, 0.2);
       padding: 2.5rem;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
     .skill-card::before {
@@ -398,14 +387,36 @@
       transition: transform 0.3s ease;
     }
 
+    .skill-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.2), transparent);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
     .skill-card:hover {
       border-color: var(--cyan);
-      box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2);
-      transform: translateY(-5px);
+      box-shadow:
+        0 20px 60px rgba(0, 255, 255, 0.3),
+        0 0 40px rgba(255, 0, 255, 0.2),
+        inset 0 0 20px rgba(0, 255, 255, 0.1);
+      transform: translateY(-10px) rotateX(2deg);
     }
 
     .skill-card:hover::before {
       transform: scaleX(1);
+    }
+
+    .skill-card:hover::after {
+      width: 300px;
+      height: 300px;
     }
 
     .skill-icon {
@@ -446,313 +457,693 @@
       font-weight: 500;
     }
 
-    /* Editor Panel */
+    .project-filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.75rem 2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid rgba(0, 255, 255, 0.3);
+      color: var(--cyan);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-family: var(--font-main);
+    }
+
+    .filter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn:hover::before {
+      left: 100%;
+    }
+
+    .filter-btn.active {
+      background: var(--cyan);
+      color: var(--dark);
+      border-color: var(--cyan);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    }
+
+    .filter-btn:focus-visible {
+      outline: 3px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 3rem;
+    }
+
+    .project-card.hidden {
+      display: none;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 0, 255, 0.2);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%
+      );
+      background-size: 200% 200%;
+      animation: shimmer 3s infinite;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .project-card:hover {
+      border-color: var(--magenta);
+      box-shadow:
+        0 30px 80px rgba(255, 0, 255, 0.4),
+        0 0 60px rgba(0, 255, 255, 0.2),
+        inset 0 0 30px rgba(255, 0, 255, 0.1);
+      transform: translateY(-15px) rotateX(3deg) scale(1.02);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    .project-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: brightness(0.8) saturate(1.2);
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.1) rotate(1deg);
+      filter: brightness(1.1) saturate(1.4) contrast(1.1);
+    }
+
+    .project-content {
+      padding: 2rem;
+    }
+
+    .project-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .project-description {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tag {
+      font-size: 0.875rem;
+      padding: 0.4rem 1rem;
+      background: rgba(255, 0, 255, 0.1);
+      border: 1px solid rgba(255, 0, 255, 0.3);
+      color: var(--magenta);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .project-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      color: var(--magenta);
+      text-shadow: 0 0 10px var(--magenta);
+    }
+
+    .contact-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-text {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      min-width: 180px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      border-color: var(--purple);
+      box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+      transform: translateY(-5px);
+    }
+
+    .contact-icon {
+      font-size: 3rem;
+    }
+
+    .contact-label {
+      color: var(--light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .editor-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1200;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+      font-size: 1.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+    }
+
+    .editor-toggle:hover,
+    .editor-toggle:focus-visible {
+      background: rgba(0, 255, 255, 0.15);
+      color: var(--dark);
+      box-shadow: 0 15px 40px rgba(0, 255, 255, 0.35);
+    }
+
     .editor-panel {
       position: fixed;
-      right: 0;
-      top: 80px;
-      width: 400px;
-      max-height: calc(100vh - 100px);
-      overflow-y: auto;
-      background: rgba(10, 10, 15, 0.95);
+      top: 50%;
+      right: 2rem;
+      transform: translate(120%, -50%);
+      width: min(380px, 90vw);
+      max-height: 80vh;
+      background: rgba(5, 5, 8, 0.92);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 255, 255, 0.3);
-      padding: 1.5rem;
-      z-index: 999;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      z-index: 1150;
+      transition: transform 0.4s ease;
+      color: var(--light);
     }
 
     .editor-panel.open {
-      transform: translateX(0);
+      transform: translate(0, -50%);
     }
 
-    /* Element Inspector Mode */
-    body.inspect-mode * {
-      cursor: crosshair !important;
-    }
-
-    body.inspect-mode *:hover {
-      outline: 2px solid var(--cyan) !important;
-      outline-offset: 2px;
-    }
-
-    .selected-element {
-      outline: 3px solid var(--magenta) !important;
-      outline-offset: 2px;
+    .editor-title {
+      font-family: var(--font-display);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--cyan);
+      font-size: 1.25rem;
     }
 
     .editor-tabs {
       display: flex;
       gap: 0.5rem;
       margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
     }
 
     .editor-tab {
-      background: none;
-      border: none;
-      color: var(--gray);
-      padding: 0.75rem 1rem;
-      font-family: var(--font-main);
+      flex: 1;
+      padding: 0.65rem 1rem;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--light);
+      font-size: 0.85rem;
       font-weight: 600;
       text-transform: uppercase;
-      font-size: 0.75rem;
-      cursor: pointer;
       letter-spacing: 1px;
-      border-bottom: 2px solid transparent;
+      cursor: pointer;
       transition: all 0.3s ease;
+      border-radius: 999px;
+    }
+
+    .editor-tab:hover,
+    .editor-tab:focus-visible {
+      border-color: var(--cyan);
+      color: var(--cyan);
     }
 
     .editor-tab.active {
-      color: var(--cyan);
-      border-bottom-color: var(--cyan);
-    }
-
-    .editor-tab:hover {
-      color: var(--light);
+      background: var(--cyan);
+      color: var(--dark);
+      border-color: var(--cyan);
+      box-shadow: 0 8px 20px rgba(0, 255, 255, 0.3);
     }
 
     .editor-content {
       display: none;
+      max-height: 45vh;
+      overflow-y: auto;
+      padding-right: 0.25rem;
     }
 
     .editor-content.active {
       display: block;
     }
 
-    .element-path {
-      font-size: 0.75rem;
-      color: var(--gray);
-      margin-bottom: 1rem;
-      padding: 0.5rem;
-      background: rgba(0, 255, 255, 0.05);
-      border: 1px solid rgba(0, 255, 255, 0.2);
-      font-family: monospace;
-      word-break: break-all;
-    }
-
-    .editor-toggle {
-      position: fixed;
-      right: 20px;
-      top: 100px;
-      z-index: 1000;
-      background: var(--cyan);
-      color: var(--dark);
-      border: none;
-      padding: 1rem;
-      font-family: var(--font-main);
-      font-weight: 700;
-      text-transform: uppercase;
-      cursor: pointer;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-    }
-
-    .editor-toggle:hover {
-      background: var(--magenta);
-      box-shadow: 0 0 20px var(--magenta);
-    }
-
     .editor-group {
-      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
     }
 
     .editor-label {
-      display: block;
-      color: var(--cyan);
+      font-size: 0.85rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
-      font-size: 0.875rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.05em;
+      color: var(--gray);
     }
 
     .editor-input {
       width: 100%;
+      padding: 0.75rem 0.9rem;
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(0, 255, 255, 0.3);
+      border: 1px solid rgba(0, 255, 255, 0.2);
       color: var(--light);
-      padding: 0.75rem;
       font-family: var(--font-main);
-      font-size: 0.875rem;
+      border-radius: 10px;
     }
 
-    .editor-input:focus {
-      outline: none;
+    .editor-input:focus-visible {
       border-color: var(--cyan);
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
     }
 
     .export-btn {
       width: 100%;
-      background: var(--magenta);
-      color: var(--light);
-      border: none;
-      padding: 1rem;
-      font-family: var(--font-main);
-      font-weight: 700;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.75rem;
+      background: rgba(0, 255, 255, 0.1);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 255, 255, 0.3);
       text-transform: uppercase;
-      cursor: pointer;
       letter-spacing: 1px;
-      margin-top: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 999px;
       transition: all 0.3s ease;
     }
 
-    .export-btn:hover {
-      box-shadow: 0 0 20px var(--magenta);
+    .export-btn:hover,
+    .export-btn:focus-visible {
+      background: var(--cyan);
+      color: var(--dark);
+      border-color: var(--cyan);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.35);
     }
 
-    .export-btn.clear-btn {
-      background: var(--purple);
+    .clear-btn,
+    .export-btn.inspect-active {
+      background: rgba(255, 0, 255, 0.1);
+      color: var(--magenta);
+      border-color: rgba(255, 0, 255, 0.4);
     }
 
-    .editor-title {
+    .clear-btn:hover,
+    .clear-btn:focus-visible,
+    .export-btn.inspect-active:hover,
+    .export-btn.inspect-active:focus-visible {
+      background: var(--magenta);
+      color: var(--dark);
+      border-color: var(--magenta);
+    }
+
+    .editor-panel .export-divider {
+      margin: 1.5rem 0 0.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1rem;
+    }
+
+    .editor-panel .export-info {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+
+    .element-path {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
       color: var(--cyan);
-      font-family: var(--font-display);
       margin-bottom: 1rem;
-      text-transform: uppercase;
-      font-size: 1.25rem;
+      word-break: break-word;
     }
 
     .inspector-controls-hidden {
       display: none;
     }
 
-    .export-divider {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(0, 255, 255, 0.2);
-    }
-
-    .export-info {
+    .footer {
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(0, 255, 255, 0.1);
+      padding: 3rem 2rem;
+      text-align: center;
       color: var(--gray);
-      font-size: 0.875rem;
-      margin-bottom: 1rem;
     }
 
-    .skills-title-large {
-      font-size: 60px;
+    .footer-link {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.3s ease;
     }
 
-    .footer-spacing {
-      margin-top: 1rem;
+    .footer-link:hover {
+      color: var(--magenta);
     }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle:hover {
+      border-color: var(--magenta);
+      color: var(--magenta);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .fade-in-delay-1 { animation-delay: 0.1s; }
+    .fade-in-delay-2 { animation-delay: 0.2s; }
+    .fade-in-delay-3 { animation-delay: 0.3s; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+      filter: blur(10px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .reveal:nth-child(1) { transition-delay: 0.1s; }
+    .reveal:nth-child(2) { transition-delay: 0.2s; }
+    .reveal:nth-child(3) { transition-delay: 0.3s; }
+    .reveal:nth-child(4) { transition-delay: 0.4s; }
+    .reveal:nth-child(5) { transition-delay: 0.5s; }
+    .reveal:nth-child(6) { transition-delay: 0.6s; }
 
     @media (max-width: 768px) {
-      .about-grid {
-        grid-template-columns: 1fr;
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 15, 0.95);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid rgba(0, 255, 255, 0.2);
       }
-      .editor-panel {
-        width: 100%;
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 12vw, 4rem);
+      }
+
+      .about-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-image-wrapper::before {
+        top: 10px;
+        left: 10px;
+        right: -10px;
+        bottom: -10px;
+      }
+
+      .section {
+        padding: 5rem 1.5rem;
       }
     }
   </style>
 </head>
-<body>
+<body class="loading">
+  <div class="loading-screen">
+    <div class="loading-logo">BF</div>
+    <div class="loading-progress">
+      <div class="loading-progress-bar"></div>
+    </div>
+    <div class="loading-text">Loading Experience...</div>
+  </div>
+
+  <a href="#hero" class="skip-to-main">Skip to main content</a>
+
   <div class="bg-gradient"></div>
   <div class="grid-overlay"></div>
+  <canvas id="particles" aria-hidden="true">
+  <p class="canvas-fallback-message">Your browser does not support the HTML5 canvas element.</p>
+  </canvas>
+  <div class="custom-cursor" aria-hidden="true"></div>
 
-  <!-- Editor Toggle -->
-  <button class="editor-toggle" onclick="toggleEditor()">⚙️ Edit</button>
+  <button
+    type="button"
+    class="editor-toggle"
+    id="editorToggle"
+    aria-label="Toggle visual editor"
+    aria-controls="editorPanel"
+  aria-pressed="false"
+  aria-expanded="false"
+    onclick="toggleEditor()"
+  >⚙️ Edit</button>
 
-  <!-- Editor Panel -->
-  <div class="editor-panel" id="editorPanel">
-    <h2 class="editor-title">Visual Editor</h2>
-    
-    <!-- Tabs -->
-    <div class="editor-tabs">
-      <button class="editor-tab active" onclick="switchTab('global')">Global</button>
-      <button class="editor-tab" onclick="switchTab('inspector')">Inspector</button>
-      <button class="editor-tab" onclick="switchTab('export')">Export</button>
+  <aside class="editor-panel" id="editorPanel" aria-hidden="true" role="complementary" aria-labelledby="editorTitle">
+    <h2 class="editor-title" id="editorTitle">Visual Editor</h2>
+
+    <div class="editor-tabs" role="tablist" aria-label="Visual editor sections">
+      <button type="button" class="editor-tab active" id="tab-global" data-tab="global" role="tab" aria-selected="true" aria-controls="global-content" onclick="switchTab('global', event)">Global</button>
+      <button type="button" class="editor-tab" id="tab-inspector" data-tab="inspector" role="tab" aria-selected="false" aria-controls="inspector-content" onclick="switchTab('inspector', event)">Inspector</button>
+      <button type="button" class="editor-tab" id="tab-export" data-tab="export" role="tab" aria-selected="false" aria-controls="export-content" onclick="switchTab('export', event)">Export</button>
     </div>
 
-    <!-- Global Tab -->
-    <div class="editor-content active" id="global-content">
+    <div class="editor-content active" id="global-content" role="tabpanel" aria-labelledby="tab-global" aria-hidden="false">
       <div class="editor-group">
         <label class="editor-label" for="color-cyan">Primary Color (Cyan)</label>
-        <input type="color" id="color-cyan" value="#00ffff" class="editor-input" onchange="updateColor('--cyan', this.value)" title="Primary Color (Cyan)">
+        <input type="color" id="color-cyan" value="#00ffff" class="editor-input" onchange="updateColor('--cyan', this.value)" title="Primary accent color" />
       </div>
 
       <div class="editor-group">
         <label class="editor-label" for="color-magenta">Accent Color (Magenta)</label>
-        <input type="color" id="color-magenta" value="#ff00ff" class="editor-input" onchange="updateColor('--magenta', this.value)" title="Accent Color (Magenta)">
+        <input type="color" id="color-magenta" value="#ff00ff" class="editor-input" onchange="updateColor('--magenta', this.value)" title="Secondary accent color" />
       </div>
 
       <div class="editor-group">
         <label class="editor-label" for="color-purple">Secondary (Purple)</label>
-        <input type="color" id="color-purple" value="#8b5cf6" class="editor-input" onchange="updateColor('--purple', this.value)" title="Secondary (Purple)">
+        <input type="color" id="color-purple" value="#8b5cf6" class="editor-input" onchange="updateColor('--purple', this.value)" title="Tertiary accent color" />
       </div>
 
       <div class="editor-group">
         <label class="editor-label" for="color-dark">Background (Dark)</label>
-        <input type="color" id="color-dark" value="#0a0a0f" class="editor-input" onchange="updateColor('--dark', this.value)" title="Background (Dark)">
+        <input type="color" id="color-dark" value="#0a0a0f" class="editor-input" onchange="updateColor('--dark', this.value)" title="Background color" />
       </div>
 
       <div class="editor-group">
         <label class="editor-label" for="color-light">Text Color (Light)</label>
-        <input type="color" id="color-light" value="#f8f9fa" class="editor-input" onchange="updateColor('--light', this.value)" title="Text Color (Light)">
+        <input type="color" id="color-light" value="#f8f9fa" class="editor-input" onchange="updateColor('--light', this.value)" title="Primary text color" />
       </div>
 
       <div class="editor-group">
         <label class="editor-label" for="color-gray">Muted Text (Gray)</label>
-        <input type="color" id="color-gray" value="#6b7280" class="editor-input" onchange="updateColor('--gray', this.value)" title="Muted Text (Gray)">
+        <input type="color" id="color-gray" value="#6b7280" class="editor-input" onchange="updateColor('--gray', this.value)" title="Muted text color" />
       </div>
     </div>
 
-    <!-- Inspector Tab -->
-    <div class="editor-content" id="inspector-content">
-      <button class="export-btn" onclick="toggleInspectMode()" id="inspectBtn">
+    <div class="editor-content" id="inspector-content" role="tabpanel" aria-labelledby="tab-inspector" aria-hidden="true">
+      <button type="button" class="export-btn" onclick="toggleInspectMode()" id="inspectBtn" aria-pressed="false">
         🎯 Click to Inspect Elements
       </button>
-      
-      <div id="inspector-controls" class="inspector-controls-hidden">
-        <div class="element-path" id="elementPath">No element selected</div>
-        
+
+      <div id="inspector-controls" class="inspector-controls-hidden" aria-hidden="true">
+        <div class="element-path" id="elementPath" role="status" aria-live="polite">No element selected</div>
+
         <div class="editor-group">
-          <label class="editor-label">Text Content</label>
-          <textarea class="editor-input" rows="3" id="elementText" oninput="updateElementText()"></textarea>
+          <label class="editor-label" for="elementText">Text Content</label>
+          <textarea class="editor-input" rows="3" id="elementText" placeholder="Update text content" aria-label="Selected element text content" oninput="updateElementText()"></textarea>
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Font Size</label>
-          <input type="text" class="editor-input" id="elementFontSize" oninput="updateElementStyle('fontSize', this.value)" placeholder="e.g. 2rem, 24px">
+          <label class="editor-label" for="elementFontSize">Font Size</label>
+          <input type="text" class="editor-input" id="elementFontSize" placeholder="e.g. 2rem, 24px" aria-label="Selected element font size" oninput="updateElementStyle('fontSize', this.value)" />
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Color</label>
-          <input type="color" class="editor-input" id="elementColor" onchange="updateElementStyle('color', this.value)">
+          <label class="editor-label" for="elementColor">Color</label>
+          <input type="color" class="editor-input" id="elementColor" title="Selected element text color" aria-label="Selected element text color" onchange="updateElementStyle('color', this.value)" />
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Background Color</label>
-          <input type="color" class="editor-input" id="elementBg" onchange="updateElementStyle('backgroundColor', this.value)">
+          <label class="editor-label" for="elementBg">Background Color</label>
+          <input type="color" class="editor-input" id="elementBg" title="Selected element background color" aria-label="Selected element background color" onchange="updateElementStyle('backgroundColor', this.value)" />
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Padding</label>
-          <input type="text" class="editor-input" id="elementPadding" oninput="updateElementStyle('padding', this.value)" placeholder="e.g. 2rem, 20px 40px">
+          <label class="editor-label" for="elementPadding">Padding</label>
+          <input type="text" class="editor-input" id="elementPadding" placeholder="e.g. 2rem, 20px 40px" aria-label="Selected element padding" oninput="updateElementStyle('padding', this.value)" />
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Margin</label>
-          <input type="text" class="editor-input" id="elementMargin" oninput="updateElementStyle('margin', this.value)" placeholder="e.g. 2rem, 20px auto">
+          <label class="editor-label" for="elementMargin">Margin</label>
+          <input type="text" class="editor-input" id="elementMargin" placeholder="e.g. 2rem, 20px auto" aria-label="Selected element margin" oninput="updateElementStyle('margin', this.value)" />
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Width</label>
-          <input type="text" class="editor-input" id="elementWidth" oninput="updateElementStyle('width', this.value)" placeholder="e.g. 100%, 500px, auto">
+          <label class="editor-label" for="elementWidth">Width</label>
+          <input type="text" class="editor-input" id="elementWidth" placeholder="e.g. 100%, 500px, auto" aria-label="Selected element width" oninput="updateElementStyle('width', this.value)" />
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Height</label>
-          <input type="text" class="editor-input" id="elementHeight" oninput="updateElementStyle('height', this.value)" placeholder="e.g. 100vh, 300px, auto">
+          <label class="editor-label" for="elementHeight">Height</label>
+          <input type="text" class="editor-input" id="elementHeight" placeholder="e.g. 100vh, 300px, auto" aria-label="Selected element height" oninput="updateElementStyle('height', this.value)" />
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Display</label>
-          <select class="editor-input" id="elementDisplay" onchange="updateElementStyle('display', this.value)">
+          <label class="editor-label" for="elementDisplay">Display</label>
+          <select class="editor-input" id="elementDisplay" title="Selected element display" aria-label="Selected element display" onchange="updateElementStyle('display', this.value)">
             <option value="">Default</option>
             <option value="block">Block</option>
             <option value="inline">Inline</option>
@@ -764,8 +1155,8 @@
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Text Align</label>
-          <select class="editor-input" id="elementTextAlign" onchange="updateElementStyle('textAlign', this.value)">
+          <label class="editor-label" for="elementTextAlign">Text Align</label>
+          <select class="editor-input" id="elementTextAlign" title="Selected element text alignment" aria-label="Selected element text alignment" onchange="updateElementStyle('textAlign', this.value)">
             <option value="">Default</option>
             <option value="left">Left</option>
             <option value="center">Center</option>
@@ -775,8 +1166,8 @@
         </div>
 
         <div class="editor-group">
-          <label class="editor-label">Font Weight</label>
-          <select class="editor-input" id="elementFontWeight" onchange="updateElementStyle('fontWeight', this.value)">
+          <label class="editor-label" for="elementFontWeight">Font Weight</label>
+          <select class="editor-input" id="elementFontWeight" title="Selected element font weight" aria-label="Selected element font weight" onchange="updateElementStyle('fontWeight', this.value)">
             <option value="">Default</option>
             <option value="400">Regular (400)</option>
             <option value="500">Medium (500)</option>
@@ -786,82 +1177,883 @@
           </select>
         </div>
 
-        <button class="export-btn clear-btn" onclick="clearSelection()">
+        <button type="button" class="export-btn clear-btn" onclick="clearSelection()">
           Clear Selection
         </button>
       </div>
     </div>
 
-    <!-- Export Tab -->
-    <div class="editor-content" id="export-content">
-      <button class="export-btn" onclick="exportCSS()">📋 Copy CSS Variables</button>
-      <button class="export-btn" onclick="exportAll()">💾 Export All Changes</button>
-      
+    <div class="editor-content" id="export-content" role="tabpanel" aria-labelledby="tab-export" aria-hidden="true">
+      <button type="button" class="export-btn" onclick="exportCSS()">📋 Copy CSS Variables</button>
+      <button type="button" class="export-btn" onclick="exportAll()">💾 Export All Changes</button>
+
       <div class="export-divider">
         <p class="export-info">
           Click "Export All Changes" and paste the JSON output back to me. I'll update your actual site!
         </p>
       </div>
     </div>
-  </div>
+  </aside>
 
-  <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="#hero" class="nav-logo">BF</a>
-      <ul class="nav-links">
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+      <a href="#hero" class="nav-logo" aria-label="Benjamin Filler - Home">BF</a>
+      <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <ul class="nav-links" id="navLinks" role="menubar">
+        <li role="none"><a href="#about" class="nav-link" role="menuitem">About</a></li>
+        <li role="none"><a href="#skills" class="nav-link" role="menuitem">Skills</a></li>
+        <li role="none"><a href="#projects" class="nav-link" role="menuitem">Projects</a></li>
+        <li role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
   <section class="hero" id="hero">
     <div class="hero-content">
-      <h1 class="hero-title">BENJAMIN<br>FILLER</h1>
-      <p class="hero-subtitle">
-        Creator / Artist / Developer<br>
-      <div class="hero-cta">
+      <div class="hero-image fade-in">
+        <img src="/images/BenjaminFiller2.png" alt="Benjamin Filler" />
+      </div>
+      <h1 class="hero-title fade-in fade-in-delay-1">BENJAMIN<br />FILLER</h1>
+      <p class="hero-subtitle fade-in fade-in-delay-2">Creative / Artist / Developer</p>
+      <div class="hero-cta fade-in fade-in-delay-3">
         <a href="#projects" class="btn btn-primary">View Projects</a>
         <a href="#contact" class="btn btn-secondary">Let's Collaborate</a>
       </div>
     </div>
   </section>
 
-  <!-- About -->
   <section class="section" id="about">
-    <h2 class="section-title">ABOUT</h2>
+    <h2 class="section-title reveal">ABOUT</h2>
     <div class="about-grid">
-      <div class="about-text">
+      <div class="about-text reveal">
         <p>
-          I'm a <strong>multidisciplinary creative</strong> working across web development, 
-          documentary film, digital art, and interactive design. Based in Detroit, I create 
+          I'm a <strong>multidisciplinary creative</strong> working across web development,
+          documentary film, digital art, and interactive design. Based in Detroit, I create
           experiences that push boundaries and challenge conventions.
         </p>
         <p>
-          From building <strong>browser-based operating systems</strong> to directing 
-          <strong>experimental documentaries</strong>, my work explores where technology, 
-          visual storytelling, and art collide.
+          From building <strong>browser-based operating systems</strong> to directing
+          <strong>experimental documentaries</strong>, my work explores where technology,
+          visual storytelling, and art collide. I believe in making things that are both
+          technically innovative and emotionally resonant.
         </p>
         <p>
-          Whether it's crafting immersive web experiences, composing surreal digital art, 
-          or capturing intimate human stories on film—I approach every project with 
+          Whether it's crafting immersive web experiences, composing surreal digital art,
+          or capturing intimate human stories on film—I approach every project with
           <strong>creative vision and technical precision</strong>.
         </p>
       </div>
-      <div class="about-image-wrapper">
-        <img src="../public/images/BenjaminFiller3.png" alt="Benjamin Filler" class="about-image">
+      <div class="about-image-wrapper reveal">
+        <img src="/images/BenjaminFiller3.png" alt="Benjamin Filler" class="about-image" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <!-- Skills -->
   <section class="section" id="skills">
-    <h2 class="section-title skills-title-large">skills</h2>
+  <h2 class="section-title reveal skills-title-large">skills</h2>
     <div class="skills-grid">
+      <div class="skill-card reveal">
+        <span class="skill-icon">🎨</span>
+        <h3 class="skill-title">Visual Art & Design</h3>
+        <p class="skill-description">
+          Creating composite photo art, digital illustrations, and visual designs
+          that blend photography with surreal aesthetics.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Composites</span>
+          <span class="skill-tag">Illustration</span>
+          <span class="skill-tag">Graphic Design</span>
+          <span class="skill-tag">UI/UX</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <span class="skill-icon">🎬</span>
+        <h3 class="skill-title">Film & Video</h3>
+        <p class="skill-description">
+          Directing, producing, and editing documentary, narrative, and experimental
+          moving pictures.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Direction</span>
+          <span class="skill-tag">Cinematography</span>
+          <span class="skill-tag">Editing</span>
+          <span class="skill-tag">Production</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <span class="skill-icon">🎵</span>
+        <h3 class="skill-title">Sound & Music</h3>
+        <p class="skill-description">
+          Composing, producing, and sound designing for multimedia projects,
+          with emphasis on experimental and ambient soundscapes.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Composition</span>
+          <span class="skill-tag">Production</span>
+          <span class="skill-tag">Sound Design</span>
+          <span class="skill-tag">Mixing</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <span class="skill-icon">💻</span>
+        <h3 class="skill-title">Tech</h3>
+        <p class="skill-description">
+          Building performant web applications, interactive experiences, and
+          creative coding projects with modern frameworks.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Astro</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Python</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <span class="skill-icon">📖</span>
+        <h3 class="skill-title">Narrative Systems</h3>
+        <p class="skill-description">
+          Designing interactive storytelling systems, branching narratives,
+          and world-building frameworks for games and experiences.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Storytelling</span>
+          <span class="skill-tag">Game Design</span>
+          <span class="skill-tag">World-Building</span>
+          <span class="skill-tag">Writing</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <span class="skill-icon">🎓</span>
+        <h3 class="skill-title">Learning Technologies</h3>
+        <p class="skill-description">
+          Creating engaging educational experiences and learning systems that
+          blend pedagogy with interactive technology.
+        </p>
+        <div class="skill-tags">
+          <span class="skill-tag">Curriculum Design</span>
+          <span class="skill-tag">E-Learning</span>
+          <span class="skill-tag">Assessment</span>
+          <span class="skill-tag">Learning Tech</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <h2 class="section-title reveal">PROJECTS</h2>
+
+    <div class="project-filters reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="code">Code</button>
+      <button class="filter-btn" data-filter="film">Film</button>
+      <button class="filter-btn" data-filter="art">Art</button>
+      <button class="filter-btn" data-filter="music">Music</button>
+      <button class="filter-btn" data-filter="interactive">Interactive</button>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card reveal" data-category="film">
+        <img src="https://i.ytimg.com/vi/i3yRphyofs0/hqdefault.jpg" alt="The Weight of Care" class="project-image" loading="lazy" />
+        <div class="project-content">
+          <h3 class="project-title">The Weight of Care</h3>
+          <p class="project-description">Experimental documentary on the emotional weight of private care medicine in the USA.</p>
+          <div class="project-tags">
+            <span class="project-tag">Documentary</span>
+            <span class="project-tag">Healthcare</span>
+            <span class="project-tag">Experimental</span>
+          </div>
+          <div class="project-links">
+            <a href="https://bbfiller.com" class="project-link" target="_blank" rel="noopener noreferrer">Watch →</a>
+            <a href="https://www.youtube.com/watch?v=i3yRphyofs0" class="project-link" target="_blank" rel="noopener noreferrer">YouTube →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="film">
+        <img src="https://i.ytimg.com/vi/6l2BltEBLt0/hqdefault.jpg" alt="Birding with Brian" class="project-image" loading="lazy" />
+        <div class="project-content">
+          <h3 class="project-title">Birding with Brian</h3>
+          <p class="project-description">Documentary short about a birder named Brian.</p>
+          <div class="project-tags">
+            <span class="project-tag">Documentary</span>
+            <span class="project-tag">Nature</span>
+            <span class="project-tag">Portrait</span>
+          </div>
+          <div class="project-links">
+            <a href="https://www.youtube.com/watch?v=6l2BltEBLt0" class="project-link" target="_blank" rel="noopener noreferrer">YouTube →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="code">
+        <img src="/images/desktop/psychtoadglow.gif" alt="BBFiller Desktop OS" class="project-image" loading="lazy" />
+        <div class="project-content">
+          <h3 class="project-title">BBFiller Desktop OS</h3>
+          <p class="project-description">Browser-based operating system with draggable windows, games, music player, and interactive portfolio. Built with Astro 5, React 19, and TypeScript for sub-500ms load times.</p>
+          <div class="project-tags">
+            <span class="project-tag">Astro</span>
+            <span class="project-tag">React</span>
+            <span class="project-tag">TypeScript</span>
+            <span class="project-tag">Vercel</span>
+            <span class="project-tag">UI/UX</span>
+          </div>
+          <div class="project-links">
+            <a href="https://bbfiller.com" class="project-link" target="_blank" rel="noopener noreferrer">View Live →</a>
+            <a href="https://github.com/jimminiglitch/bbfillerdesktop" class="project-link" target="_blank" rel="noopener noreferrer">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="interactive">
+        <div class="project-content">
+          <h3 class="project-title">r3d3ch0 Story Map</h3>
+          <p class="project-description">ArcGIS narrative experience. Interactive story map with geospatial data and multimedia.</p>
+          <div class="project-tags">
+            <span class="project-tag">ArcGIS</span>
+            <span class="project-tag">Storytelling</span>
+            <span class="project-tag">Maps</span>
+          </div>
+          <div class="project-links">
+            <a href="https://r3d3ch0story.vercel.app/" class="project-link" target="_blank" rel="noopener noreferrer">View Live →</a>
+            <a href="https://bbfiller.com" class="project-link" target="_blank" rel="noopener noreferrer">Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="music">
+        <div class="project-content">
+          <h3 class="project-title">BBFiller Music</h3>
+          <p class="project-description">Personal music collection with playlist management, shuffle mode, and visualizers. Streaming player hosted on GitHub Pages.</p>
+          <div class="project-tags">
+            <span class="project-tag">Audio</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">UI/UX</span>
+          </div>
+          <div class="project-links">
+            <a href="https://jimminiglitch.github.io/bbfillermusic/" class="project-link" target="_blank" rel="noopener noreferrer">View Live →</a>
+            <a href="https://github.com/jimminiglitch/bbfillermusic" class="project-link" target="_blank" rel="noopener noreferrer">GitHub →</a>
+            <a href="https://bbfiller.com" class="project-link" target="_blank" rel="noopener noreferrer">Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-category="art">
+        <img src="/images/DOGOFWAR.png" alt="DOGOFWAR Series" class="project-image" loading="lazy" />
+        <div class="project-content">
+          <h3 class="project-title">DOGOFWAR Series</h3>
+          <p class="project-description">Original artwork and digital composites featuring cyberpunk themes and neon aesthetics.</p>
+          <div class="project-tags">
+            <span class="project-tag">Digital Art</span>
+            <span class="project-tag">Composites</span>
+            <span class="project-tag">Cyberpunk</span>
+          </div>
+          <div class="project-links">
+            <a href="https://bbfiller.com" class="project-link" target="_blank" rel="noopener noreferrer">View Live →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2 class="section-title reveal">CONTACT</h2>
+    <div class="contact-content reveal">
+      <p class="contact-text">
+        Available for film projects, web development, and multimedia collaborations.
+        Let's create something unique together.
+      </p>
+      <div class="contact-links">
+        <a href="https://bbfiller.com/windows/contact" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-icon">📧</span>
+          <span class="contact-label">Contact</span>
+        </a>
+        <a href="https://github.com/jimminiglitch" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-icon">💻</span>
+          <span class="contact-label">GitHub</span>
+        </a>
+        <a href="https://bbfiller.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-icon">🖥️</span>
+          <span class="contact-label">Desktop OS</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>
+      © 2025 BENJAMIN FILLER — Built with
+      <a href="https://astro.build" class="footer-link" target="_blank" rel="noopener noreferrer">Astro</a>
+      & creative vision
+    </p>
+  <p class="contact-note">
+      <a href="https://bbfiller.com" class="footer-link" target="_blank" rel="noopener noreferrer">Desktop OS</a> •
+      <a href="https://github.com/jimminiglitch/bbfillerdesktop" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+  </footer>
+
+  <script>
+    const CONFIG = {
+      PARTICLE_COUNT: window.innerWidth < 768 ? 40 : 100,
+      CONNECTION_DISTANCE: 150,
+      MAGNETIC_MULTIPLIER: 0.3,
+      TILT_DIVISOR: 10
+    };
+
+    const canvas = document.getElementById('particles');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+
+    if (canvas && ctx) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    const particles = [];
+    const particleCount = CONFIG.PARTICLE_COUNT;
+    const connectionDistance = CONFIG.CONNECTION_DISTANCE;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 255, 255, 0.5)';
+        ctx.fill();
+      }
+    }
+
+    if (canvas && ctx) {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < connectionDistance) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(0, 255, 255, ${1 - distance / connectionDistance})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateParticles() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((particle) => {
+        particle.update();
+        particle.draw();
+      });
+
+      connectParticles();
+      requestAnimationFrame(animateParticles);
+    }
+
+    if (canvas && ctx) {
+      animateParticles();
+    }
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        if (canvas) {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+      }, 250);
+    });
+
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    const fallbackNonTouch = !('ontouchstart' in window) && navigator.maxTouchPoints === 0;
+    const enableDesktopInteractions = (hasFinePointer && supportsHover) || fallbackNonTouch;
+    const cursor = document.querySelector('.custom-cursor');
+    const bodyElement = document.body;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    if (enableDesktopInteractions && cursor) {
+      bodyElement.classList.remove('custom-cursor-disabled');
+      cursor.style.display = '';
+
+      window.addEventListener('pointermove', (event) => {
+        if (event.pointerType !== 'mouse') return;
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+      }, { passive: true });
+
+      const renderCursor = () => {
+        cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+        requestAnimationFrame(renderCursor);
+      };
+
+      requestAnimationFrame(renderCursor);
+
+      const interactiveSelectors = 'a, button, .skill-card, .project-card';
+      document.querySelectorAll(interactiveSelectors).forEach((el) => {
+        el.addEventListener('pointerenter', (event) => {
+          if (event.pointerType !== 'mouse') return;
+          cursor.classList.add('hover');
+        });
+        el.addEventListener('pointerleave', () => cursor.classList.remove('hover'));
+      });
+    } else {
+      if (cursor) {
+        cursor.style.display = 'none';
+      }
+      bodyElement.classList.add('custom-cursor-disabled');
+    }
+
+    if (enableDesktopInteractions) {
+      document.querySelectorAll('.skill-card, .project-card').forEach((card) => {
+        const htmlCard = card;
+
+        card.addEventListener('mousemove', (event) => {
+          const rect = htmlCard.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = (y - centerY) / CONFIG.TILT_DIVISOR;
+          const rotateY = (centerX - x) / CONFIG.TILT_DIVISOR;
+
+          htmlCard.style.transform = `translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          htmlCard.style.transform = '';
+        });
+      });
+    }
+
+    const navLogo = document.querySelector('.nav-logo');
+    if (navLogo && enableDesktopInteractions) {
+      navLogo.addEventListener('mousemove', (event) => {
+        const rect = navLogo.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+
+        navLogo.style.transform = `translate(${x * CONFIG.MAGNETIC_MULTIPLIER}px, ${y * CONFIG.MAGNETIC_MULTIPLIER}px) scale(1.1)`;
+      });
+
+      navLogo.addEventListener('mouseleave', () => {
+        navLogo.style.transform = '';
+      });
+    }
+
+    document.querySelectorAll('.skill-icon').forEach((icon) => {
+      const htmlIcon = icon;
+
+      icon.addEventListener('mouseenter', () => {
+        htmlIcon.style.transform = 'scale(1.3) rotate(10deg)';
+        htmlIcon.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+      });
+
+      icon.addEventListener('mouseleave', () => {
+        htmlIcon.style.transform = '';
+      });
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      navLinks.querySelectorAll('.nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    let lastScroll = 0;
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      if (!nav) return;
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll <= 0) {
+        nav.style.transform = 'translateY(0)';
+        return;
+      }
+
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        nav.style.transform = 'translateY(-100%)';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+
+      lastScroll = currentScroll;
+    }, { passive: true });
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (event) => {
+        event.preventDefault();
+        const href = anchor.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+
+        filterButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        projectCards.forEach((card, index) => {
+          const category = card.getAttribute('data-category');
+
+          if (filter === 'all' || category === filter) {
+            setTimeout(() => {
+              card.classList.remove('hidden');
+              card.style.animation = 'fadeInUp 0.6s ease forwards';
+            }, index * 50);
+          } else {
+            card.classList.add('hidden');
+            card.style.animation = '';
+          }
+        });
+      });
+    });
+
+    const dynamicStyle = document.createElement('style');
+    dynamicStyle.textContent = `
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(dynamicStyle);
+  </script>
+
+  <script>
+    const loadingScreen = document.querySelector('.loading-screen');
+    const loadingBar = document.querySelector('.loading-progress-bar');
+    const pageBody = document.body;
+
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 30;
+      if (progress > 100) progress = 100;
+
+      if (loadingBar) {
+        loadingBar.style.width = `${progress}%`;
+      }
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          if (loadingScreen) {
+            loadingScreen.classList.add('fade-out');
+          }
+          pageBody.classList.remove('loading');
+
+          setTimeout(() => {
+            if (loadingScreen) {
+              loadingScreen.style.display = 'none';
+            }
+          }, 800);
+        }, 300);
+      }
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      if (loadingBar) {
+        loadingBar.style.width = '100%';
+      }
+      setTimeout(() => {
+        if (loadingScreen) {
+          loadingScreen.classList.add('fade-out');
+        }
+        pageBody.classList.remove('loading');
+        setTimeout(() => {
+          if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+          }
+        }, 800);
+      }, 200);
+    }, 3000);
+  </script>
+
+  <script type="module">
+    import Lenis from 'https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.29/dist/lenis.min.mjs';
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', function (event) {
+        event.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          lenis.scrollTo(target, {
+            offset: -80,
+            duration: 1.5
+          });
+        }
+      });
+    });
+
+    const aboutImage = document.querySelector('.about-image');
+    const aboutWrapper = document.querySelector('.about-image-wrapper');
+
+    if (aboutImage && aboutWrapper) {
+      let x = 0;
+      let y = 0;
+      let dx = 1.5;
+      let dy = 1.2;
+
+      const imageWidth = 200;
+      const imageHeight = 200;
+      const containerWidth = 500;
+      const containerHeight = 300;
+
+      let isDragging = false;
+      let lastX = 0;
+      let lastY = 0;
+      let lastTime = 0;
+      let velocityX = 0;
+      let velocityY = 0;
+
+      aboutImage.addEventListener('mousedown', (event) => {
+        isDragging = true;
+        lastX = event.clientX;
+        lastY = event.clientY;
+        lastTime = Date.now();
+        velocityX = 0;
+        velocityY = 0;
+        aboutImage.style.cursor = 'grabbing';
+        event.preventDefault();
+      });
+
+      aboutImage.addEventListener('touchstart', (event) => {
+        isDragging = true;
+        lastX = event.touches[0].clientX;
+        lastY = event.touches[0].clientY;
+        lastTime = Date.now();
+        velocityX = 0;
+        velocityY = 0;
+        event.preventDefault();
+      }, { passive: false });
+
+      document.addEventListener('mousemove', (event) => {
+        if (!isDragging) return;
+
+        const currentTime = Date.now();
+        const deltaTime = currentTime - lastTime;
+
+        const rect = aboutWrapper.getBoundingClientRect();
+        const newX = event.clientX - rect.left - imageWidth / 2;
+        const newY = event.clientY - rect.top - imageHeight / 2;
+
+        x = Math.max(0, Math.min(newX, containerWidth - imageWidth));
+        y = Math.max(0, Math.min(newY, containerHeight - imageHeight));
+
+        if (deltaTime > 0) {
+          velocityX = (event.clientX - lastX) / deltaTime;
+          velocityY = (event.clientY - lastY) / deltaTime;
+        }
+
+        lastX = event.clientX;
+        lastY = event.clientY;
+        lastTime = currentTime;
+      });
+
+      document.addEventListener('touchmove', (event) => {
+        if (!isDragging) return;
+
+        const currentTime = Date.now();
+        const deltaTime = currentTime - lastTime;
+
+        const rect = aboutWrapper.getBoundingClientRect();
+        const touchX = event.touches[0].clientX - rect.left - imageWidth / 2;
+        const touchY = event.touches[0].clientY - rect.top - imageHeight / 2;
+
+        x = Math.max(0, Math.min(touchX, containerWidth - imageWidth));
+        y = Math.max(0, Math.min(touchY, containerHeight - imageHeight));
+
+        if (deltaTime > 0) {
+          velocityX = (event.touches[0].clientX - lastX) / deltaTime;
+          velocityY = (event.touches[0].clientY - lastY) / deltaTime;
+        }
+
+        lastX = event.touches[0].clientX;
+        lastY = event.touches[0].clientY;
+        lastTime = currentTime;
+      }, { passive: false });
+
+      document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+
+        dx = velocityX * 30;
+        dy = velocityY * 30;
+
+        const maxSpeed = 20;
+        dx = Math.max(-maxSpeed, Math.min(dx, maxSpeed));
+        dy = Math.max(-maxSpeed, Math.min(dy, maxSpeed));
+
+        if (Math.abs(dx) < 0.5) dx = 1.5;
+        if (Math.abs(dy) < 0.5) dy = 1.2;
+
+        isDragging = false;
+        aboutImage.style.cursor = 'grab';
+      });
+
+      document.addEventListener('touchend', () => {
+        if (!isDragging) return;
+
+        dx = velocityX * 30;
+        dy = velocityY * 30;
+
+        const maxSpeed = 20;
+        dx = Math.max(-maxSpeed, Math.min(dx, maxSpeed));
+        dy = Math.max(-maxSpeed, Math.min(dy, maxSpeed));
+
+        if (Math.abs(dx) < 0.5) dx = 1.5;
+        if (Math.abs(dy) < 0.5) dy = 1.2;
+
+        isDragging = false;
+      }, { passive: false });
+
+      aboutImage.style.cursor = 'grab';
+
+      function animateDVD() {
+        if (!isDragging) {
+          const friction = 0.98;
+          const minSpeedX = 1.5;
+          const minSpeedY = 1.2;
+
+          if (Math.abs(dx) > minSpeedX) {
+            dx *= friction;
+          } else {
+            dx = dx > 0 ? minSpeedX : -minSpeedX;
+          }
+
+          if (Math.abs(dy) > minSpeedY) {
+            dy *= friction;
+          } else {
+            dy = dy > 0 ? minSpeedY : -minSpeedY;
+          }
+
+          x += dx;
+          y += dy;
+
+          if (x <= 0 || x + imageWidth >= containerWidth) {
+            dx = -dx;
+            x = Math.max(0, Math.min(x, containerWidth - imageWidth));
+          }
+          if (y <= 0 || y + imageHeight >= containerHeight) {
+            dy = -dy;
+            y = Math.max(0, Math.min(y, containerHeight - imageHeight));
+          }
+        }
+
+        aboutImage.style.left = `${x}px`;
+        aboutImage.style.top = `${y}px`;
+
+        const speed = Math.sqrt(dx * dx + dy * dy);
+        const normalSpeed = Math.sqrt(1.5 * 1.5 + 1.2 * 1.2);
+        const speedRatio = speed / normalSpeed;
+
+        const safeRatio = Math.max(speedRatio, 0.001);
+        const glowDuration = Math.max(0.5, 3 / safeRatio);
+        aboutWrapper.style.animationDuration = `${glowDuration}s`;
+
+        const rainbowDuration = Math.max(1, 8 / safeRatio);
+        aboutWrapper.style.setProperty('--rainbow-duration', `${rainbowDuration}s`);
+
+        const imageGlowIntensity = Math.min(40, 20 * speedRatio);
+        aboutImage.style.boxShadow = `0 0 ${imageGlowIntensity}px rgba(255, 0, 255, 0.6)`;
+
+        requestAnimationFrame(animateDVD);
+      }
+
+      requestAnimationFrame(animateDVD);
+    }
+  </script>
+
+</body>
       <div class="skill-card">
         <span class="skill-icon">🎨</span>
         <h3 class="skill-title">Visual Art & Design</h3>
@@ -1123,23 +2315,48 @@
     let selectedElement = null;
     let inspectMode = false;
     const elementChanges = new Map();
+    const editorPanel = document.getElementById('editorPanel');
+    const editorToggle = document.getElementById('editorToggle');
+    const inspectorControls = document.getElementById('inspector-controls');
 
     function toggleEditor() {
-      document.getElementById('editorPanel').classList.toggle('open');
+      if (!editorPanel || !editorToggle) return;
+
+    editorPanel.classList.toggle('open');
+    const isOpen = editorPanel.classList.contains('open');
+
+    editorPanel.setAttribute('aria-hidden', String(!isOpen));
+    editorToggle.setAttribute('aria-pressed', String(isOpen));
+    editorToggle.setAttribute('aria-expanded', String(isOpen));
+    editorToggle.textContent = isOpen ? '✖ Close' : '⚙️ Edit';
+
+      if (isOpen) {
+        const activeTab = document.querySelector('.editor-tab.active');
+        if (activeTab) activeTab.focus();
+      } else {
+        editorToggle.focus();
+      }
     }
 
-    function switchTab(tabName) {
-      // Update tab buttons
-      document.querySelectorAll('.editor-tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      event.target.classList.add('active');
+    function switchTab(tabName, tabEvent) {
+      const tabId = `${tabName}-content`;
 
-      // Update content
-      document.querySelectorAll('.editor-content').forEach(content => {
-        content.classList.remove('active');
+      document.querySelectorAll('.editor-tab').forEach((tab) => {
+        const isActive = tab.dataset.tab === tabName;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+        tab.setAttribute('tabindex', isActive ? '0' : '-1');
       });
-      document.getElementById(tabName + '-content').classList.add('active');
+
+      document.querySelectorAll('.editor-content').forEach((panel) => {
+        const isActive = panel.id === tabId;
+        panel.classList.toggle('active', isActive);
+        panel.setAttribute('aria-hidden', String(!isActive));
+      });
+
+      if (tabEvent && typeof tabEvent.preventDefault === 'function') {
+        tabEvent.preventDefault();
+      }
     }
 
     function updateColor(variable, value) {
@@ -1154,18 +2371,22 @@
     }
 
     function toggleInspectMode() {
-      inspectMode = !inspectMode;
       const btn = document.getElementById('inspectBtn');
-      
+
+      if (!btn) return;
+
+      inspectMode = !inspectMode;
+
+      btn.setAttribute('aria-pressed', String(inspectMode));
+      btn.classList.toggle('inspect-active', inspectMode);
+
       if (inspectMode) {
         document.body.classList.add('inspect-mode');
         btn.textContent = '❌ Cancel Inspect Mode';
-        btn.style.background = 'var(--magenta)';
         addInspectListeners();
       } else {
         document.body.classList.remove('inspect-mode');
         btn.textContent = '🎯 Click to Inspect Elements';
-        btn.style.background = 'var(--cyan)';
         removeInspectListeners();
       }
     }
@@ -1202,7 +2423,10 @@
       selectedElement.classList.add('selected-element');
 
       // Show inspector controls
-      document.getElementById('inspector-controls').style.display = 'block';
+      if (inspectorControls) {
+        inspectorControls.classList.remove('inspector-controls-hidden');
+        inspectorControls.setAttribute('aria-hidden', 'false');
+      }
 
       // Get element path
       const path = getElementPath(element);
@@ -1291,7 +2515,10 @@
         selectedElement.classList.remove('selected-element');
         selectedElement = null;
       }
-      document.getElementById('inspector-controls').style.display = 'none';
+      if (inspectorControls) {
+        inspectorControls.classList.add('inspector-controls-hidden');
+        inspectorControls.setAttribute('aria-hidden', 'true');
+      }
       document.getElementById('elementPath').textContent = 'No element selected';
     }
 
