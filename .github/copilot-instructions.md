@@ -232,7 +232,7 @@ npm run preview
 # Opens at http://localhost:4321
 
 # 3. Test checklist:
-# ✓ All sections scroll correctly (#about, #skills, #projects, #contact)
+# ✓ All sections scroll correctly (sections: about, skills, projects, contact)
 # ✓ Custom cursor works on desktop (disabled on mobile)
 # ✓ Particle animation renders
 # ✓ All images load (check /public/images/*)
@@ -276,9 +276,9 @@ If project grows, consider:
 ```astro
 <style>
   :root {
-    --cyan: #00ffff;
-    --magenta: #ff00ff;
-    --purple: #8b5cf6;
+    --cyan: cyan;        /* #00ffff */
+    --magenta: magenta;  /* #ff00ff */
+    --purple: purple;    /* #8b5cf6 */
     --font-main: 'Space Grotesk', sans-serif;
     --font-display: 'Archivo Black', sans-serif;
   }
@@ -352,9 +352,12 @@ Modify the `.skills-grid` section—each card has:
 ### Changing Colors
 Update CSS custom properties in `:root` block:
 ```css
---cyan: #00ffff;      /* Primary accent */
---magenta: #ff00ff;   /* Secondary accent */
---purple: #8b5cf6;    /* Tertiary accent */
+/* Primary accent - cyan */
+--cyan: rgb(0, 255, 255);
+/* Secondary accent - magenta */
+--magenta: rgb(255, 0, 255);
+/* Tertiary accent - purple */
+--purple: rgb(139, 92, 246);
 ```
 
 ### Adjusting Animations
@@ -377,7 +380,7 @@ Tune `CONFIG` object values (particle density, tilt sensitivity, etc.)
 ## Gotchas & Constraints
 
 - **No build-time image optimization**—manually optimize before adding to `/public`
-- **Single route app**—all sections are hash anchors (`#about`, `#projects`, etc.)
+- **Single route app**—all sections use hash anchors (about, projects, etc.)
 - **Monolithic file**—full context searches may be slow; use line ranges
 - **No dark mode toggle**—always dark theme
 - **Desktop-first interactions**—custom cursor and 3D effects skip mobile entirely
@@ -636,7 +639,7 @@ src/
   <a href="/">Portfolio</a>
   <a href="/blog">Blog</a>
   <a href="/lab">Lab</a>
-  <a href="#contact">Contact</a>
+  <a href="#contact">Contact</a> <!-- Anchor link to contact section -->
 </nav>
 ```
 
@@ -819,7 +822,7 @@ benjaminfiller-portfolio/
 ## When in Doubt
 
 1. Check `src/data/profile.ts` for content/metadata changes
-2. Search `index.astro` for section IDs (`#about`, `#skills`, `#projects`, `#contact`)
-3. Grep for CSS custom properties (`--cyan`, `--font-main`) to trace theme usage
+2. Search `index.astro` for section IDs: about, skills, projects, contact
+3. Grep for CSS custom properties (--cyan, --font-main) to trace theme usage
 4. Test locally with `npm run dev` before deploying
 5. **NEW**: Check this roadmap for implementation order and dependencies
