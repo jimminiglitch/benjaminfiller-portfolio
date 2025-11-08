@@ -120,30 +120,38 @@ const themes = {
 ## 🎬 Content Features (High Effort, High Value)
 
 ### 9. **Video Backgrounds**
+
 Replace static images with:
+
 - Hero: Looping code compilation video
 - Projects: Preview videos on hover
 - About: Timelapse of Detroit skyline
 
 ### 10. **Interactive Project Demos**
+
 Instead of just links:
+
 ```html
 <iframe class="project-preview" src="/desktop" loading="lazy"></iframe>
 ```
+
 - Embedded live demos
 - Click to expand fullscreen
 - Interactive before/after sliders
 - Video walkthroughs with captions
 
 ### 11. **Case Study Pages**
+
 Create `/projects/[slug].astro`:
-```
+
+```text
 /projects/desktop-os
 /projects/weight-of-care
 /projects/birding-with-brian
 ```
 
 **Each includes:**
+
 - Problem statement
 - Solution approach
 - Tech stack deep dive
@@ -154,10 +162,13 @@ Create `/projects/[slug].astro`:
 - "Hire me" CTA
 
 ### 12. **Blog System**
+
 ```bash
 npm install @astrojs/mdx
 ```
+
 Content collections for posts:
+
 - Technical tutorials
 - Creative process breakdowns
 - Project retrospectives
@@ -168,7 +179,9 @@ Content collections for posts:
 ## 🧪 Experimental Features (High Effort, Unique)
 
 ### 13. **AI Chat Assistant**
+
 Embed chatbot that answers:
+
 - "What projects has Ben done?"
 - "Tell me about his film work"
 - "How can I contact him?"
@@ -176,17 +189,21 @@ Embed chatbot that answers:
 Uses Vercel AI SDK or OpenAI API.
 
 ### 14. **3D Elements with Three.js**
+
 ```bash
 npm install three @react-three/fiber
 ```
+
 - 3D logo in hero
 - Rotating project thumbnails
 - Interactive skill constellation
 - Particle system upgrade to WebGL
 
 ### 15. **Terminal Interface Mode**
+
 Toggle to retro terminal view:
-```
+
+```text
 $ ls projects
 desktop-os/  weight-of-care/  birding-with-brian/
 
@@ -198,14 +215,18 @@ Opening email client...
 ```
 
 ### 16. **Music Player**
+
 Showcase your music:
+
 - Embedded Spotify/SoundCloud
 - Custom audio visualizer (Canvas API)
 - Waveform animations
 - Background ambient tracks (toggle on/off)
 
 ### 17. **Generative Art Gallery**
+
 `/lab` section with:
+
 - Live p5.js sketches
 - Shader experiments
 - Interactive installations
@@ -216,26 +237,33 @@ Showcase your music:
 ## 📊 Analytics & Optimization (Backend Magic)
 
 ### 18. **Vercel Analytics**
+
 ```bash
 npm install @vercel/analytics @vercel/speed-insights
 ```
+
 Track:
+
 - Page views & sessions
 - Click heatmaps
 - Scroll depth
 - Button CTR
 
 ### 19. **A/B Testing**
+
 Test variants:
+
 - CTA button text
 - Hero subtitle phrasing
 - Project card layouts
 - Color schemes
 
 ### 20. **Email Newsletter**
+
 ```bash
 # Buttondown, ConvertKit, or Mailchimp
 ```
+
 - Signup form in footer
 - Welcome sequence
 - Monthly project updates
@@ -246,27 +274,35 @@ Test variants:
 ## 🎯 SEO & Discovery (Growth Hacks)
 
 ### 21. **Dynamic OG Images**
+
 Generate unique images per project:
+
 ```javascript
 // /api/og-image/[slug].png
 // Uses @vercel/og or Satori
 ```
 
 ### 22. **Structured Data Expansion**
+
 Add JSON-LD for:
+
 - CreativeWork (each project)
 - VideoObject (film projects)
 - SoftwareApplication (code projects)
 - BreadcrumbList (navigation)
 
 ### 23. **RSS Feed**
+
 ```bash
 npm install @astrojs/rss
 ```
+
 Syndicate blog posts & project updates.
 
 ### 24. **Social Proof**
+
 Add sections:
+
 - Testimonials carousel
 - Client logos
 - GitHub stats widget
@@ -277,27 +313,33 @@ Add sections:
 ## 🎭 Performance Theater (Make Fast Look Faster)
 
 ### 25. **Skeleton Screens**
+
 Show loading placeholders instead of blank:
+
 ```html
 <div class="skeleton project-card"></div>
 ```
 
 ### 26. **Progressive Image Loading**
+
 ```javascript
 // LQIP (Low Quality Image Placeholder)
 <img src="tiny-blurred.jpg" data-src="full-res.jpg" />
 ```
 
 ### 27. **Preload Key Routes**
+
 ```html
 <link rel="prefetch" href="/projects">
 <link rel="prefetch" href="/contact">
 ```
 
 ### 28. **Service Worker (PWA)**
+
 ```bash
 npm install @vite-pwa/astro
 ```
+
 - Offline capability
 - Install as app
 - Push notifications (project launches)
@@ -307,7 +349,9 @@ npm install @vite-pwa/astro
 ## 🎪 Community & Engagement
 
 ### 29. **Guest Book / Comments**
+
 Let visitors leave messages:
+
 ```bash
 # Giscus (GitHub Discussions)
 # Utterances (GitHub Issues)
@@ -315,7 +359,9 @@ Let visitors leave messages:
 ```
 
 ### 30. **Live Status**
+
 Show what you're working on:
+
 ```javascript
 // Fetch from GitHub, Notion, or Trello API
 "🚧 Currently building: AI-powered video editor"
@@ -324,7 +370,9 @@ Show what you're working on:
 ```
 
 ### 31. **Collaboration Portal**
+
 Dedicated `/hire` or `/collaborate` page:
+
 - Project brief form
 - Budget estimator
 - Availability calendar
@@ -335,22 +383,25 @@ Dedicated `/hire` or `/collaborate` page:
 ## 🚀 Quick Wins (Do These First)
 
 **This Weekend:**
+
 1. ✅ Add smooth scroll (30 mins)
 2. ✅ Loading screen (1 hour)
 3. ✅ Console easter egg (15 mins)
 4. ✅ Theme switcher (2 hours)
 
 **Next Week:**
-5. ✅ Case study pages (4 hours)
-6. ✅ Vercel Analytics (30 mins)
-7. ✅ Dynamic OG images (2 hours)
-8. ✅ Video backgrounds (1 hour)
+
+1. ✅ Case study pages (4 hours)
+2. ✅ Vercel Analytics (30 mins)
+3. ✅ Dynamic OG images (2 hours)
+4. ✅ Video backgrounds (1 hour)
 
 **Next Month:**
-9. ✅ Blog system (1 day)
-10. ✅ Interactive demos (2 days)
-11. ✅ Music player (1 day)
-12. ✅ Terminal mode (1 day)
+
+1. ✅ Blog system (1 day)
+2. ✅ Interactive demos (2 days)
+3. ✅ Music player (1 day)
+4. ✅ Terminal mode (1 day)
 
 ---
 
@@ -385,18 +436,22 @@ Dedicated `/hire` or `/collaborate` page:
 **Pick ONE path to focus on:**
 
 ### 🎨 **The Artist Path**
+
 → Generative art lab + music player + video backgrounds
 *Goal: Showcase your creative range*
 
 ### 💻 **The Developer Path**
+
 → Terminal mode + live demos + code snippets + blog
 *Goal: Demonstrate technical depth*
 
 ### 🎬 **The Filmmaker Path**
+
 → Case studies + video walkthroughs + behind-the-scenes
 *Goal: Tell compelling stories*
 
 ### 🚀 **The Hustler Path**
+
 → Analytics + SEO + social proof + collaboration portal
 *Goal: Generate client leads*
 
@@ -405,3 +460,4 @@ Dedicated `/hire` or `/collaborate` page:
 **What sounds most exciting? Pick 3-5 features and I'll help you implement them!** 🎸
 
 Or tell me your wildest idea and let's make it happen! 🚀
+
