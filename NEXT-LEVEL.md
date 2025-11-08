@@ -3,12 +3,15 @@
 ## 🔥 Immediate Impact (High ROI, Low Effort)
 
 ### 1. **Smooth Scroll & Anchor Links**
+
 ```bash
 npm install @astrojs/sitemap
 ```
+
 Add smooth scrolling behavior + generate XML sitemap for SEO.
 
 **Implementation:**
+
 ```javascript
 // Add to <script> tag
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -21,32 +24,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 ```
 
 ### 2. **Loading Screen / Splash Animation**
+
 Create epic entrance experience:
+
 ```html
 <div id="loader">
   <div class="loader-logo">BF</div>
   <div class="loader-bar"></div>
 </div>
 ```
+
 - Animated logo reveal
 - Progress bar for assets
 - Fade out when ready
 - Sets tone immediately
 
 ### 3. **Easter Eggs & Interactions**
+
 **Konami Code unlock:**
+
 ```javascript
 // ↑ ↑ ↓ ↓ ← → ← → B A
 // Activates secret "matrix mode" or "retro terminal"
 ```
 
 **Hidden achievements:**
+
 - Click nav logo 10 times → unlock glitch mode
 - Hover all project cards → confetti celebration
 - Secret message in console.log()
 
 ### 4. **Advanced Cursor Effects**
+
 Upgrade cursor to react to sections:
+
 - **Hero**: Gradient trail
 - **Projects**: Magnifying glass effect
 - **Contact**: Pulsing heart
@@ -57,6 +68,7 @@ Upgrade cursor to react to sections:
 ## 🎨 Visual Polish (Medium Effort, High Impact)
 
 ### 5. **Micro-interactions Everywhere**
+
 ```javascript
 // Button press animation
 btn.addEventListener('mousedown', () => btn.style.transform = 'scale(0.95)');
@@ -69,7 +81,9 @@ btn.addEventListener('mouseup', () => btn.style.transform = '');
 ```
 
 ### 6. **Parallax Layers**
+
 Multi-layer depth:
+
 ```javascript
 window.addEventListener('scroll', () => {
   const scrolled = window.pageYOffset;
@@ -81,7 +95,9 @@ window.addEventListener('scroll', () => {
 ```
 
 ### 7. **Theme Switcher**
-**Cyberpunk → Neon → Matrix → Retro**
+
+Cyberpunk / Neon / Matrix / Retro
+
 ```javascript
 const themes = {
   cyberpunk: { cyan: '#00ffff', magenta: '#ff00ff' },
@@ -92,6 +108,7 @@ const themes = {
 ```
 
 ### 8. **Enhanced Animations**
+
 - **Staggered card reveals** (already have, but enhance)
 - **Morphing shapes** behind sections
 - **Text reveal** on scroll (letters appear one by one)
