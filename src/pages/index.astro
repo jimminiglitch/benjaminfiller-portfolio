@@ -1865,8 +1865,8 @@ const jsonLd = {
     <!-- ==================== LOADING SCREEN SCRIPT ==================== -->
     <script>
       // Loading screen with progress animation
-      const loadingScreen = document.querySelector('.loading-screen');
-      const loadingBar = document.querySelector('.loading-progress-bar');
+      const loadingScreen = document.querySelector('.loading-screen') as HTMLElement | null;
+      const loadingBar = document.querySelector('.loading-progress-bar') as HTMLElement | null;
       const body = document.body;
       
       let progress = 0;
