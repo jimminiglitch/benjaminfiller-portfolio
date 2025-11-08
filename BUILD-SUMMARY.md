@@ -3,6 +3,7 @@
 ## ✅ Optimizations Applied
 
 ### **1. Astro Configuration (`astro.config.mjs`)**
+
 ```javascript
 - HTML compression enabled
 - Auto CSS inlining for critical styles
@@ -11,14 +12,16 @@
 ```
 
 ### **2. Vercel Caching (`vercel.json`)**
+
 ```javascript
 - Fonts: 1 year immutable cache
-- Images: 1 year immutable cache  
+- Images: 1 year immutable cache
 - CSS/JS: 1 year immutable cache
 - Reduces bandwidth & improves repeat visit speed
 ```
 
 ### **3. Font Preloading (`index.astro`)**
+
 ```html
 - Critical fonts preloaded with <link rel="preload">
 - Eliminates Flash of Unstyled Text (FOUT)
@@ -26,6 +29,7 @@
 ```
 
 ### **4. Build Scripts (`package.json`)**
+
 ```bash
 npm run build        # Production build
 npm run build:check  # Build with type checking
@@ -36,9 +40,12 @@ npm run clean        # Clean build artifacts
 
 ## 📊 Build Results
 
-**Build Time**: ~1.6s ⚡  
-**Total Pages**: 1  
-**Assets Generated**: 
+**Build Time**: ~1.6s ⚡
+
+**Total Pages**: 1
+
+**Assets Generated**:
+
 - HTML: Compressed & optimized
 - JS: 5.11 KB (gzipped: 2.01 KB)
 - CSS: Inlined critical styles
@@ -50,29 +57,36 @@ npm run clean        # Clean build artifacts
 ## 🚀 Deployment Steps
 
 ### 1. **Verify Fonts Are Downloaded**
+
 ```powershell
 .\scripts\setup-fonts.ps1
 ```
+
 Download fonts from gwfh.mranftl.com to `/public/fonts/`
 
 ### 2. **Test Production Build Locally**
+
 ```bash
 npm run build
 npm run preview
 ```
-Open http://localhost:4321 and verify everything works
+
+Open <http://localhost:4321> and verify everything works
 
 ### 3. **Commit & Push to Deploy**
+
 ```bash
 git add .
 git commit -m "Production optimizations: caching, compression, font preloading"
 git push origin master
 ```
+
 Vercel will auto-deploy in ~30-60 seconds
 
 ### 4. **Verify Deployment**
+
 - Check Vercel dashboard for build success
-- Test live URL: https://benjaminfiller.com
+- Test live URL: <https://benjaminfiller.com>
 - Run Lighthouse audit (target: 95+ performance)
 
 ---
@@ -92,9 +106,11 @@ Vercel will auto-deploy in ~30-60 seconds
 ## 🎯 Next Steps (Optional)
 
 ### Add Sitemap for SEO
+
 ```bash
 npm install @astrojs/sitemap
 ```
+
 ```javascript
 // astro.config.mjs
 import sitemap from '@astrojs/sitemap';
@@ -106,9 +122,11 @@ export default defineConfig({
 ```
 
 ### Add Analytics
+
 ```bash
 npm install @vercel/analytics
 ```
+
 ```astro
 // In <head>
 import { Analytics } from '@vercel/analytics/astro';
@@ -116,9 +134,11 @@ import { Analytics } from '@vercel/analytics/astro';
 ```
 
 ### Image Optimization
+
 ```bash
 npm install @astrojs/image
 ```
+
 - Convert to WebP/AVIF
 - Generate responsive srcset
 - Lazy load off-screen images
@@ -128,7 +148,7 @@ npm install @astrojs/image
 ## ✅ Production Checklist
 
 - [x] HTML compression enabled
-- [x] CSS inlining configured  
+- [x] CSS inlining configured
 - [x] GSAP chunked separately
 - [x] Cache headers configured
 - [x] Font preloading added
@@ -142,7 +162,9 @@ npm install @astrojs/image
 
 ---
 
-**Total Build Time**: 1.61s  
+**Total Build Time**: 1.61s
+
 **Ready for deployment!** 🎉
 
 See `DEPLOYMENT.md` for detailed monitoring and troubleshooting guide.
+
