@@ -783,6 +783,10 @@ const jsonLd = {
       }
 
       /* Animated rainbow background glow for profile image */
+      .about-image-wrapper {
+        --rainbow-duration: 8s;
+      }
+      
       .about-image-wrapper::after {
         content: '';
         position: absolute;
@@ -801,7 +805,7 @@ const jsonLd = {
           #ff0080
         );
         background-size: 400% 400%;
-        animation: rainbowRotate 8s ease infinite;
+        animation: rainbowRotate var(--rainbow-duration) ease infinite;
         z-index: -1;
         opacity: 0.6;
         filter: blur(20px);
@@ -2202,11 +2206,15 @@ const jsonLd = {
           const normalSpeed = Math.sqrt(1.5 * 1.5 + 1.2 * 1.2); // ~1.9
           const speedRatio = speed / normalSpeed;
           
-          // Faster glow when moving fast
+          // Faster box glow when moving fast
           const glowDuration = Math.max(0.5, 3 / speedRatio);
           aboutWrapper.style.animationDuration = `${glowDuration}s`;
           
-          // Also pulse the image glow faster
+          // Faster rainbow background rotation when moving fast
+          const rainbowDuration = Math.max(1, 8 / speedRatio);
+          aboutWrapper.style.setProperty('--rainbow-duration', `${rainbowDuration}s`);
+          
+          // Brighter image glow when moving fast
           const imageGlowIntensity = Math.min(40, 20 * speedRatio);
           aboutImage.style.boxShadow = `0 0 ${imageGlowIntensity}px rgba(255, 0, 255, 0.6)`;
 
