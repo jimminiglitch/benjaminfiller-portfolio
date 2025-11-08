@@ -24,9 +24,9 @@ export const profile: Profile = {
   // Optional default if PUBLIC_SITE_URL is not set
   siteUrl: undefined,
   handles: {
-    twitter: 'jimminiglitch',
     github: 'https://github.com/jimminiglitch',
     // Add more as you like; left blank until verified
+    twitter: undefined,
     linkedin: undefined,
     instagram: undefined,
     youtube: undefined,

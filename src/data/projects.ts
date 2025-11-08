@@ -45,8 +45,7 @@ export const projects: Project[] = [
     category: 'film',
     tags: ['Documentary', 'Nature', 'Portrait'],
     links: {
-      youtube: 'https://www.youtube.com/watch?v=6l2BltEBLt0',
-      live: 'https://bbfiller.com'
+      youtube: 'https://www.youtube.com/watch?v=6l2BltEBLt0'
     },
     thumbnail: 'https://i.ytimg.com/vi/6l2BltEBLt0/hqdefault.jpg',
     featured: true
@@ -112,8 +111,7 @@ export const projects: Project[] = [
     tags: ['Astro', 'React', 'TypeScript', 'Vercel', 'UI/UX'],
     links: {
       live: 'https://bbfiller.com',
-      github: 'https://github.com/jimminiglitch/bbfillerdesktop',
-      demo: 'https://bbfiller.com'
+      github: 'https://github.com/jimminiglitch/bbfillerdesktop'
     },
     thumbnail: '/images/desktop/psychtoadglow.gif',
     featured: true
