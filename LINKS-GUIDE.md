@@ -170,5 +170,4 @@ These links currently exist but need pages/content:
 - **Open Graph URL**: Same as canonical, for social media sharing
 - **Twitter URL**: Same as canonical
 
-
 These are auto-generated from your profile data and environment variables.
