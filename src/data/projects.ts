@@ -114,7 +114,7 @@ export const projects: Project[] = [
       live: 'https://bbfiller.com',
       github: 'https://github.com/jimminiglitch/bbfillerdesktop'
     },
-    thumbnail: '/images/desktop/VaporTV.png',
+    thumbnail: '/images/desktop/psychtoadglow.gif',
     featured: true
   },
   {
@@ -194,7 +194,7 @@ export const projects: Project[] = [
       github: 'https://github.com/jimminiglitch/bbfillermusic',
       demo: 'https://bbfiller.com'
     },
-    thumbnail: '/images/desktop/VHS.gif',
+    thumbnail: '/images/desktop/TIGERGLOW.gif',
     featured: true
   },
 
