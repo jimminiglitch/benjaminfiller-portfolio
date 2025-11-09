@@ -17,17 +17,18 @@
       --magenta: #ff00ff;
       --purple: #8b5cf6;
       --dark: #0a0a0f;
-      --darker: #050508;
-      --light: #f8f9fa;
-      --gray: #6b7280;
-      --font-main: 'Space Grotesk', -apple-system, system-ui, sans-serif;
-      --font-display: 'Archivo Black', sans-serif;
+      background: var(--surface-glass);
+      -webkit-backdrop-filter: blur(22px);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border-glow);
+      box-shadow: 0 12px 30px rgba(4, 6, 20, 0.35);
+      transition: transform 0.3s ease, background 0.3s ease;
     }
 
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      padding: 1.1rem 2rem;
     }
 
     html {
@@ -43,6 +44,12 @@
       overflow-x: hidden;
       position: relative;
       cursor: none;
+      --surface-glass: rgba(12, 12, 20, 0.72);
+      --surface-raised: rgba(16, 16, 26, 0.88);
+      --surface-muted: rgba(255, 255, 255, 0.04);
+      --border-glow: rgba(0, 255, 255, 0.18);
+      --border-strong: rgba(255, 0, 255, 0.25);
+      --shadow-soft: 0 18px 44px rgba(4, 6, 14, 0.45);
     }
 
     body.loading {
@@ -96,19 +103,20 @@
 
     .hero-cta {
       display: flex;
-      gap: 1.5rem;
+      align-items: center;
+      gap: 2.25rem;
       flex-wrap: wrap;
     }
 
     .btn {
       padding: 1rem 2.5rem;
       font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 0;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 2px solid;
+      font-weight: 500;
+      font-size: 0.9rem;
       text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: 2px solid;
+      transition: color 0.25s ease;
       letter-spacing: 1px;
       position: relative;
       overflow: hidden;
@@ -117,9 +125,10 @@
     }
 
     .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      transition: width 0.25s ease;
+      opacity: 0.9;
       left: -100%;
       width: 100%;
       height: 100%;
@@ -525,15 +534,17 @@
     }
 
     .project-card {
-      background: rgba(255, 255, 255, 0.03);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 0, 255, 0.2);
+      background: var(--surface-raised);
+      border: 1px solid var(--border-glow);
+      border-radius: 22px;
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      transform-style: preserve-3d;
-      perspective: 1000px;
+      transform: translateY(0);
+      transform-style: flat;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+      box-shadow: var(--shadow-soft);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
     }
 
     .project-card::before {
@@ -543,9 +554,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15));
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(255, 0, 255, 0.12));
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.35s ease;
       pointer-events: none;
     }
 
@@ -572,20 +583,18 @@
     }
 
     .project-card:hover {
-      border-color: var(--magenta);
-      box-shadow:
-        0 30px 80px rgba(255, 0, 255, 0.4),
-        0 0 60px rgba(0, 255, 255, 0.2),
-        inset 0 0 30px rgba(255, 0, 255, 0.1);
-      transform: translateY(-15px) rotateX(3deg) scale(1.02);
+      border-color: var(--border-strong);
+      box-shadow: 0 28px 60px rgba(8, 8, 28, 0.48);
+      transform: translateY(-10px) scale(1.01);
+      background: rgba(18, 18, 30, 0.92);
     }
 
     .project-card:hover::before {
-      opacity: 1;
+      opacity: 0.6;
     }
 
     .project-card:hover::after {
-      opacity: 1;
+      opacity: 0.55;
     }
 
     .project-image {
@@ -593,17 +602,17 @@
       aspect-ratio: 16 / 10;
       object-fit: cover;
       display: block;
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      filter: brightness(0.8) saturate(1.2);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
+      filter: brightness(0.9) saturate(1.1);
     }
 
     .project-card:hover .project-image {
-      transform: scale(1.1) rotate(1deg);
-      filter: brightness(1.1) saturate(1.4) contrast(1.1);
+      transform: scale(1.04);
+      filter: brightness(1.05) saturate(1.25) contrast(1.05);
     }
 
     .project-content {
-      padding: 2rem;
+      padding: 2.1rem;
     }
 
     .project-title {
