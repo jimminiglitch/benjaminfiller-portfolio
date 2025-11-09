@@ -60,7 +60,8 @@ export const projects: Project[] = [
       youtube: 'https://www.youtube.com/watch?v=16N_xqMwHDg',
       live: 'https://bbfiller.com'
     },
-    featured: false
+    thumbnail: 'https://i.ytimg.com/vi/16N_xqMwHDg/hqdefault.jpg',
+    featured: true
   },
   {
     id: 'joyful-life',
@@ -113,7 +114,7 @@ export const projects: Project[] = [
       live: 'https://bbfiller.com',
       github: 'https://github.com/jimminiglitch/bbfillerdesktop'
     },
-    thumbnail: '/images/desktop/psychtoadglow.gif',
+    thumbnail: '/images/desktop/VaporTV.png',
     featured: true
   },
   {
@@ -165,6 +166,7 @@ export const projects: Project[] = [
       live: 'https://r3d3ch0story.vercel.app/',
       demo: 'https://bbfiller.com'
     },
+    thumbnail: '/images/desktop/r3d3ch0-logo.png',
     featured: true
   },
   {
@@ -192,6 +194,7 @@ export const projects: Project[] = [
       github: 'https://github.com/jimminiglitch/bbfillermusic',
       demo: 'https://bbfiller.com'
     },
+    thumbnail: '/images/desktop/VHS.gif',
     featured: true
   },
 
@@ -210,15 +213,15 @@ export const projects: Project[] = [
     featured: false
   },
   {
-    id: 'dogofwar',
-    title: 'DOGOFWAR Series',
-    description: 'Original artwork and digital composites featuring cyberpunk themes and neon aesthetics.',
+    id: 'cool-pics-digital-art',
+    title: 'COOL PICS Digital Art',
+    description: 'Curated selections from the COOL PICS desktop folder, featuring pieces like DOGOFWAR, OCTAVIA, and TIGER.',
     category: 'art',
-    tags: ['Digital Art', 'Composites', 'Cyberpunk'],
+    tags: ['Digital Art', 'Composites', 'Gallery'],
     links: {
       live: 'https://bbfiller.com'
     },
-    thumbnail: '/images/DOGOFWAR.png',
+    thumbnail: '/images/desktop/octavia.png',
     featured: true
   },
   {
