@@ -1,6 +1,6 @@
 ---
-title: "Rick Marone: Profiles in Cadence"
-description: "A portrait of my mentor, Instructional Learning Assistant Rick Marone, and the rhythms he brings to UM-Dearborn's creative lab."
+title: "Rick Marrone: Profiles in Cadence"
+description: "A portrait of my mentor, Instructional Learning Assistant Rick Marrone, and the rhythms he brings to UM-Dearborn's creative lab."
 pubDate: 2025-11-10
 tags:
   - profile
@@ -26,4 +26,4 @@ As his reputation precedes him, the gig offers stay steady. He rarely says no, p
 
 As charismatic as Rick is, not every mentor cheered him on. Once, in college, a professor told him he was “bad at email.” The feedback stung, small but true. In a field that prizes vision, communication still decides whether a project moves. True to form, Rick made the fix, and today you wouldn't know it was ever an issue: clear subject lines, swift replies, expectations set early, and apologies when needed. The lesson turned into a practice he now models for students.
 
-Ask him about the future and he keeps it modest. Fame is not the aim. "It is never too late to start something new," he exclaims; coming from him, this seems like an understatement. But a life where the work feels right and the bills get paid is a good life indeed. Sometimes that's editing trailers. Sometimes it's running a church fundraiser. Sometimes it's making a home movie gift that lands at just the right moment. The thread through it all are the methods he learned early on: use what you have, do what you love, never stop learning. And whatever happens, no matter what, don't stop believing.
+Ask him about the future and he keeps it modest. Fame is not the aim. “It is never too late to start something new,” he exclaims; coming from him, this seems like an understatement. But a life where the work feels right and the bills get paid is a good life indeed. Sometimes that’s editing trailers. Sometimes it’s running a church fundraiser. Sometimes it’s making a home movie gift that lands at just the right moment. The thread through it all is a tried-and-true method he learned early on: Use what you have. Do what you love. Never stop learning. And whatever happens, no matter what: don't stop believing.
