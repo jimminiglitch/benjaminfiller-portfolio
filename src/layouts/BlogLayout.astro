@@ -103,6 +103,43 @@ const formattedUpdatedDate = updatedDate
         text-shadow: 0 0 12px rgba(255, 0, 255, 0.45);
       }
 
+      /* Custom Cursor */
+      .custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid var(--cyan);
+        box-shadow: 0 0 22px rgba(0, 255, 255, 0.5);
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: screen;
+        transition: width 0.22s ease, height 0.22s ease, border-color 0.22s ease;
+        will-change: transform;
+      }
+
+      .custom-cursor.hover {
+        width: 52px;
+        height: 52px;
+        border-color: var(--magenta);
+        box-shadow: 0 0 32px rgba(255, 0, 255, 0.6);
+      }
+
+      body:not(.custom-cursor-disabled) {
+        cursor: none;
+      }
+
+      body:not(.custom-cursor-disabled) a,
+      body:not(.custom-cursor-disabled) button {
+        cursor: none;
+      }
+
+      body.custom-cursor-disabled .custom-cursor {
+        display: none !important;
+      }
+
       .site-header {
         max-width: 1100px;
         margin: 0 auto;
@@ -372,5 +409,52 @@ const formattedUpdatedDate = updatedDate
       </div>
       <p>© {new Date().getFullYear()} Benjamin Filler. Crafted in Astro.</p>
     </footer>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <script>
+      // Custom cursor logic
+      const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+      const supportsHover = window.matchMedia('(hover: hover)').matches;
+      const fallbackNonTouch = !('ontouchstart' in window) && navigator.maxTouchPoints === 0;
+      const enableDesktopInteractions = (hasFinePointer && supportsHover) || fallbackNonTouch;
+      const cursor = document.querySelector('.custom-cursor') as HTMLElement | null;
+      const bodyElement = document.body;
+      let mouseX = 0, mouseY = 0;
+
+      if (enableDesktopInteractions && cursor) {
+        bodyElement.classList.remove('custom-cursor-disabled');
+        cursor.style.display = '';
+
+        window.addEventListener('pointermove', (e: PointerEvent) => {
+          if (e.pointerType !== 'mouse') return;
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        }, { passive: true });
+
+        const renderCursor = () => {
+          cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+          requestAnimationFrame(renderCursor);
+        };
+
+        requestAnimationFrame(renderCursor);
+
+        const interactiveSelectors = 'a, button';
+        document.querySelectorAll(interactiveSelectors).forEach(el => {
+          el.addEventListener('pointerenter', (event: Event) => {
+            const pointerEvent = event as PointerEvent;
+            if (pointerEvent.pointerType !== 'mouse') return;
+            cursor.classList.add('hover');
+          });
+          el.addEventListener('pointerleave', () => cursor.classList.remove('hover'));
+        });
+      } else {
+        if (cursor) {
+          cursor.style.display = 'none';
+        }
+        bodyElement.classList.add('custom-cursor-disabled');
+      }
+    </script>
   </body>
 </html>
