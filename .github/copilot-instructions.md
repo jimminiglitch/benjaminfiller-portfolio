@@ -276,9 +276,9 @@ If project grows, consider:
 ```astro
 <style>
   :root {
-    --cyan: cyan;        /* #00ffff */
-    --magenta: magenta;  /* #ff00ff */
-    --purple: purple;    /* #8b5cf6 */
+    --cyan: cyan;        /* hex 00ffff */
+    --magenta: magenta;  /* hex ff00ff */
+    --purple: purple;    /* hex 8b5cf6 */
     --font-main: 'Space Grotesk', sans-serif;
     --font-display: 'Archivo Black', sans-serif;
   }
@@ -634,14 +634,7 @@ src/
 - Glitch text generator
 
 #### 5.2 Navigation Update
-```astro
-<nav class="nav">
-  <a href="/">Portfolio</a>
-  <a href="/blog">Blog</a>
-  <a href="/lab">Lab</a>
-  <a href="#contact">Contact</a> <!-- Anchor link to contact section -->
-</nav>
-```
+Add Blog and Lab links to the main navigation.
 
 ### Phase 6: Analytics & Newsletter (Week 9)
 **Goal**: Data-driven optimization + audience building
