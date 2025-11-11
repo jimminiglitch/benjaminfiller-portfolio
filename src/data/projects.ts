@@ -32,8 +32,7 @@ export const projects: Project[] = [
     category: 'film',
     tags: ['Documentary', 'Healthcare', 'Experimental'],
     links: {
-      youtube: 'https://www.youtube.com/watch?v=i3yRphyofs0',
-      live: 'https://bbfiller.com' // Available in Desktop OS
+      youtube: 'https://www.youtube.com/watch?v=i3yRphyofs0'
     },
     thumbnail: 'https://i.ytimg.com/vi/i3yRphyofs0/hqdefault.jpg',
     featured: true
@@ -57,8 +56,7 @@ export const projects: Project[] = [
     category: 'film',
     tags: ['Documentary', 'Detroit', 'Sports'],
     links: {
-      youtube: 'https://www.youtube.com/watch?v=16N_xqMwHDg',
-      live: 'https://bbfiller.com'
+      youtube: 'https://www.youtube.com/watch?v=16N_xqMwHDg'
     },
     thumbnail: 'https://i.ytimg.com/vi/16N_xqMwHDg/hqdefault.jpg',
     featured: true
