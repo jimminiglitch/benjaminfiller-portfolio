@@ -857,13 +857,6 @@ const jsonLd = {
         z-index: 1;
       }
 
-      .about-image.static {
-        position: relative;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
-
       @keyframes boxGlow {
         0%, 100% {
           box-shadow: 
@@ -1825,33 +1818,11 @@ const jsonLd = {
       // 🔮 Enhanced glow and neon effects
       
       // ==================== CONFIGURATION CONSTANTS ====================
-      const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const handleMotionPreferenceChange = () => {
-        window.location.reload();
-      };
-      if (typeof motionPreference.addEventListener === 'function') {
-        motionPreference.addEventListener('change', handleMotionPreferenceChange);
-      } else if (typeof motionPreference.addListener === 'function') {
-        motionPreference.addListener(handleMotionPreferenceChange);
-      }
-      const prefersReducedMotion = motionPreference.matches;
-      const isHighDensityDisplay = (window.devicePixelRatio || 1) > 1.5;
-      const isDesktopMac = /Mac/.test(navigator.userAgent) && !/Mobile/.test(navigator.userAgent);
-
-      const baseParticleTarget = window.innerWidth < 768 ? 28 : 72;
-      const particlePerformanceFactor = isDesktopMac || isHighDensityDisplay ? 0.65 : 1;
-      const initialParticleCount = prefersReducedMotion
-        ? 0
-        : Math.max(20, Math.round(baseParticleTarget * particlePerformanceFactor));
-
-      type LenisAwareWindow = typeof window & { __lenisActive?: boolean };
-      const lenisAwareWindow = window as LenisAwareWindow;
-
       const CONFIG = {
-        PARTICLE_COUNT: initialParticleCount,
-        CONNECTION_DISTANCE: window.innerWidth < 768 ? 110 : 140,
+        PARTICLE_COUNT: window.innerWidth < 768 ? 40 : 100,
+        CONNECTION_DISTANCE: 150,
         MAGNETIC_MULTIPLIER: 0.3,
-        TILT_DIVISOR: 10,
+        TILT_DIVISOR: 10
       };
       
       // ==================== PARTICLES SYSTEM ====================
@@ -1875,7 +1846,7 @@ const jsonLd = {
 
       const particles: ParticleType[] = [];
       const particleCount = CONFIG.PARTICLE_COUNT;
-      let connectionDistance = CONFIG.CONNECTION_DISTANCE;
+      const connectionDistance = CONFIG.CONNECTION_DISTANCE;
 
       class Particle implements ParticleType {
         x: number;
@@ -1937,40 +1908,20 @@ const jsonLd = {
         }
       }
 
-      let fpsSampleCount = 0;
-      let fpsSampleStart = performance.now();
-
       function animate() {
         if (!ctx || !canvas) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+        
         particles.forEach(particle => {
           particle.update();
           particle.draw();
         });
 
-        if (connectionDistance > 0 && particles.length > 1) {
-          connectParticles();
-        }
-
-        fpsSampleCount += 1;
-        const now = performance.now();
-        const sampleWindow = now - fpsSampleStart;
-        if (sampleWindow >= 1600) {
-          const fps = (fpsSampleCount * 1000) / sampleWindow;
-          if (fps < 50 && particles.length > 35) {
-            const targetCount = Math.max(35, Math.round(particles.length * 0.7));
-            particles.length = targetCount;
-            connectionDistance = Math.max(90, connectionDistance * 0.85);
-          }
-          fpsSampleStart = now;
-          fpsSampleCount = 0;
-        }
-
+        connectParticles();
         requestAnimationFrame(animate);
       }
 
-      if (canvas && ctx && particleCount > 0) {
+      if (canvas && ctx) {
         animate();
       }
 
@@ -1983,10 +1934,6 @@ const jsonLd = {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
           }
-          connectionDistance = window.innerWidth < 768 ? 100 : 140;
-          if (window.innerWidth < 768 && particles.length > 40) {
-            particles.length = Math.max(25, Math.round(particles.length * 0.6));
-          }
         }, 250);
       });
 
@@ -1994,7 +1941,7 @@ const jsonLd = {
       const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
       const supportsHover = window.matchMedia('(hover: hover)').matches;
       const fallbackNonTouch = !('ontouchstart' in window) && navigator.maxTouchPoints === 0;
-    const enableDesktopInteractions = !prefersReducedMotion && ((hasFinePointer && supportsHover) || fallbackNonTouch);
+    const enableDesktopInteractions = (hasFinePointer && supportsHover) || fallbackNonTouch;
     const cursor = document.querySelector('.custom-cursor') as HTMLElement | null;
     const bodyElement = document.body;
       let mouseX = 0, mouseY = 0;
@@ -2081,20 +2028,18 @@ const jsonLd = {
       }
 
       // ==================== ANIMATED SKILL ICONS ====================
-      if (!prefersReducedMotion) {
-        document.querySelectorAll('.skill-icon').forEach(icon => {
-          const htmlIcon = icon as HTMLElement;
-
-          icon.addEventListener('mouseenter', () => {
-            htmlIcon.style.transform = 'scale(1.3) rotate(10deg)';
-            htmlIcon.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-          });
-
-          icon.addEventListener('mouseleave', () => {
-            htmlIcon.style.transform = '';
-          });
+      document.querySelectorAll('.skill-icon').forEach(icon => {
+        const htmlIcon = icon as HTMLElement;
+        
+        icon.addEventListener('mouseenter', () => {
+          htmlIcon.style.transform = 'scale(1.3) rotate(10deg)';
+          htmlIcon.style.transition = 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
         });
-      }
+        
+        icon.addEventListener('mouseleave', () => {
+          htmlIcon.style.transform = '';
+        });
+      });
 
       // Mobile Menu
       const menuToggle = document.getElementById('menuToggle') as HTMLButtonElement | null;
@@ -2126,9 +2071,6 @@ const jsonLd = {
       // Smooth Scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e: Event) => {
-          if (lenisAwareWindow.__lenisActive) {
-            return;
-          }
           e.preventDefault();
           const href = anchor.getAttribute('href');
           if (href) {
@@ -2241,92 +2183,46 @@ const jsonLd = {
 
     <!-- ==================== SMOOTH SCROLL WITH LENIS ==================== -->
     <script type="module">
-      type LenisWindow = typeof window & { __lenisActive?: boolean };
-      const lenisWindow = window as LenisWindow;
-      lenisWindow.__lenisActive = false;
+      import Lenis from 'https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.29/dist/lenis.min.mjs';
 
-      const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const prefersReducedMotion = motionPreference.matches;
-      const isDesktopMac = /Mac/.test(navigator.userAgent) && !/Mobile/.test(navigator.userAgent);
-      const shouldEnableLenis = !prefersReducedMotion && !isDesktopMac;
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+      });
 
-      const setupLenis = async () => {
-        const { default: Lenis } = await import('https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.29/dist/lenis.min.mjs');
-
-        const lenis = new Lenis({
-          duration: 1.1,
-          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          direction: 'vertical',
-          gestureDirection: 'vertical',
-          smooth: true,
-          mouseMultiplier: 0.9,
-          smoothTouch: false,
-          touchMultiplier: 1.6,
-          infinite: false,
-        });
-
-        lenisWindow.__lenisActive = true;
-
-        let rafId = 0;
-        const raf = (time: number) => {
-          lenis.raf(time);
-          rafId = requestAnimationFrame(raf);
-        };
-
-        const startLoop = () => {
-          cancelAnimationFrame(rafId);
-          rafId = requestAnimationFrame(raf);
-        };
-
-        const stopLoop = () => {
-          cancelAnimationFrame(rafId);
-        };
-
-        startLoop();
-
-        const handleVisibility = () => {
-          if (document.hidden) {
-            stopLoop();
-          } else {
-            startLoop();
-          }
-        };
-
-        document.addEventListener('visibilitychange', handleVisibility);
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (event) {
-            event.preventDefault();
-            const href = (this as HTMLAnchorElement).getAttribute('href') || '';
-            const target = document.querySelector(href);
-            if (target) {
-              lenis.scrollTo(target, {
-                offset: -80,
-                duration: 1.3,
-              });
-            }
-          });
-        });
-
-        if (typeof motionPreference.addEventListener === 'function') {
-          motionPreference.addEventListener('change', handleVisibility);
-        } else if (typeof motionPreference.addListener === 'function') {
-          motionPreference.addListener(handleVisibility);
-        }
-      };
-
-      if (shouldEnableLenis) {
-        setupLenis().catch(error => {
-          console.error('Lenis setup error', error);
-          lenisWindow.__lenisActive = false;
-        });
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
       }
+
+      requestAnimationFrame(raf);
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            lenis.scrollTo(target, {
+              offset: -80,
+              duration: 1.5,
+            });
+          }
+        });
+      });
 
       // DVD Screensaver Physics for About Image
       const aboutImage = document.querySelector('.about-image');
       const aboutWrapper = document.querySelector('.about-image-wrapper');
 
-      if (aboutImage && aboutWrapper && !prefersReducedMotion) {
+      if (aboutImage && aboutWrapper) {
         let x = 0;
         let y = 0;
         let dx = 1.5; // horizontal velocity
@@ -2518,8 +2414,6 @@ const jsonLd = {
         }
 
         animateDVD();
-      } else if (aboutImage) {
-        aboutImage.classList.add('static');
       }
     </script>
   </body>
