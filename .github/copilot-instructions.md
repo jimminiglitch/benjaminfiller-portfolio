@@ -642,9 +642,7 @@ Add Blog and Lab links to the main navigation.
 #### 6.1 Privacy-Friendly Analytics
 ```bash
 # Option 1: Plausible (paid but beautiful)
-# Add script in <head>
-<script defer data-domain="benjaminfiller.com" 
-  src="https://plausible.io/js/script.js"></script>
+# Add Plausible script tag in your HTML head section
 
 # Option 2: Vercel Analytics (free tier)
 npm install @vercel/analytics
