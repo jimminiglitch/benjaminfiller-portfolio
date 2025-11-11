@@ -11,6 +11,7 @@
     "clean": "rm -rf dist .astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.13",
     "@astrojs/vercel": "^8.0.0",
     "@types/three": "^0.181.0",
     "astro": "^5.14.6",
