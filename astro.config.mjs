@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/static';
 
 export default defineConfig({
-  site: 'https://benjaminfiller.com',
+  site: 'https://benjaminfiller.dev',
   output: 'static',
   adapter: vercel(),
   compressHTML: true,
@@ -20,5 +20,8 @@ export default defineConfig({
         }
       }
     }
+  },
+  experimental: {
+    contentCollections: true // Only needed if using Astro < 3.0
   }
 });
