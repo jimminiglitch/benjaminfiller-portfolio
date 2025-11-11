@@ -1849,11 +1849,11 @@ const jsonLd = {
       const connectionDistance = CONFIG.CONNECTION_DISTANCE;
 
       class Particle implements ParticleType {
-        x: number;
-        y: number;
-        vx: number;
-        vy: number;
-        radius: number;
+        x: number = 0;
+        y: number = 0;
+        vx: number = 0;
+        vy: number = 0;
+        radius: number = 1;
 
         constructor() {
           if (!canvas) return;
