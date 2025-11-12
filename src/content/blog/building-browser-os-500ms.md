@@ -4,7 +4,7 @@ description: 'How I architected a fully functional desktop operating system for 
 pubDate: 2025-11-11
 tags: ['performance', 'astro', 'react', 'web-development', 'optimization']
 minutesRead: 12
-draft: false
+draft: true
 ---
 
 When I set out to build [BBFiller Desktop OS](https://bbfiller.com), I had one non-negotiable goal: it had to feel *instant*. Not "fast for a web app," actually instant. Sub-500ms to first interaction on 4G (Pixel 6), INP < 200ms, CLS 0.00.
