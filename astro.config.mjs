@@ -7,7 +7,7 @@ export default defineConfig({
   adapter: vercel(),
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always', // Force inline all CSS for single-page app
   },
   vite: {
     build: {

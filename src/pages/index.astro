@@ -48,6 +48,12 @@ const jsonLd = {
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://vercel.live">
+    
+    <!-- Prefetch navigation pages -->
+    <link rel="prefetch" href="/blog">
+    
   <!-- Canonical URL -->
   {publicSiteUrl && <link rel="canonical" href={publicSiteUrl} />}
     
@@ -78,7 +84,52 @@ const jsonLd = {
     <!-- Structured Data / JSON-LD -->
     <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
 
-    <style>
+    <!-- Preload Critical Fonts -->
+    <link rel="preload" href="/fonts/space-grotesk/space-grotesk-v22-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/space-grotesk/space-grotesk-v22-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/archivo-black/archivo-black-v23-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Self-Hosted Fonts -->
+    <style is:inline>
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url('/fonts/space-grotesk/space-grotesk-v22-latin-regular.woff2') format('woff2');
+        font-display: swap;
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url('/fonts/space-grotesk/space-grotesk-v22-latin-500.woff2') format('woff2');
+        font-display: swap;
+        font-weight: 500;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url('/fonts/space-grotesk/space-grotesk-v22-latin-600.woff2') format('woff2');
+        font-display: swap;
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Space Grotesk';
+        src: url('/fonts/space-grotesk/space-grotesk-v22-latin-700.woff2') format('woff2');
+        font-display: swap;
+        font-weight: 700;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Archivo Black';
+        src: url('/fonts/archivo-black/archivo-black-v23-latin-regular.woff2') format('woff2');
+        font-display: swap;
+        font-weight: 900;
+        font-style: normal;
+      }
+    </style>
+
+    <!-- Critical Above-Fold CSS (inlined for fastest FCP) -->
+    <style is:inline>
       :root {
         --cyan: #00ffff;
         --magenta: #ff00ff;
@@ -1557,7 +1608,14 @@ const jsonLd = {
     <section class="hero" id="hero">
       <div class="hero-content">
         <div class="hero-image fade-in">
-          <img src={profile.ogImagePath} alt={profile.name} />
+          <img 
+            src={profile.ogImagePath} 
+            alt={profile.name} 
+            fetchpriority="high"
+            width="800"
+            height="800"
+            decoding="async"
+          />
         </div>
         <h1 class="hero-title fade-in fade-in-delay-1">
           BENJAMIN<br />FILLER
@@ -1728,7 +1786,10 @@ const jsonLd = {
                 src={project.thumbnail} 
                 alt={project.title} 
                 class="project-image" 
-                loading="lazy" 
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="400"
               />
             )}
             <div class="project-content">
@@ -1802,6 +1863,18 @@ const jsonLd = {
         <a href="https://github.com/jimminiglitch/bbfillerdesktop" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
       </p>
     </footer>
+
+    <!-- Service Worker Registration -->
+    <script is:inline>
+      // Register Service Worker for offline support
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('✅ Service Worker registered:', reg.scope))
+            .catch(err => console.log('❌ Service Worker registration failed:', err));
+        });
+      }
+    </script>
 
     <script>
       // ==================== ADVANCED PORTFOLIO EFFECTS ====================
